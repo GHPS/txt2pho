@@ -1,0 +1,40 @@
+//----------------------------------------------------------------------------
+// ObjectWindows - (C) Copyright 1991, 1993 by Borland International
+//----------------------------------------------------------------------------
+
+// Menu item ids.
+//
+#define CM_INSERT_TEXT        400
+#define CM_DELETE_SUBTEXT     401
+#define CM_DELETE_LINE        402
+#define CM_SAVE_TEXT          403
+#define CM_RESTORE_TEXT       404
+#define CM_SYNTHESIZE			405
+#define CM_NEW_VOICE			   406
+#define CM_NEW_SPEECHRATE     407
+#define CM_NEW_PITCH          408
+#define CM_DEFAULT				409
+#define CM_SHOWVALUES			410
+#define CM_PREPROCESS         411
+#define CM_SYNTHESIZE_WITH_YOUR_PITCH 412
+#define CM_SYNTHESIZE_WITH_YOUR_PROSODY 413
+#define CM_SYMBOLICS_ONLY 414
+#define CM_ONWARD_FROM_SYMBOLICS 415
+#define CM_ABOUT 416
+#define CM_HELP 417
+#define CM_NEW_TEXT 418
+#define CM_STOP 419
+#define CM_SYNBUTTON 420
+#define CM_VOICEBOX 421
+#define CM_HORSTBUTTON 422
+#define CM_LIOBABUTTON 423
+#define CM_STOPBUTTON 424
+#define CM_SYNTH_AS_WAV 425
+#define CM_SYNTH_FILE_AS_WAV 426
+#define CM_SYNTHESIZE_FILE 427
+#define IDD_DIALOG1 1111
+#define IDC_STATICTEXT1 11111
+
+
+
+
