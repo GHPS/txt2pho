@@ -2,6 +2,7 @@
 
 #include "lexem.h"
 
+#include <string.h>
 
 #ifndef GCC28
 #define erase remove

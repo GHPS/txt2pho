@@ -8,6 +8,8 @@
 #endif
 #ifndef NOTREE
 
+#include <string.h>
+
 int isspace(char c) {
 	if (c == '\n' || c == '\t' || c == ' ' || c == '\0')
 		return(1) ;

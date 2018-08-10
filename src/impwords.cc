@@ -1,5 +1,6 @@
 #include "lisatalk.h"
 #include "impwords.h"
+#include <string.h>
 
 char mklower(char in) {
 	in = tolower(in) ;

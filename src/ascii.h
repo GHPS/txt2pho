@@ -123,7 +123,7 @@ inline bool is_ascii_consonant (char ch)
 
 //#if defined(__GNUC__)
 char *strrev(char *str);
-char *strdup(const char *str);
+//char *strdup(const char *str);
 //#endif
 
 

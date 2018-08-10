@@ -21,11 +21,11 @@
 #include <stdlib.h>
 #define _USERENTRY
 #endif
-#include <iostream.h>
+#include <iostream>
 #include <string.h>
-#include <fstream.h>
+#include <fstream>
 
-extern ofstream debugstr ;
+extern std::ofstream debugstr ;
 
 #if defined(USE_WRAPPER)
 #include "pointer.h"
@@ -37,7 +37,7 @@ extern ofstream debugstr ;
 #pragma option -vi+
 #endif
 
-#include <fstream.h>
+#include <fstream>
 
 
 

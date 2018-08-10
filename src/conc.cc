@@ -7,6 +7,7 @@
 #include "syndata.h"
 #endif
 #include "sigman.h"
+#include <string.h>
 
 //#define DEBUG2
 

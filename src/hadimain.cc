@@ -8,8 +8,8 @@ extern int optind,opterr,optopt ;
 
 extern char* optarg ;
 
-char* synopsis = 
-"This is hadifix Version 0.91\n"
+char const* synopsis = 
+"This is hadifix Version 0.92\n"
 "Usage is \"hadifix -pmdnvioh\"\n"
 "Hadifix reads text from stdin (if no filename is given with the -i option)\n"
 "and writes audio samples to stdout (if no filename is given with the -o option)\n"
@@ -72,7 +72,7 @@ int main (int argc, char** argv) {
 	while((optc = getopt(argc,argv,"s:p:m:d:vi:o:hl:r:n:")) != EOF) {
 
 	  switch(optc) {
-	  case 'v': printf("This is hadifix Version 0.91\n") ; return(0) ;
+	  case 'v': printf("This is hadifix Version 0.92\n") ; return(0) ;
 	  case 'p': if (optarg != NULL)strcpy(path,optarg) ; break; 
 	  case 'm': if (optarg != NULL)modus = atoi(optarg) ; break ;
 	  case 'r': if (optarg != NULL)piping = atoi(optarg) ; break ;

@@ -1,5 +1,5 @@
 
-#include <iostream.h>
+#include <iostream>
 
 #include "debug.h"
 #include "ipa.h"

@@ -10,6 +10,8 @@
 #include "syllable.h"
 #endif
 
+#include <string.h>
+
 //#ifdef UNIX
 extern char* strdup(char*) ;
 //#endif

@@ -1,6 +1,7 @@
 
 
 
+#include <string.h>
 #include "ascii.h"
 #include "debug.h"
 #include "ipa.h"

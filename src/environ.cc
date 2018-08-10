@@ -4,6 +4,8 @@
 #include "environ.h"
 #endif
 
+#include <string.h>
+
 Environment::Environment(char* path, char* filename) {
 	list = NULL ;
 	char name[512] ;

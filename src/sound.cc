@@ -4,6 +4,8 @@
 #include "sound.h"
 #endif
 
+#include <string.h>
+
 char* consonants = "ptkbdgfvszSZcjxhRlmnN" ;
 
 char* vowels = "aeiou29EIOUyY6@" ;

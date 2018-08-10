@@ -2,6 +2,7 @@
 #include "lisatalk.h"
 #include "hannwin.src"
 
+#include <string.h>
 
 unsigned short* get_win(int length, int slope) {
 

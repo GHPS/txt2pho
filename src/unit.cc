@@ -3,6 +3,7 @@
 #if !defined(__UNIT_H__)
 #include "unit.h"
 #endif
+#include <string.h>
 
 //#define DEBUG2
 

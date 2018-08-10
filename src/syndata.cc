@@ -5,6 +5,8 @@
 #include "syndata.h"
 #endif
 
+#include <string.h>
+
 extern short bt2(short) ;
 extern long bt4(long) ;
 

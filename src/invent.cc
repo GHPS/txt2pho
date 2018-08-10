@@ -11,6 +11,8 @@
 #endif
 #endif
 
+#include <string.h>
+
 //#define DEBUG2
 
 const int MAX_UNITS=5000 ;

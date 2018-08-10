@@ -18,7 +18,7 @@ extern char* optarg ;
 
 
 char* synopsis = 
-"This is twhadi Version 0.91a\n"
+"This is twhadi Version 0.92\n"
 "Usage is \"twadi -pdvlih\"\n"
 "Valid options are:\n"
 "  -p path      - This option specifies the path to the hadifix files. Default\n"
@@ -98,7 +98,7 @@ int main (int argc, char** argv) {
 	while((optc = getopt(argc,argv,"p:d:f:vi:hl:")) != EOF) {
 
 	  switch(optc) {
-	  case 'v': printf("This is twhadi Version 0.9a\n") ; return(0) ;
+	  case 'v': printf("This is twhadi Version 0.92\n") ; return(0) ;
 	  case 'p': if (optarg != NULL)strcpy(path,optarg) ; break; 
 	  case 'f': if (optarg != NULL)strcpy(festname,optarg) ; break; 
 	  case 'd': if (optarg != NULL)debuglevel = atoi(optarg) ; break ;

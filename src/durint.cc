@@ -7,6 +7,8 @@
 #include "syndata.h"
 #endif
 
+#include <string.h>
+
 extern int isspace(char c);
 
 Duration::Durationlist::Durationlist() {
@@ -304,7 +306,7 @@ int Duration::write_sentence_duration(Periodlist& pl,Marklist& ml,long start, lo
 			if (p->f0 < 30) {
          	p->f0 = (short)lastactf0 ;
    			if (debuglevel > 4) {
-		         fprintf(errfile,"F0 too low in DURINT: f0 %d lastactf0 %f actf0 %f p->start %ld m1.adress %ld durfac %f sf %ld lastactf0pos %f actf0pos %f\n",p->f0,lastactf0,actf0,p->start,m1.adress,durfac,sf,lastactf0pos,actf0pos) ;
+		         fprintf(errfile,"F0 too low in DURINT: f0 %d lastactf0 %f actf0 %f p->start %ld m1.adress %ld durfac %f sf %d lastactf0pos %f actf0pos %f\n",p->f0,lastactf0,actf0,p->start,m1.adress,durfac,sf,lastactf0pos,actf0pos) ;
 					fprintf(errfile,"start-adress %f df/sf %f term1 %f af0p-laf0p %f\n", float(p->start - m1.adress),(durfac/(float)sf),(float(p->start - m1.adress) * (durfac/(float)sf) - lastactf0pos),(actf0pos-lastactf0pos)) ;
       	      fflush(errfile) ; } }
 			p->dur = durfac ;

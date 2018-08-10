@@ -5,7 +5,7 @@
 
 #include <stdio.h>
 #include <string.h>
-#include <fstream.h>
+#include <fstream>
 
 
 #include "file.h"

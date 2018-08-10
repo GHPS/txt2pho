@@ -1,11 +1,12 @@
 CC=/usr/bin/g++
 CCC=/usr/bin/gcc
-CFLAGS=-g -ansi
+CFLAGS=-g -ansi -Wno-write-strings
 SRCPATH=src
-HADIPATH=/home/tpo/hadifix
+HADIPATH=.
 INCLUDE=-I$(SRCPATH) -I$(HADIPATH)/src
 LDFLAGS=-g -L$(HADIPATH) 
-LOADLIBS=-lm -lhadi
+#LDFLAGS=-g -L$(HADIPATH) -static
+LOADLIBS=-lm lib/libhadi.a
 OBJPATH=obj
 DEFINES=-DSTATISTICS -DBORDERPROS -DNEWTREE -DNO_FILES -DNOWINMOD -DUNIX -DPHONDURNET -DLOWBORDERTONE -DIPHONDURNET -DLINUX -DGCC28 
 
@@ -90,33 +91,28 @@ $(OBJPATH)/%.o		:  $(SRCPATH)/%.c
 
 all		:	hadifix syswatch txt2pho twhadi preproc
 hadifix		:	$(OBJPATH)/hadimain.o libhadi
-	$(CC) $(LDFLAGS) -static -o hadifix $(OBJPATH)/hadimain.o $(LOADLIBS)
+	$(CC) $(LDFLAGS) -o hadifix $(OBJPATH)/hadimain.o $(LOADLIBS)
 
 txt2pho		:	$(OBJPATH)/txt2pho.o libhadi
-	$(CC) $(LDFLAGS) -static -o txt2pho $(OBJPATH)/txt2pho.o $(LOADLIBS)
+	$(CC) $(LDFLAGS) -o txt2pho $(OBJPATH)/txt2pho.o $(LOADLIBS)
+#	$(CC) $(LDFLAGS) -o txt2pho $(OBJPATH)/txt2pho.o $(LOADLIBS)
 
 syswatch		:	$(OBJPATH)/syswatch.o libhadi
 	$(CC) $(LDFLAGS) -o syswatch $(OBJPATH)/syswatch.o $(LOADLIBS)
 
 twhadi			:	$(OBJPATH)/twhadi.o $(OBJPATH)/tags.o libhadi
-	$(CC) $(LDFLAGS) -static -o twhadi $(OBJPATH)/twhadi.o $(OBJPATH)/tags.o $(LOADLIBS)
+	$(CC) $(LDFLAGS) -o twhadi $(OBJPATH)/twhadi.o $(OBJPATH)/tags.o $(LOADLIBS)
 	strip twhadi
-
-
-
 
 preproc		:	$(PPOBJECTS) $(OBJPATH)/preproc.o
 	$(CC) $(LDFLAGS) -o preproc $(PPOBJECTS) $(OBJPATH)/preproc.o $(LOADLIBS)
-	mv preproc /apps/bin
-
-
-
+#	mv preproc /apps/bin
 
 libhadi			:       $(OBJECTS) $(OBJPATH)/libhadi.o
-	ar -r libhadi.a $(OBJECTS) $(OBJPATH)/libhadi.o
+	ar -r lib/libhadi.a $(OBJECTS) $(OBJPATH)/libhadi.o
 
 clean	 	:
-	rm -f $(OBJPATH)/*.o $(OBJPATH)/*.a
+	rm -f $(OBJPATH)/*.o lib/*.a
 
 
 

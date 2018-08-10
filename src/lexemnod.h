@@ -228,5 +228,4 @@ inline unsigned TLexemNode::size () const
 TLexem get_best_decomposition (TLexemNodePointer root, int &, int &);
 
 
-#endif LEXEMNODE_HEADER
-
+#endif // LEXEMNODE_HEADER

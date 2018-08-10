@@ -237,7 +237,7 @@ bool TLexicon::transcribe_literally (TLexem &lexem, TWordClass wcl)
       else
       	record = table[i] ;
 #endif
-      fprintf(stderr,"LEMMA %d\n",i) ;
+      fprintf(stderr,"LEMMA %ld\n",i) ;
       fflush(stderr) ;
 		statistics("Lemma fetched") ;
 

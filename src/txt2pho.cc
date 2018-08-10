@@ -9,8 +9,8 @@ extern int optind,opterr,optopt ;
 
 extern char* optarg ;
 
-char* synopsis = 
-"This is txt2pho Version 0.94\n"
+char const* synopsis = 
+"This is txt2pho Version 0.95\n"
 "Usage is \"txt2pho -pfmdvioh\"\n"
 "Txt2pho reads text from stdin (if no filename is given with the -i option)\n"
 "and writes MBROLA input to stdout (if no filename is given with the -o option)\n"
@@ -60,7 +60,7 @@ int main (int argc, char** argv) {
 	while((optc = getopt(argc,argv,"p:mfd:vi:o:h")) != EOF) {
 
 	  switch(optc) {
-	  case 'v': printf("This is txt2pho Version 0.94\n") ; return(0) ;
+	  case 'v': printf("This is txt2pho Version 0.95\n") ; return(0) ;
 	  case 'p': if (optarg != NULL)strcpy(path,optarg) ; break; 
 	  case 'm': voicenr = 0 ; break ;
 	  case 'f': voicenr = 1 ; break ;
