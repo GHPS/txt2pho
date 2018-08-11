@@ -21,33 +21,25 @@ IKP Poppelsdorfer Allee 47, D-53115 Bonn Germany
 __________________________
 
 */
-#include "PPRlchls.h"
-#include <stdlib.h>
+#ifndef _PPCCONTE_H_
+#define _PPCCONTE_H_
 
-PPRulecharlist::PPRulecharlist() {
-	lst = (PPRulechars**)malloc(sizeof(PPRulechars*)) ;
-   listnumber = 0 ; }
+#include "PPCStrin.h"
 
-PPRulecharlist::~PPRulecharlist() {
-	int i ;
-   for (i=0 ; i < listnumber ; i++)
-   	delete(lst[i]) ;
-   free(lst) ; }
+class PPCContext {
 
-int PPRulecharlist::add(char* in) {
-	lst[listnumber++] = new PPRulechars(in) ;
-   lst = (PPRulechars**)realloc(lst,sizeof(PPRulechars*)*(listnumber+1)) ;
-   return(listnumber) ; }
+	PPCString* cstr ;
+   char** tliste ;
+   int tokennr ;
+   int direction ;
+   int scope ;
 
-int PPRulecharlist::check(char key, char c) {
-   int i ;
-   for (i=0 ; i < listnumber ; i++) {
-     if (lst[i]->key == key)
-       return(lst[i]->is_member(c)) ; }
-   return(0) ; }
+public:
 
-void PPRulecharlist::list(FILE* lf) {
-   int i ;
-   for (i=0 ; i < listnumber ; i++) {
-   	lst[i]->list(lf) ; } }
+	PPCContext(char* in, int d) ;
+   ~PPCContext() ;
+   int is_valid(char*in, int tokenstart,PPRulecharlist& rcl) ;
+   void list(FILE* lf) ; } ;
+
+#endif
 

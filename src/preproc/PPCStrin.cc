@@ -40,60 +40,56 @@ PPCString::~PPCString() {
   		delete(target) ; }
 
 int PPCString::find(char* in, int tokenstart, int direction, int& left, PPRulecharlist& rcl) {
-  if (target == NULL)
-    return(0) ;
-  int i,j,k,l ;
-  i = j = 0 ;
-  PPCString* temp ;
-  char v ;
+	if (target == NULL)
+   	return(0) ;
+	int i,j,k,l ;
+   i = j = 0 ;
+   PPCString* temp ;
+   char v ;
 
-  j = tokenstart ;
-  if (direction == -1)
-    i = strlen(target)-1 ;
-  while ((direction == -1?i>= 0 : i < strlen(target))) {
-    if (in[j] == 0)
-      return 0 ;
-    if (target[i] == '*') {
-      while (rcl.check(target[i-1],in[j]) == 1)
-	if (direction == -1)
-	  j-- ;
-	else
-	  j++ ;
-      if (direction == -1)
-	i-=2 ;
-      else
-	i++ ;
-      continue ; }
-    if (target[i] == '[') {
+	j = tokenstart ;
+   while (i < strlen(target)) {
+   	if (target[i] == '*') {
+      	while (rcl.check(target[i-1],in[j]) == 1)
+         	if (direction == -1)
+	         	j-- ;
+            else
+            	j++ ;
+         if (direction == -1)
+         	i-- ;
+         else
+	         i++ ;
+         continue ; }
+      if (target[i] == '[') {
+      	if (direction == -1) {
+         	fprintf(errfile,"DIRECTION -1 NOT SUPPORTED WITH []\n") ;
+            return(0) ; }
+      	k = ++i ;
+       	while (target[i] != ']')
+         	i++ ;
+         v = target[i] ;
+         target[i] = '\0' ;
+         temp = new PPCString(&target[k]) ;
+         target[i] = v ;
+   		if (temp->find(in,j,1,l,rcl) == 0) {
+         	delete(temp) ;
+            return(0) ; }
+			j += l ;
+			while (temp->find(in,j,1,l,rcl) != 0)
+         	j += l ;
+         delete(temp) ;
+         i++ ;
+         continue ; }
+      if (rcl.check(target[i],in[j]) == 0)
+      	return(0) ;
       if (direction == -1) {
-	fprintf(errfile,"DIRECTION -1 NOT SUPPORTED WITH []\n") ;
-	return(0) ; }
-      k = ++i ;
-      while (target[i] != ']')
-	i++ ;
-      v = target[i] ;
-      target[i] = '\0' ;
-      temp = new PPCString(&target[k]) ;
-      target[i] = v ;
-      if (temp->find(in,j,1,l,rcl) == 0) {
-	delete(temp) ;
-	return(0) ; }
-      j += l ;
-      while (temp->find(in,j,1,l,rcl) != 0)
-	j += l ;
-      delete(temp) ;
-      i++ ;
-      continue ; }
-    if (rcl.check(target[i],in[j]) == 0)
-      return(0) ;
-    if (direction == -1) {
-      i--; j-- ; }
-    else {
-      i++ ; j++ ; } }
-  if (in[j] != ' ' && direction == 0)
-    return(0) ;
-  left = j - tokenstart ;
-  return(1) ; }
+      	i--; j-- ; }
+      else {
+      	i++ ; j++ ; } }
+   if (in[j] != ' ' && direction == 0)
+   	return(0) ;
+   left = j - tokenstart ;
+   return(1) ; }
 
 
 

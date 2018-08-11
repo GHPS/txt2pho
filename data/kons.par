@@ -1,0 +1,6 @@
+Eingabeparameter: ACAT (0,31) ACC_PH_P (0,7) BEATC (1,14) BEATP (0,5) B_ONC (1,3) B_WORTAR (1,23) FACCE (0,1) FL_ARTAR (0,4) FL_GERUN (0,1) FL_OF_GE (1,4) FL_SH_SL (0,1) FL_VO_HI (1,3) FOSO (0,2) KONS_ART (1,4) PDISS (0,5) PHR_POS (-2,2) PLDISVH (1,7) PLIDS (1,9) PL_ARTAR (1,4) PL_GERUN (0,1) PL_OF_GE (1,4) PL_SH_SL (0,1) PL_VO_HI (1,3) SH_SL (0,1) SONR (1,6) STRESS (0,1) TYP (1,8)
+Ausgabeparameter: LAUTDUR (0,300)
+Bedingungen: SPRECHER (1,1,0) B_ONC (1,3,0) KONS_ART (1,4,0)
+Linker Kontext: 0
+Rechter Kontext: 0
+Training-Test: 4

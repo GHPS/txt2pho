@@ -90,7 +90,7 @@ int PPmain(char* rulefilename, char* abbfilename, char* infilename, char* outfil
 				   fclose(abbfile) ; } } }
 	output = rl->apply(xinput,g) ;
 
-	// fprintf(stderr,"%s\n",output) ;
+	//	fprintf(stderr,"%s\n",output) ;
 
  	if (al != NULL) 
       		output = al->apply(output) ;

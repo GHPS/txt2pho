@@ -1,0 +1,219 @@
+# Character-Listen
+Z: 0123456789
+L: abcdefghijklmnopqrstuvwxyzäüöABCDEFGHIJKLMNOPQRSTUVWXYZÄÜÖß
+G: ABCDEFGHIJKLMNOPQRSTUVWXYZÄÖÜ
+K: abcdefghijklmnopqrstuvwxyzäöüß
+N: 0123456789_abcdefghijklmnopqrstuvwxyz.ABCDEFGHIJKLMNOPQRSTUVWXYZ-~
+C: 0123456789_abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ-
+n: htpf
+U: abcdefghijklmnopqrstuvwxyzäüöABCDEFGHIJKLMNOPQRSTUVWXYZÄÜÖßµ²°-
+A: 0123456789abcdefghijklmnopqrstuvwxyzäüöABCDEFGHIJKLMNOPQRSTUVWXYZÄÜÖß.,!?"
+x: x×
+S: /-+*=
+R: $%&@()
+E: ,:;.!?
+@: @
+:: :
+.: .
+!: !
+,: ,
+0: 0
+1: 1
+8: 8
+9: 9
++: +
+(: (
+): )
+-: -
+/: /
+&: &
+%: %
+$: $
+§: §
+#
+#
+# REGELN BEGINNEN HIER
+#
+Rules:
+#
+# Telefonnummern
+#
+0Z*/Z* AS phone_number
+0Z* BEFORE ) AFTER ( AS phone_number_prefix
+0Z* AS single_numbers
+#
+# Geldbetraege (pre-Euro)
+#
+Z*,ZZ AFTER 'DM,Mark,DMark,D-Mark' AS money_post
+Z*,ZZ BEFORE 'DM,Mark,DMark,D-Mark' AS money_pre
+Z*,- AS money_no_change
+Z* BEFORE ,- AS money_no_change
+,- AFTER Z AS sign
+#
+# Kommazahlen
+#
+Z*,Z* AS real_number
+Z*,Z*E AS real_number_before_point
+#
+# Uhrzeit
+#
+# Bei der nächsten Regel haben wir ein kleines Problem:
+# Wir können das Wort 'Uhr', dass der Zeitangabe folgt
+# nicht aus dem Input-Stream löschen.
+ZZ:ZZ BEFORE 'Uhr' IN 2 WORDS AS time_before_Uhr
+ZZ:ZZ AS time
+ZZ:ZZE AS time
+#
+# Datum
+#
+Z*.Z*.ZZZZ AFTER 'Am,am,Dem,dem,Den,den,Zum,zum,Vom,vom,Beim,beim' IN 4 WORDS AS full_date_flex
+Z*.Z*.ZZZZ AS full_date
+Z*.Z*.ZZZZE AFTER 'Am,am,Dem,dem,Den,den,Zum,zum,Vom,vom,Beim,beim' IN 4 WORDS AS full_date_flex_before_point
+Z*.Z*.ZZZZE AS full_date_before_point
+Z*.Z*.ZZ AFTER 'Am,am,Dem,dem,Den,den,Zum,zum,Vom,vom,Beim,beim' IN 4 WORDS AS full_date_flex
+Z*.Z*.ZZ AS full_date
+Z*.Z*.ZZE AFTER 'Am,am,Dem,dem,Den,den,Zum,zum,Vom,vom,Beim,beim' IN 4 WORDS AS full_date_flex_before_point
+Z*.Z*.ZZE AS full_date_before_point
+Z*.Z*. BEFORE K AFTER 'Am,am,Dem,dem,Den,den,Zum,zum,Vom,vom,Beim,beim' IN 4 WORDS AS short_date_flex
+Z*.Z*. BEFORE K AS short_date
+Z*.Z*.E AFTER 'Am,am,Dem,dem,Den,den,Zum,zum,Vom,vom,Beim,beim' IN 4 WORDS AS short_date_flex_before_point
+Z*.Z*.E AS short_date_before_point
+ZZZZ AFTER 'seit,Seit' AS dnumeral
+ZZZZ AFTER 'Jahr,Jahre' AS dnumeral
+ZZZZE AFTER 'Jahr,Jahre' AS dnumeral
+# o.k., das ist eine Heuristik...
+18ZZ AS dnumeral
+19ZZ AS dnumeral
+18ZZE AS dnumeral
+19ZZE AS dnumeral
+18ZZK* AS dnumeral
+19ZZK* AS dnumeral
+ZZZZ-ZZZZ AS dnumeral_range
+ZZZ-ZZZ AS dnumeral_range
+ZZ-ZZ AS dnumeral_range
+ZZZZ-ZZZZE AS dnumeral_range
+ZZZ-ZZZE AS dnumeral_range
+ZZ-ZZE AS dnumeral_range
+ZZZZ/ZZZZ AS dnumeral_range
+ZZZZ/ZZ AS dnumeral_range
+ZZ/ZZ AS dnumeral_range
+ZZZZ/ZZZZE AS dnumeral_range
+ZZZZ/ZZE AS dnumeral_range
+ZZ/ZZE AS dnumeral_range
+#
+# Brüche
+#
+# Der Zähler wird auf nur eine Ziffer limitiert, da...
+# a) in normalen Texten selten andere Brüche vorkommen sollten und
+# b) hierdurch Überschneidungen mit Jahresangaben wie z. B. 1870/71 entstehen würden.
+Z/Z* AS fraction
+Z/Z*E AS fraction
+#
+# Ratio
+#
+Z:Z AS ratio
+#
+# mit Doppelpunkt getrennte Zahlenkolonnen
+#
+[Z*:]Z* AS colon_numbers
+[Z*:]Z*E AS colon_numbers_before_point
+#
+# Ordinalzahlen
+#
+#Z*. BEFORE K AFTER 'Am,am,Dem,dem,Den,den,Zum,zum,Vom,vom,Beim,beim' IN 1 WORDS AS ordinal_dativ
+#Z*. BEFORE K AFTER 'Der,der,die,Die,das,Das,eine,Eine' IN 1 WORDS AS ordinal_fem
+#Z*. BEFORE K AFTER 'Ein,ein' IN 1 WORDS AS ordinal_neutr
+#Z*. BEFORE K AS ordinal_fem
+Z*. AFTER 'Am,am,Dem,dem,Den,den,Zum,zum,Vom,vom,Beim,beim,Des,des,Im,im' IN 1 WORDS AS ordinal_dativ
+Z*. AFTER 'der,Der,die,Die,das,Das,eine,Eine' IN 1 WORDS AS ordinal_fem
+Z*. AFTER 'Ein,ein' IN 1 WORDS AS ordinal_neutr
+Z*. AFTER 'bis' IN 1 WORDS AS ordinal_dativ
+Z*. BEFORE 'Januar,Februar,März,April,Mai,Juni,Juli,August,September,Oktober,November,Dezember' AFTER 'und' IN 1 WORDS AS ordinal_dativ
+#Z*. BEFORE G AFTER 'Am,am,Dem,dem,Zum,zum,Vom,vom,Beim,beim,des,im,Im' IN 1 WORDS AS ordinal_dativ
+#Z*. BEFORE G AFTER 'das,Das' IN 1 WORDS AS ordinal_fem
+#Z*. BEFORE G AFTER 'Ein,ein' IN 1 WORDS AS ordinal_neutr
+Z*$$ AS countnumber
+#L*. BEFORE Z AS street
+#
+# Kardinalzahlen
+# Z*E  : z.B.: [...] 20, aber [...]
+# Z*U* : z.B.: 1er, 2stellig, 5fach aber auch 22m (22 Meter)
+#
+Z*.ZZZ.ZZZ.ZZZ.ZZZ.ZZZ AS thousands_separated_number
+Z*.ZZZ.ZZZ.ZZZ.ZZZ.ZZZE AS thousands_separated_number
+Z*.ZZZ.ZZZ.ZZZ.ZZZ.ZZZU* AS thousands_separated_number
+Z*.ZZZ.ZZZ.ZZZ.ZZZ.ZZZU*E AS thousands_separated_number
+Z*.ZZZ.ZZZ.ZZZ.ZZZ AS thousands_separated_number
+Z*.ZZZ.ZZZ.ZZZ.ZZZE AS thousands_separated_number
+Z*.ZZZ.ZZZ.ZZZ.ZZZU* AS thousands_separated_number
+Z*.ZZZ.ZZZ.ZZZ.ZZZU*E AS thousands_separated_number
+Z*.ZZZ.ZZZ.ZZZ AS thousands_separated_number
+Z*.ZZZ.ZZZ.ZZZE AS thousands_separated_number
+Z*.ZZZ.ZZZ.ZZZU* AS thousands_separated_number
+Z*.ZZZ.ZZZ.ZZZU*E AS thousands_separated_number
+Z*.ZZZ.ZZZ AS thousands_separated_number
+Z*.ZZZ.ZZZE AS thousands_separated_number
+Z*.ZZZ.ZZZU* AS thousands_separated_number
+Z*.ZZZ.ZZZU*E AS thousands_separated_number
+Z*.ZZZ AS thousands_separated_number
+Z*.ZZZE AS thousands_separated_number
+Z*.ZZZU* AS thousands_separated_number
+Z*.ZZZU*E AS thousands_separated_number
+Z* AS numeral
+Z*E AS numeral
+Z*U* AS numeral
+Z*U*E AS numeral
+#
+# Versionen
+#
+Z*.Z*.Z* AS version
+Z*.Z* AS version
+#
+# Mal
+#
+x BEFORE Z AFTER Z AS times
+#
+# Einheiten
+#
+U*/U* AFTER Z AS unit_per
+U*/U*E AFTER Z AS unit_per
+U* AFTER Z AS unit
+U*E AFTER Z AS unit
+#
+# Internet
+#
+N*@N* AS email
+n*://[N*/]N* AS http_address
+n*://[N*/] AS http_address
+n*://N* AS http_address
+n*://N*/ AS http_address
+[N*/]N* AS http_address
+[LC*.]LC* AS computer_address
+N*ZN* AS email
+N*ZN*E AS email
+ZN* AS email
+ZN*E AS email
+N*Z AS email
+N*ZE AS email
+#
+# Sonderzeichen
+#
+Z*[SZ*] AS arithmetic
+[SZ*] AS arithmetic
+#
+/ BEFORE Z AS divide
+= BEFORE Z AS equals
+( AS bracket
+) AS bracket
+- BEFORE Z AS minus
+- AS dash
+-- AS dash
+A*--A* AS dash
+--A* AS dash
++ BEFORE Z AS plus
+x AS times
+% AS percent
+& AS ando
+$ AS dollar
+§ AS paragraph
+@ AS at

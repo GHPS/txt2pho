@@ -121,47 +121,47 @@ void PPCContext::list(FILE* lf) {
    fprintf(lf,"DIRECTION %d SCOPE %d",direction,scope) ; }
 
 int PPCContext::is_valid(char* in, int tokenstart, PPRulecharlist& rcl) {
-  int i, j;
-  char* v ;
-  char* c ;
-  char l = ' ' ;
-  if (cstr != NULL) {
-    if (direction == -1)
-      return(cstr->find(in, tokenstart-2, -1,j,rcl)) ;
-    v = get_tokenend(&in[tokenstart]) ;
-    if (v == NULL)
-      return(0) ;
-    v = get_next_token(v) ;
-    if (v == NULL)
-      return(0) ;
-    if (scope > 1) {
-      fprintf(errfile,"SCOPE > 1 NOT SUPPORTED FOR CATEGORYSTRING\n") ; }
-    return(cstr->find(v,0,1,j,rcl)) ; }
-  
-  v = &in[tokenstart] ;
-  if (direction != -1) {
-    v = get_tokenend(v) ;
-    v-- ; }
-  
-  for (i=0 ; i < scope ; i++) {
-    if (direction == -1)
-      v = get_last_token(v,in) ;
-    else
+	int i, j;
+   char* v ;
+   char* c ;
+   char l = ' ' ;
+   if (cstr != NULL) {
+   	if (direction == -1)
+      	return(cstr->find(in, tokenstart-2, -1,j,rcl)) ;
+      v = get_tokenend(&in[tokenstart]) ;
+      if (v == NULL)
+      	return(0) ;
       v = get_next_token(v) ;
-    if (v == NULL)
-      return(0) ;
-    c = find_other_sign(v) ;
-    if (c != NULL) {
-      l = c[0] ;
-      c[0] = '\0' ; }
-    for (j = 0 ; j < tokennr ; j++) {
-      if (strcmp(v,tliste[j]) == 0) {
-	if (c != NULL)
-	  c[0] = l ; 
-	return(1) ; } }
-    if (c != NULL)
-      c[0] = l ; }
-  return(0) ; }
+      if (v == NULL)
+      	return(0) ;
+      if (scope > 1) {
+      	fprintf(errfile,"SCOPE > 1 NOT SUPPORTED FOR CATEGORYSTRING\n") ; }
+      return(cstr->find(v,0,1,j,rcl)) ; }
+
+   v = &in[tokenstart] ;
+   if (direction != -1) {
+   	v = get_tokenend(v) ;
+        v-- ; }
+
+   for (i=0 ; i < scope ; i++) {
+   	if (direction == -1)
+      		v = get_last_token(v,in) ;
+      	else
+      		v = get_next_token(v) ;
+      	if (v == NULL)
+      		return(0) ;
+      	c = find_other_sign(v) ;
+      	if (c != NULL) {
+      		l = c[0] ;
+	      	c[0] = '\0' ; }
+      	for (j = 0 ; j < tokennr ; j++) {
+      		if (strcmp(v,tliste[j]) == 0) {
+  	 		if (c != NULL)
+	  	    		c[0] = l ; 
+         		return(1) ; } }
+   	if (c != NULL)
+	      c[0] = l ; }
+   return(0) ; }
 
 
 

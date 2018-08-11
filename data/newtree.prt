@@ -1,0 +1,167 @@
+
+# DAUER (geaendert ab 15.12.96)
+
+silgre=0?
+#Regeln fuer Grenzen=Pausen!!
+
+acat<4?
+	syldur:0;
+	rifa=0?
+		syldur:70*acat-77;
+		syldur:34*acat-39;
+
+#Regeln fuer Silben
+
+bodi=0?
+	facatbo<5?
+		coso=0?
+			onso=0?
+				syldur:(((5*acat)+50*sonr)+25*facatbo);
+				syldur:(((5*acat)+50*sonr)+25*facatbo)+20;
+			onso=0?
+				syldur:(((5*acat)+50*sonr)+25*facatbo)+20;
+				syldur:(((5*acat)+50*sonr)+25*facatbo)+30;
+	
+			acce=0? # ge„ndert 29.12.96
+				syldur:((41*sonr)+14*tobo)+100;
+				tobo=0?
+					syldur:((44*sonr)+4*acat)+130;
+					tobo=1?  # W-Fragen st„rker gel„ngt als Aussagen
+						#codac=0? # klingt immer zu kurz; verl. nicht aus daten
+						# codac Regeln raus, weil codac in hadi immer null!!
+							#syldur:((44*sonr)+4*acat)+160;	
+							syldur:((44*sonr)+4*acat)+150;	
+						tobo=2?
+							#codac=0?
+								#syldur:((44*sonr)+4*acat)+150;	
+								syldur:((44*sonr)+4*acat)+130;	
+								#codac=0?
+									#syldur:((44*sonr)+4*acat)+150;	
+									syldur:((44*sonr)+4*acat)+160;
+
+	bodi=1?
+		facce=1?  # wenn kein Schwa/6 folgt(Regeln wie bodi>1)
+			  # ge„ndert 29.12.96
+	syldur:((((38*sonr)+3*acat)+3*codac)+2*tobo)+27;
+		
+		
+		#wenn Schwa6 folgt
+		syldur:(((-7.5*rifa)+65*sonr)+3*acat)-4;	
+	
+
+# wenn bodi > 1 # aber Daten aus bodi > 0 !!!
+syldur:((((38*sonr)+3*acat)+3*codac)+2*tobo)+27;
+		
+# DELAY
+
+silgre=1?
+
+#Regeln fuer Silben
+
+#rifa=0? faellt raus weil es jetzt Grenzton gibt
+searly=1?
+	bodi=0?
+		delay:-240;
+		bodi=1?
+			delay:-200;
+			delay:-160 ;
+	slate=1?
+		bodi<2?
+			rifa=0?
+				delay:120;
+				bodi<1?
+					delay:120;
+					delay:240;
+			rifa=0?
+				delay:180;
+				delay:180 ;
+		rifa=0?
+			delay:30;
+			bodi=0?
+				delay:100;
+				bodi=1?
+					delay:80;
+					delay:50;
+# Grenzton!
+
+delay:0;
+
+
+#AMPLITUDE
+silgre=1?
+
+#Regeln fuer Silben
+smax=1?
+	fdiss=0?
+		amplitude:10+(acat-(sylpos/2));
+	amplitude:32+(acat-(sylpos));
+	amplitude:40-sylpos;
+		
+
+# Regeln fuer Grenzamplitude
+rifa=0?
+	amplitude:-20;
+tobo=3?
+	amplitude:70;
+	tobo=2?
+		amplitude:50;	
+		tobo=1?
+			amplitude:55;
+			amplitude:20;
+
+
+# ANSTIEG (betali): 14.12.96
+
+silgre=1?
+sslope=1?
+	betali:0.05;
+	searly=1?
+		betali:0.2;
+		betali:0.5;
+# Regeln fuer Grenzen
+rifa=0?
+	betali:0.2;
+	pdiss=0? # wenn nur ein max in der Phrase ist
+# Hilfsregel: Scheisse, geht nicht!!
+
+	
+		betali:0.25;
+# 2.1.97: pdiss ist in hadi derzeit immer=0!! Regeln deshalb auskommentiert!!
+# 9.1.97: pdiss korrigiert, Regel wieder drin (TP)
+
+			tobo=0?
+			#pdiss<5?
+				#betali:-0.046*pdiss+0.49;
+				betali:0.3;
+ 			#pdiss<5?
+				#betali:-0.046*pdiss+0.49;
+				betali:0.4;	
+
+
+
+
+# Regeln fuer fall, 14.12.1996 
+
+
+silgre=1? # handelt es sich um eine Silbe?
+rifa=0?
+	bodi=0?
+		betare:0.6;
+		bodi=1?
+			betare:0.5;
+			searly=0?
+				betare:0.2;
+				betare:0.6;
+	bodi<2?
+		betare:0.0;
+		betare:0.5 ;
+		
+
+
+ betare:0.8;  # Regeln fuer Grenzton; silgre=0 (willkuerlicher Wert)
+	
+
+
+
+
+

@@ -2,6 +2,8 @@ CC=/usr/bin/g++
 CCC=/usr/bin/gcc
 CFLAGS=-g -ansi -Wno-write-strings
 SRCPATH=src
+PPSRCPATH=$(SRCPATH)/preproc
+PPFLTSRCPATH=$(SRCPATH)/pipefilt
 HADIPATH=.
 INCLUDE=-I$(SRCPATH) -I$(HADIPATH)/src
 LDFLAGS=-g -L$(HADIPATH) 
@@ -17,6 +19,7 @@ $(OBJPATH)/PPCtglst.o \
 $(OBJPATH)/PPCtgstr.o \
 $(OBJPATH)/PPFnclst.o \
 $(OBJPATH)/PPFuncts.o \
+$(OBJPATH)/PPNumbers.o \
 $(OBJPATH)/PPInput.o \
 $(OBJPATH)/PPMain.o \
 $(OBJPATH)/PPRlchls.o \
@@ -84,6 +87,8 @@ $(OBJPATH)/hadidll.o
 $(OBJPATH)/%.o		:  $(SRCPATH)/%.cc
 	 $(CC) $(INCLUDE) $(CFLAGS) $(DEFINES) -o $@ -c $<
 
+$(OBJPATH)/%.o		:  $(PPSRCPATH)/%.cc
+	 $(CC) $(INCLUDE) $(CFLAGS) $(DEFINES) -o $@ -c $<
 
 $(OBJPATH)/%.o		:  $(SRCPATH)/%.c
 	 $(CCC) $(INCLUDE) $(CFLAGS) $(DEFINES) -o $@ -c $<
@@ -95,7 +100,6 @@ hadifix		:	$(OBJPATH)/hadimain.o libhadi
 
 txt2pho		:	$(OBJPATH)/txt2pho.o libhadi
 	$(CC) $(LDFLAGS) -o txt2pho $(OBJPATH)/txt2pho.o $(LOADLIBS)
-#	$(CC) $(LDFLAGS) -o txt2pho $(OBJPATH)/txt2pho.o $(LOADLIBS)
 
 syswatch		:	$(OBJPATH)/syswatch.o libhadi
 	$(CC) $(LDFLAGS) -o syswatch $(OBJPATH)/syswatch.o $(LOADLIBS)
@@ -106,7 +110,9 @@ twhadi			:	$(OBJPATH)/twhadi.o $(OBJPATH)/tags.o libhadi
 
 preproc		:	$(PPOBJECTS) $(OBJPATH)/preproc.o
 	$(CC) $(LDFLAGS) -o preproc $(PPOBJECTS) $(OBJPATH)/preproc.o $(LOADLIBS)
-#	mv preproc /apps/bin
+
+pipefilt		:	
+	$(CC) -o pipefilt $(CFLAGS) $(DEFINES) $(PPFLTSRCPATH)/*.cc 
 
 libhadi			:       $(OBJECTS) $(OBJPATH)/libhadi.o
 	ar -r lib/libhadi.a $(OBJECTS) $(OBJPATH)/libhadi.o

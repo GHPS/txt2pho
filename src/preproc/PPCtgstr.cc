@@ -27,37 +27,37 @@ __________________________
 
 PPCategorystring::PPCategorystring(char* in) {
 
-  str = NULL ;
-  con = NULL ;
-  contextnr = 0 ;
-  char* c ;
-  int r ;
-  char* v ;
+	str = NULL ;
+   con = NULL ;
+   contextnr = 0 ;
+   char* c ;
+   int r ;
+   char* v ;
 
-  if ((c = strstr(in," BEFORE ")) == NULL) {
-    c = strstr(in," AFTER ") ; }
+   if ((c = strstr(in," BEFORE ")) == NULL) {
+   	c = strstr(in," AFTER ") ; }
 
-  if (c != NULL) {
-    con = (PPCContext**)malloc(sizeof(PPCContext*)) ;
-    
-    do {
-      c[0] = '\0' ;
-      if (c[1] == 'B') {
-	r = 1 ;
-	c += 8 ; }
-      else {
-	r = -1 ;
-	c += 7 ; }
-      if ((v = strstr(c," BEFORE ")) == NULL) {
-	v = strstr(c," AFTER ") ; }
-      if (v != NULL)
-	v[0] = '\0' ;
-      con[contextnr++] = new PPCContext(c,r) ;
-      con = (PPCContext**)realloc(con,sizeof(PPCContext*)*(contextnr+1)) ;
-      c = v ; }
-    while (c != NULL) ; }
-  
-  str = new PPCString(in) ; }
+   if (c != NULL) {
+   	con = (PPCContext**)malloc(sizeof(PPCContext*)) ;
+
+      do {
+	      c[0] = '\0' ;
+   	   if (c[1] == 'B') {
+      		r = 1 ;
+      		c += 8 ; }
+	      else {
+   	   	r = -1 ;
+      		c += 7 ; }
+		   if ((v = strstr(c," BEFORE ")) == NULL) {
+		   	v = strstr(c," AFTER ") ; }
+         if (v != NULL)
+         	v[0] = '\0' ;
+	      con[contextnr++] = new PPCContext(c,r) ;
+	   	con = (PPCContext**)realloc(con,sizeof(PPCContext*)*(contextnr+1)) ;
+         c = v ; }
+      while (c != NULL) ; }
+
+   str = new PPCString(in) ; }
 
 PPCategorystring::~PPCategorystring() {
    int i ;
@@ -76,12 +76,12 @@ void PPCategorystring::list(FILE* lf) {
       fprintf(lf," ") ; } }
 
 int PPCategorystring::find(char* in, int tokenstart, int& left,PPRulecharlist& rcl) {
-  if (str->find(in,tokenstart,0,left,rcl) == 0)
-    return(0) ;
-  if (con == NULL)
-    return(1) ;
-  int i ;
-  for (i=0 ; i < contextnr ; i++)
-    if (con[i]->is_valid(in,tokenstart,rcl) == 0)
-      return(0) ;
-  return(1) ; }
+	if (str->find(in,tokenstart,0,left,rcl) == 0)
+   	return(0) ;
+   if (con == NULL)
+   	return(1) ;
+   int i ;
+	for (i=0 ; i < contextnr ; i++)
+   	if (con[i]->is_valid(in,tokenstart,rcl) == 0)
+      	return(0) ;
+   return(1) ; }

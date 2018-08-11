@@ -1,0 +1,203 @@
+
+# DAUER (geaendert ab 15.12.96)
+
+silgre=0?
+#Regeln fuer Grenzen=Pausen!!
+
+acat<4?
+	syldur:0;
+	rifa=0?
+		syldur:70*acat-77;
+		syldur:34*acat-39;
+
+#Regeln fuer Silben
+
+bodi=0?
+	facatbo<5?
+		coso=0?
+			onso=0?
+				syldur:(((5*acat)+50*sonr)+25*facatbo);
+				syldur:(((5*acat)+50*sonr)+25*facatbo)+20;
+			onso=0?
+				syldur:(((5*acat)+50*sonr)+25*facatbo)+20;
+				syldur:(((5*acat)+50*sonr)+25*facatbo)+30;
+	
+			acce=0? # ge„ndert 29.12.96
+				syldur:((41*sonr)+14*tobo)+100;
+				tobo=0?
+					syldur:((44*sonr)+4*acat)+130;
+					tobo=1?  # W-Fragen st„rker gel„ngt als Aussagen
+						#codac=0? # klingt immer zu kurz; verl. nicht aus daten
+						# codac Regeln raus, weil codac in hadi immer null!!
+							#syldur:((44*sonr)+4*acat)+160;	
+							syldur:((44*sonr)+4*acat)+150;	
+						tobo=2?
+							#codac=0?
+								#syldur:((44*sonr)+4*acat)+150;	
+								syldur:((44*sonr)+4*acat)+130;	
+								#codac=0?
+									#syldur:((44*sonr)+4*acat)+150;	
+									syldur:((44*sonr)+4*acat)+160;
+
+	bodi=1?
+		facce=1?  # wenn kein Schwa/6 folgt(Regeln wie bodi>1)
+			  # ge„ndert 29.12.96
+	syldur:((((38*sonr)+3*acat)+3*codac)+2*tobo)+27;
+		
+		
+		#wenn Schwa6 folgt
+		syldur:(((-7.5*rifa)+65*sonr)+3*acat)-4;	
+	
+
+# wenn bodi > 1 # aber Daten aus bodi > 0 !!!
+syldur:((((38*sonr)+3*acat)+3*codac)+2*tobo)+27;
+		
+# DELAY
+
+silgre=1?
+
+#Regeln fuer Silben
+
+#rifa=0? faellt raus weil es jetzt Grenzton gibt
+fdiss=0?
+   bodi=0?
+	pdiss=0?
+		tobo<3?
+		 	coso=0?													delay:-30;
+				delay:20;
+				delay:50;
+	 		pdiss<3?
+				delay:-30*tobo+10;
+				delay:-3*tobo-90;
+		bodi=1?
+			 pdiss=0?
+				tobo=0?
+					delay:80;
+					delay:-100;
+				tobo<2?
+					delay:50;
+					delay:-80;
+			pdiss<3?
+				sylnr<5?
+					tobo<3?
+						delay:-38*sylnr+200;
+						delay:-38*sylnr+180;
+				delay:65;
+				tobo=0?
+					delay:140;
+					tobo=1?
+						delay:40;
+						delay:15;
+	 pdiss>0?
+		 delay:(((((2.4*acat)+25*fdiss)+9*sylnr)-38*pdiss)-14*sonr)+78;
+acat<12?
+	delay:30;
+	facce=0?
+		  delay:((-30*sylnr)+11*acat)-59;
+		  delay:((13*acat)+24*fdiss)-299;
+
+
+# Grenzton!
+
+delay:0;
+
+
+#AMPLITUDE
+silgre=1?
+
+#Regeln fuer Silben
+rifa=0?
+	fdiss=0?
+		bodi=0?
+			amplitude:1.7*acat-9; #25.NOV
+			bodi<6?
+				amplitude:((-0.46*bodi)+1.5*acat)-7;
+				amplitude:15; #25.NOV 
+		
+		sylnr<20? #26.12 damit bei ’berlangen Phrasen keine negative ampl.!!
+			amplitude:(((0.66*acat)-1.3*tobo)-1.7*sylnr)+40; #25.NOV
+			amplitude:15;
+			
+
+	sylnr<20? # wenn rifa =1
+		bodi<4?
+			amplitude:((((0.005*acat)+0.02*bodi)-0.01*sylnr)+0.25)*100;
+			amplitude:(((0.01*acat)-0.017*sylnr)+0.3)*100;
+		bodi>4?
+			amplitude:20;
+			amplitude:10;
+		
+
+
+# Regeln fuer Grenzamplitude
+
+rifa=0?
+	amplitude:0;
+tobo=3?
+	amplitude:70;
+	tobo=2?
+		amplitude:62;	
+		tobo=1?
+			amplitude:55;
+			amplitude:40;
+
+
+# ANSTIEG (betali): 14.12.96
+
+silgre=1?
+		pdiss=0?
+			sylnr<5?
+				betali:0.068*sylnr+0.41;
+				betali:0.08; # (med.:0.05, mean: 0.1) 
+			pdiss<4?
+				betali:-0.069*pdiss+0.44;
+				betali:0.18; # (med:0.15, mean: 0.22)
+	
+
+# Regeln fuer Grenzen
+	pdiss=0? # wenn nur ein max in der Phrase ist
+# Hilfsregel: Scheisse, geht nicht!!
+	
+		betali:0.25;
+# 2.1.97: pdiss ist in hadi derzeit immer=0!! Regeln deshalb auskommentiert!!
+# 9.1.97: pdiss korrigiert, Regel wieder drin (TP)
+
+			tobo=0?
+			#pdiss<5?
+				#betali:-0.046*pdiss+0.49;
+				betali:0.3;
+ 			#pdiss<5?
+				#betali:-0.046*pdiss+0.49;
+				betali:0.4;	
+
+
+
+
+# Regeln fuer fall, 14.12.1996 
+
+
+silgre=1? # handelt es sich um eine Silbe?
+
+
+rifa=0? # handelt es sich um eine Phrase mit fallendem F0?
+
+	fdiss=0? # letztes max. in der Phrase?
+		betare:-0.028*bodi+0.36;
+		betare:-0.039*fdiss+0.46;			
+
+
+	fdiss=0? # Regeln fuer rifa=1 (Phrasen mit steig. F0, letzt. Max. in Phrase?)
+		bodi=0?
+			betare:0.7;
+			betare:-0.1*bodi+0.79; # ge„ndert 2.1.97 (0.3*bodi)
+			
+
+		betare:-0.044*fdiss+4.3; # fuer andere max. in rise-Phrase.
+
+ betare:0.8;  # Regeln fuer Grenzton; silgre=0 (willkuerlicher Wert)
+	
+
+
+
+
+

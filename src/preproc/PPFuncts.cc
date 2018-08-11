@@ -24,7 +24,13 @@ __________________________
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <ctype.h>
 #include "PPdebug.h"
+#include "PPNumbers.h"
+#include "PPFuncts.h"
+
+#define MAX_UNIT_LENGTH	20
+#define MAX(a,b) ((a)>(b)?(a):(b))
 
 char* strfind(char* s, char* targets) {
 	unsigned int i ;
@@ -32,6 +38,7 @@ char* strfind(char* s, char* targets) {
    	if (strchr(targets,s[i]) != NULL)
       	return(&s[i]) ; }
    return(NULL) ; }
+
 char* strrfind(char* s, char* targets) {
 	int i ;
    for (i=strlen(s)-1 ; i >=0 ; i--) {
@@ -83,154 +90,200 @@ char* find_non_number(char* in) {
       	return(&in[i]) ;}
    return(NULL) ; }
 
-#define MAX_NUMBER 999999
-
 char* single_numbers(char* in) {
-	unsigned int i ;
-   char* result = new char[strlen(in)*12] ;
-   strcpy(result,"") ;
-   for (i = 0 ; i < strlen(in) ; i++) {
-   	switch (in[i]) {
-      	case '0' : strcat(result,"Null ") ; break ;
-      	case '1' : strcat(result,"Eins ") ; break ;
-      	case '2' : strcat(result,"Zwei ") ; break ;
-      	case '3' : strcat(result,"Drei ") ; break ;
-      	case '4' : strcat(result,"Vier ") ; break ;
-      	case '5' : strcat(result,"Fünf ") ; break ;
-      	case '6' : strcat(result,"Sechs ") ; break ;
-      	case '7' : strcat(result,"Sieben ") ; break ;
-      	case '8' : strcat(result,"Acht ") ; break ;
-      	case '9' : strcat(result,"Neun ") ; break ; } }
-   delete(in) ;
-   return(result) ; }
+	size_t i;
+   char* result = new char[strlen(in)*7];	// 'sieben' is the longest digit + single space
+   char* p = result;
 
-char* numeral(char* in) {
-   long number = atol(in) ;
-   if (number > MAX_NUMBER || number == 0L)
-   	return(single_numbers(in)) ;
-   long x ;
-   char* result ;
-   char* temp1 = NULL ;
-   char* temp2 = NULL ;
-   char* temp3 = NULL ;
-   char* temp4 = NULL ;
-   if (number > 999) {
-      x = (number / 1000) ;
-      temp1 = new char[12] ;
-      sprintf(temp1,"%ld",x) ;
-      temp1 = numeral(temp1) ;
-      number = number % 1000 ; }
-   if (number > 99) {
-      x = (number / 100) ;
-      temp2 = new char[12] ;
-      sprintf(temp2,"%ld",x) ;
-      temp2 = numeral(temp2) ;
-      number = number % 100 ; }
-   if (number > 19) {
-   	x = (number / 10) ;
-		switch (x) {
-      	case 2: temp3 = "zwanzig" ; break ;
-      	case 3: temp3 = "dreissig" ; break ;
-      	case 4: temp3 = "vierzig" ; break ;
-      	case 5: temp3 = "fünfzig" ; break ;
-      	case 6: temp3 = "sechzig" ; break ;
-      	case 7: temp3 = "siebzig" ; break ;
-      	case 8: temp3 = "achtzig" ; break ;
-      	case 9: temp3 = "neunzig" ; break ; }
-      number = number % 10 ; }
-   switch (number) {
-   		case 0: temp4 = "" ; break ;
-         case 1: temp4 = "ein"; break ;
-      	case 2: temp4 = "zwei" ; break ;
-      	case 3: temp4 = "drei" ; break ;
-      	case 4: temp4 = "vier" ; break ;
-      	case 5: temp4 = "fünf" ; break ;
-      	case 6: temp4 = "sechs" ; break ;
-      	case 7: temp4 = "sieben" ; break ;
-      	case 8: temp4 = "acht" ; break ;
-      	case 9: temp4 = "neun" ; break ;
-   		case 10: temp4 = "zehn" ; break ;
-         case 11: temp4 = "elf" ; break ;
-      	case 12: temp4 = "zwölf" ; break ;
-      	case 13: temp4 = "dreizehn" ; break ;
-      	case 14: temp4 = "vierzehn" ; break ;
-      	case 15: temp4 = "fünfzehn" ; break ;
-      	case 16: temp4 = "sechzehn" ; break ;
-      	case 17: temp4 = "siebzehn" ; break ;
-      	case 18: temp4 = "achtzehn" ; break ;
-      	case 19: temp4 = "neunzehn" ; break ; }
-   int len = strlen(temp4)+30 ;
-   if (temp3 != NULL)
-   	len += strlen(temp3) ;
-   if (temp2 != NULL)
-   	len += strlen(temp2) ;
-   if (temp1 != NULL)
-   	len += strlen(temp1) ;
-   result = new char[len+40] ;
-  strcpy(result,"") ;   if (temp1 != NULL) {
-   	if (strstr(temp1,"eins") != NULL)
-      	temp1[strlen(temp1)-1] = '\0' ;
-   	strcat(result,temp1) ;
-   	strcat(result,"tausend ") ; }
-   if (temp2 != NULL) {
-   	if (strstr(temp2,"eins") != NULL)
-      	temp2[strlen(temp2)-1] = '\0' ;
-   	strcat(result,temp2) ;
-   	strcat(result,"hundert ") ; }
-   if (temp3 != NULL) {
-   	if (strlen(temp4) > 2) {
-	   	strcat(result,temp4) ;
-   	        strcat(result,"und") ; }
-      	strcat(result,temp3) ; }
-   else {
-   	strcat(result,temp4) ;
-        if (strcmp(temp4,"ein") == 0)
-      		strcat(result,"s") ; }
-   if (temp2 != NULL)
-   	delete(temp2) ;
-   if (temp1 != NULL)
-   	delete(temp1) ;
-   delete(in) ;
-   return(result) ; }
+	for (i = 0 ; i < strlen(in) ; i++) {
+		p = digit2txt (p, in[i] - '0');
+		strcpy (p++, " ");
+	}
+	delete (in);
+	return (result);
+}
+
+char* numeral(char *in) {
+	char *p = in;
+	char *temp1, *temp2, *q;
+	char *result;
+	char c;
+	int approx_len = 0, trailer_len;
+
+   	temp1 = q = new char[strlen (in)+1];
+	
+	for (c = *p; (c >= '0' && c <= '9'); c = *++p) {
+		*q++ = c;
+		approx_len += 15;	// this should be enough per digit
+	}
+	*q = '\0';
+
+	result = new char[approx_len + MAX(strlen (p), MAX_UNIT_LENGTH) + 1];
+	if (number2txt (result, temp1) == NULL) {
+		delete (result);
+		return (single_numbers (in));
+	}
+	delete (temp1);
+
+	if ((trailer_len = strlen (p)) > 0) {
+		temp1 = new char[trailer_len+1];
+		strcpy (temp1, p);
+		temp2 = unit (temp1);
+		if (temp1 != temp2) {
+			strcat (result, " ");
+		}
+		strcat (result, temp2);
+		delete (temp2);
+	}
+
+	delete (in);
+
+	return (result);
+}
 
 char* dnumeral(char* in) {
-   long number = atol(in) ;
-   if (number > MAX_NUMBER)
-   	return(single_numbers(in)) ;
-   long x ;
-   char* result ;
-   if (in[0] == '0' && in[1] == '0')
-     {
-       delete in ;
-       result = new char[20] ;
-       strcpy(result,"zweitausend") ;
-       return result;
-     }
-   if (!(in[0] == '1' && in[1] != '0'))
-     {
-       return(numeral(in)) ;
-     }
+   char *result;
+	char *ext = in;
+	char *dnum, *p;
 
+	dnum = p = new char [strlen(in)+1];
+	while (*ext >= '0' && *ext <= '9') {
+		*p++ = *ext++;
+	}
+	*p = '\0';
 
-   char* temp1 = NULL ;
-   char* temp2 = NULL ;
-   char* temp3 = NULL ;
-   char* temp4 = NULL ;
-   temp1 = new char[4] ;
-   temp2 = new char[4] ;
+   if ((strlen (dnum) != 4) || (!(dnum[0] == '1' && dnum[1] != '0'))) {
+		char *temp;
+		result = temp = numeral(dnum);
+		if (*ext) {
+   		result = new char[strlen(temp)+strlen(ext)+1];
+		   strcat(strcpy(result, temp), ext);
+		}
+		return (result);
+   }
 
-   strncpy(temp1,in,2) ;
-   temp1[2] = '\0' ;
-   strncpy(temp2,&in[2],2) ;
-   temp2[2] = '\0' ;
-   temp1 = numeral(temp1) ;
-   temp2 = numeral(temp2) ;
-   result = new char[strlen(temp1)+strlen(temp2)+12] ;
-   strcat(strcat(strcpy(result,temp1),"hundert"),temp2) ;
-   delete temp1 ;
-   delete temp2 ;
-   delete in ;
-   return result ;
+   char* temp1 = new char[3];
+   strncpy(temp1,dnum,2);
+   temp1[2] = '\0';
+   temp1 = numeral(temp1);
+
+   char* temp2 = new char[3];
+   if (!strcmp (&dnum[2], "00")) {
+	   temp2[0] = '\0';
+   } else {
+   	strcpy(temp2,&dnum[2]);
+		temp2 = numeral(temp2);
+	}
+
+   result = new char[strlen(temp1)+7+strlen(temp2)+strlen(ext)+1];
+   strcat(strcat(strcat(strcpy(result, temp1), "hundert"), temp2), ext);
+
+   delete (dnum);
+   delete (temp1);
+   delete (temp2);
+   delete (in);
+
+   return (result);
+}
+
+#define RANGE_LONG	1
+#define RANGE_SMALL	2
+
+char* dnumeral_range(char* in) {
+	char *temp1 = new char[5] ;
+	char *temp2 = new char[5] ;
+	char *from, *to, *result;
+	int range_type;
+
+	if (to = strchr (in, '-')) {
+		range_type = RANGE_LONG;
+	} else if (to = strchr (in, '/')) {
+		range_type = RANGE_SMALL;
+	} else {
+		return (in);
+	}
+	*to++ = '\0';
+	
+	strncpy (temp1, in, 5);
+	strncpy (temp2, to, 5);
+
+	from = dnumeral (temp1);
+	to   = dnumeral (temp2);
+
+	if (range_type == RANGE_LONG) {
+		result = new char [strlen(from)+5+strlen(to)+1];
+		strcat(strcat(strcpy (result, from), " bis "), to);
+	} else {
+		result = new char [strlen(from)+1+strlen(to)+1];
+		strcat(strcat(strcpy (result, from), " "), to);
+	}
+
+	delete (in); delete (from); delete (to);
+	return (result);
+}
+
+char* fraction(char* in) {
+	char *denominator;
+	char *temp1, *temp2;
+	char *result;
+
+	denominator = strchr (in, '/');
+	*denominator++ = '\0';
+	
+	temp1 = new char [strlen (in) * 15];
+	temp2 = new char [strlen (denominator) * 15];
+
+	if (in[0] == '1' && in[1] == '\0') {
+		strcpy (temp1, "ein");
+	} else {
+		number2txt(temp1, in);
+	}
+	denominator2txt(temp2, denominator);
+
+	result = new char [strlen(temp1)+2+strlen(temp2)+1];
+	strcat(strcpy (result, temp1), " ");
+	if (!strncmp ("ein", temp2, 3)) {
+		strcat(result, strchr (temp2, ' ') + 1);
+	} else {
+		strcat(result, temp2);
+	}
+
+	delete (in); delete (temp1); delete (temp2);
+	return (result);
+}
+
+char* ratio(char* in) {
+	char *r2, *temp1, *temp2, *result;
+
+	r2 = strchr (in, ':');
+	*r2++ = '\0';
+	
+	temp1 = new char [strlen (in) * 15];
+	temp2 = new char [strlen (r2) * 15];
+
+	number2txt(temp1, in);
+	number2txt(temp2, r2);
+	
+	result = new char [strlen(temp1)+4+strlen(temp2)+1];
+	strcat(strcat(strcpy (result, temp1), " zu "), temp2);
+
+	delete (in); delete (temp1); delete (temp2);
+	return (result);
+}
+
+char* thousands_separated_number(char* in) {
+	int offset = 0;
+	int in_len = strlen(in)+1;
+	char *p = in;
+	while (in_len--) {
+		if (*p == '.' && in_len >= 4 && isdigit (*(p+1)) && isdigit (*(p+2)) && isdigit (*(p+3))) {
+			offset++;
+		} else if (offset) {
+			*(p-offset) = *p;
+		}
+		p++;
+	}
+	return (numeral(in));
 }
 
 char* phone_number_prefix(char* in) {
@@ -304,10 +357,7 @@ char* time(char* in) {
    start = numeral(start) ;
    char* end = new char[strlen(p)+2] ;
    strcpy(end,p) ;
-   if (atol(end) == 0)
-     strcpy(end,"") ;
-   else
-     end = numeral(end) ;
+   end = numeral(end) ;
    char* result = new char[strlen(start)+strlen(end)+10] ;
    strcat(strcat(strcpy(result,start)," Uhr "),end) ;
    delete(temp) ;
@@ -318,34 +368,7 @@ char* time(char* in) {
 
 
 char* time_before_Uhr(char* in) {
-	char* temp = new char[strlen(in)+2] ;
-   strcpy(temp,in) ;
-   char* p = strchr(temp,':') ;
-   *p = '\0' ;
-   p++ ;
-   char* start = new char[strlen(temp)+20] ;
-   strcpy(start,temp) ;
-   start = numeral(start) ;
-   char* end = new char[strlen(p)+20] ;
-   strcpy(end,p) ;
-   if (atol(end) == 0)
-     strcpy(end,"") ;
-   else
-     end = numeral(end) ;
-       
-   char* result = new char[strlen(start)+strlen(end)+10] ;
-   strcat(strcat(strcpy(result,start)," Uhr "),end) ;
-   delete(temp) ;
-   delete(start) ;
-   delete(end) ;
-   delete(in) ;
-   return(result) ; }
-
-char* junk(char* in) {
-   char* temp = new char[2] ;
-   strcpy(temp,"") ;
-   delete in ;
-   return temp ; }
+	return(time(in)) ; }
 
 char* version(char* in) {
    char* temp = new char[2] ;
@@ -378,9 +401,15 @@ char* version(char* in) {
 
 
 char* ordinal_fem(char* in) {
-	char* temp = new char[strlen(in)+5] ;
-   strcpy(temp,in) ;
-   temp = numeral(temp) ;
+	char *p;
+	char *temp;
+
+	if ((p = strchr (in, '.'))) {
+		*p = '\0';
+	} else {
+		return (in);	// this doesn't look like an ordinal
+	}
+   temp = numeral(in) ;
    char* result = new char[strlen(temp)+8] ;
    strcpy(result,temp) ;
    if ((strncmp(&temp[strlen(temp)-2],"ig",2) == 0) ||
@@ -402,8 +431,8 @@ char* ordinal_fem(char* in) {
    if (temp != NULL && temp[6] == '\0') {
       temp[4] = '\0' ;}
    strcat(result,"te") ;
-   delete(in) ;
-   return(result) ; }
+   return(result) ;
+}
 
 char* ordinal_neutr(char* in) {
 	char* temp = new char[strlen(in)+5] ;
@@ -489,7 +518,11 @@ char* full_date(char* in) {
    start = short_date(start) ;
    char* end = new char[strlen(p)+4] ;
    strcpy(end,p) ;
-   end = dnumeral(end) ;
+   if (end[0] == '0' && end[2] == '\0') {
+		end = single_numbers(end) ;
+	} else {
+	   end = dnumeral(end) ;
+	}
    char* result = new char[strlen(start)+strlen(end)+10] ;
    strcat(strcat(strcpy(result,start)," "),end) ;
    delete(temp) ;
@@ -509,7 +542,11 @@ char* full_date_flex(char* in) {
    start = short_date_flex(start) ;
    char* end = new char[strlen(p)+4] ;
    strcpy(end,p) ;
-   end = dnumeral(end) ;
+   if (end[0] == '0' && end[2] == '\0') {
+		end = single_numbers(end) ;
+	} else {
+	   end = dnumeral(end) ;
+	}
    char* result = new char[strlen(start)+strlen(end)+10] ;
    strcat(strcat(strcpy(result,start)," "),end) ;
    delete(temp) ;
@@ -696,8 +733,6 @@ char* email(char* in) {
 char* http_address(char* in) {
 	char* temp = new char[strlen(in)+2] ;
    strcpy(temp,in) ;
-   if (temp[strlen(temp)-1] == '/')
-     temp[strlen(temp)-1] = '\0' ;
    char* p = strrchr(temp,':') ;
    if (p == NULL)
      {
@@ -724,14 +759,219 @@ char* computer_address(char* in) {
 	return(email(in)) ; }
 
 char* unit(char* in) {
-	char* temp = new char[strlen(in)+2] ;
-   strcpy(temp,in) ;
-   delete(in) ;
-	return(temp) ; }
+	int unit;
+	int offset = 0;
+	char *result = new char[MAX_UNIT_LENGTH] ;
+	char *ptr_punctuation, punctuation;
+
+	if (strchr(",.;:?!", *(ptr_punctuation = in+strlen(in)-1))) {
+		punctuation = *ptr_punctuation;	// save punctuation to append it later
+		*ptr_punctuation = '\0';
+	} else {
+		punctuation = '\0';
+	}
+
+	result[0] = '\0';
+	if (strlen (in) > 1) {
+		offset = 1;	
+		switch (in[0]) {
+			case 'p':
+				strcpy (result, "piko");
+				break;
+			case 'n':
+				strcpy (result, "nano");
+				break;
+			case 'µ': /* will this always work? */
+				strcpy (result, "mikro");
+				break;
+			case 'm':
+				strcpy (result, "milli");
+				break;
+			case 'c':
+				strcpy (result, "zenti");
+				break;
+			case 'd':
+				strcpy (result, "dezi");
+				break;
+			case 'h':
+				strcpy (result, "hekto");
+				break;
+			case 'k':
+			case 'K': /* this is not correct, but widely used */
+				strcpy (result, "kilo");
+				break;
+			case 'M':
+				strcpy (result, "mega");
+				break;
+			case 'G':
+				strcpy (result, "giga");
+				break;
+			case 'T':
+				strcpy (result, "tera");
+				break;
+			default:
+				offset = 0;
+		}
+	}
+
+	do {
+		unit = 1;
+		if (in[offset+1] == '\0') {
+			switch (in[offset]) {
+				case 'g':
+					strcat (result, "gramm");
+					break;
+				case 't':
+					strcat (result, "tonne");
+					break;
+				case 'm':
+					strcat (result, "meter");
+					break;
+				case 'l':
+					strcat (result, "liter");
+					break;
+				case 's':
+					strcat (result, "sekunde");
+					break;
+				case 'h':
+					strcat (result, "stunde");
+					break;
+				case 'b':
+					strcat (result, "bel");
+					break;
+				case 'J':
+					strcat (result, "joule");
+					break;
+				case 'p':
+					strcat (result, "pond");
+					break;
+				case 'N':
+					strcat (result, "newton");
+					break;
+				case 'A':
+					strcat (result, "ampere");
+					break;
+				case 'U':
+					strcat (result, "umdrehungen");
+					break;
+				case 'V':
+					strcat (result, "volt");
+					break;
+				case 'W':
+					strcat (result, "watt");
+					break;
+				case 'B':
+					strcat (result, "byte");
+					break;
+				case '°':
+					strcat (result, "grad");
+					break;
+				case 'v':
+					// Ohh, this is so ugly...
+					// Because of the rule "U*E AFTER Z AS unit" the phrase "v. Chr."
+					// ends up here. I don't like this!
+					if (punctuation) {
+						strcat (result, "vor");
+						punctuation = '\0';
+					}
+					break;
+				case 'n':
+					// Ohh, this is so ugly...
+					// Because of the rule "U*E AFTER Z AS unit" the phrase "n. Chr."
+					// ends up here. I don't like this!
+					if (punctuation) {
+						strcat (result, "nach");
+						punctuation = '\0';
+					}
+					break;
+				default:
+					unit = 0;
+			}
+		} else {
+			if (!strcmp (in+offset, "Bit")) {
+				strcat (result, "bit");
+			} else if (!strcmp (in+offset, "Byte")) {
+				strcat (result, "byte");
+			} else if (!strcmp (in+offset, "cal")) {
+				strcat (result, "kalorie");
+			} else if (!strcmp (in+offset, "Hz")) {
+				strcat (result, "hertz");
+			} else if (!strcmp (in+offset, "Nm")) {
+				strcat (result, "newtonmeter");
+			} else if (!strcmp (in+offset, "bar")) {
+				strcat (result, "bar");
+			} else if (!strcmp (in+offset, "Std")) {
+				strcat (result, "stunde");
+			} else if (!strcmp (in+offset, "°C")) {
+				strcat (result, "grad celsius");
+			} else if (!strcmp (in+offset, "m²")) {
+				char *temp = new char[MAX_UNIT_LENGTH] ;
+				strcpy (temp, "quadrat");
+				strcat (temp, result);
+				strcat (temp, "meter");
+				delete (result);
+				result = temp;
+			} else if (!strcmp (in+offset, "Min")) {
+				strcat (result, "minute");
+			} else {
+				unit = 0;
+			}
+		}
+		if (!unit) {
+			offset--;
+			result[0] = '\0';
+		}
+	} while (!unit && offset == 0);
+	if (strlen(result) == 0) {
+		delete (result);
+		if (punctuation)
+			*ptr_punctuation = punctuation;
+		return (in);
+	}
+   if (punctuation) {
+		char temp[2];
+		temp[0] = punctuation; temp[1] = '\0';
+		strcat (result, temp);
+	}
+   delete(in);
+	return(result);
+}
+
+char* unit_per(char* in) {
+	char *temp;
+	char *temp1, *temp2, *result;
+
+	*(temp = strchr (in, '/')) = '\0';
+
+	temp1 = new char[strlen(in)+1];
+	temp2 = new char[strlen(temp+1)+1];
+	strcpy (temp1, in);
+	strcpy (temp2, temp+1);
+
+	temp1 = unit (temp1);
+	temp2 = unit (temp2);
+
+	result = new char[strlen(temp1)+5+strlen(temp2)+1];
+
+	strcpy (result, temp1);
+	strcat (result, " pro ");
+	strcat (result, temp2);
+
+	delete (temp1);
+	delete (temp2);
+	delete (in);
+	return (result);
+}
 
 char* divide(char* in) {
 	char* result = new char[20] ;
-   strcpy(result,"Schrägstrich") ;
+   strcpy(result,"geteilt durch") ;
+	delete(in) ;
+   return(result) ; }
+
+char* times(char* in) {
+	char* result = new char[20] ;
+   strcpy(result,"mal") ;
 	delete(in) ;
    return(result) ; }
 
@@ -743,7 +983,7 @@ char* equals(char* in) {
 
 char* minus(char* in) {
 	char* result = new char[20] ;
-   strcpy(result,"strich") ;
+   strcpy(result,"minus") ;
 	delete(in) ;
    return(result) ; }
 
@@ -765,9 +1005,21 @@ char* percent(char* in) {
 	delete(in) ;
    return(result) ; }
 
+char* paragraph(char* in) {
+	char* result = new char[20] ;
+   strcpy(result,"Paragraph") ;
+	delete(in) ;
+   return(result) ; }
+
 char* ando(char* in) {
 	char* result = new char[20] ;
    strcpy(result,"und") ;
+	delete(in) ;
+   return(result) ; }
+
+char* euro(char* in) {
+	char* result = new char[20] ;
+   strcpy(result,"Euro") ;
 	delete(in) ;
    return(result) ; }
 
@@ -784,14 +1036,34 @@ char* at(char* in) {
    return(result) ; }
 
 char* bracket(char* in) {
-	char* result = new char[20] ;
+	char* result = new char[30] ;
    if (in[0] == '(')
 	   strcpy(result,"Klammer auf ,") ;
    else
    	strcpy(result,"Klammer zu ,") ;
-	delete(in) ;
+   delete(in) ;
    return(result) ; }
 
+char* dash(char* in) {
+	char *result;
+	char *dash;
+	dash = strchr(in, '-');
+	*dash = '\0';
+	while (*++dash == '-');
+	result = new char[strlen(in)+3+strlen(dash)+1];
+	*result = '\0';
+	if (*in != '\0') {
+		strcat(result, in);
+		strcat(result, " ");
+	}
+	strcat(result, ",");
+	if (*dash != '\0') {
+		strcat(result, " ");
+		strcat(result, dash);
+	}
+	delete(in);
+	return(result);
+}
 
 char* arithmetic(char* in) {
    char* temp = new char[2] ;
@@ -811,7 +1083,7 @@ char* arithmetic(char* in) {
       strcat(temp,t) ;
       switch(v) {
       	case '+' : strcat(temp," plus ") ; break ;
-      	case '-' : strcat(temp," strich ") ; break ;
+      	case '-' : strcat(temp," minus ") ; break ;
       	case '*' : strcat(temp," mal ") ; break ;
       	case '/' : strcat(temp," geteilt durch ") ; break ;
       	case '=' : strcat(temp," ist gleich ") ; break ; }
@@ -826,26 +1098,6 @@ char* arithmetic(char* in) {
 	char* result = new char[strlen(temp)+2] ;
    strcpy(result,temp) ;
    delete(temp) ;
-   delete(in) ;
-   return(result) ; }
-
-char* numeral_before_point(char* in) {
-	char* temp = new char[strlen(in)+2] ;
-   strcpy(temp,in) ;
-   char* p = strrfind(temp,".,;:?!") ;
-   char v = *p ;
-   *p = '\0' ;
-   p++ ;
-   char* start = new char[strlen(temp)+2] ;
-   strcpy(start,temp) ;
-   start = numeral(start) ;
-   char* result = new char[strlen(start)+8] ;
-   char* end = new char[7] ;
-   sprintf(end," %c ",v) ;
-   strcat(strcpy(result,start),end) ;
-   delete(temp) ;
-   delete(start) ;
-   delete(end) ;
    delete(in) ;
    return(result) ; }
 

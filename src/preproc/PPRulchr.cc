@@ -58,8 +58,6 @@ PPRulechars::~PPRulechars() {
 
 int PPRulechars::is_member(char c) {
 
-  if (c == 0)
-    return 0 ;
 	if (strchr(member,c) != NULL)
    	return(1) ;
    return(0) ; }
