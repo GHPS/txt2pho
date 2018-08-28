@@ -22,9 +22,9 @@ char* synopsis =
 "Usage is \"twadi -pdvlih\"\n"
 "Valid options are:\n"
 "  -p path      - This option specifies the path to the hadifix files. Default\n"
-"                 value is /usr/local/hadifix/data/. The path must end with a '/'.\n"
+"                 value is /usr/local/share/hadifix/data/. The path must end with a '/'.\n"
 "  -f path      - This option specifies the path to the festival files. Default\n"
-"                 value is /usr/local/src/festival.\n"
+"                 value is /usr/local/share/src/festival.\n"
 "  -d level     - Level specifies the amount of debug information (default 0).\n"
 "                 The higher the number, the more information is given. The\n" 
 "                 debug info is written into files located in /tmp.\n"
@@ -56,7 +56,7 @@ int main (int argc, char** argv) {
 	char festname [2048] ;
 	char buffer[2048] ;
 	char rvname[256] ;
-	strcpy(path,"/usr/local/hadifix/data/") ;
+	strcpy(path,"/usr/local/share/hadifix/data/") ;
 	strcpy(festname,"/TalkingWeb/festival/festival") ;
 	strcpy(inname,"-") ;
 	strcpy(outname,"-") ;

@@ -18,7 +18,7 @@ char const* synopsis =
 "its values overwrite those settings, and command line options overwrite the rest.\n"
 "Valid options are:\n"
 "  -p path      - This option specifies the path to the hadifix files. Default\n"
-"                 value is /usr/local/hadifix/data/. The path must end with a '/'.\n"
+"                 value is /usr/local/share/hadifix/data/. The path must end with a '/'.\n"
 "  -m mode      - This variable specifies the operating mode (default is 0):\n"
 "                 0:  if -i is given, the value is interpreted as a filename,\n"
 "                 +10: if -i is given, the value is interpreted as a text,\n"
