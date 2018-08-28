@@ -127,7 +127,8 @@ Synthese::Synthese(char* __hWnd, char* path, char* logprefix, int db, int pip, i
 
 	if (strlen(logprefix) == 0)
 	  logprefix = "/tmp/" ;
-	strcat(strcpy(pid,logprefix), __hWnd) ;
+	strcat(strcpy(pid,logprefix), "hadifix.") ;
+	strcat(pid, __hWnd) ;
 	piping = pip ;
 	nopreproc = pip ;
 	tx2ph = txt2pho ;
@@ -153,9 +154,9 @@ Synthese::Synthese(char* __hWnd, char* path, char* logprefix, int db, int pip, i
 #ifdef UNIX
 	if (strlen(path) == 0) {
 	  if (npp == 0)
-	    path = "/usr/local/hadifix/data/" ;
+	    path = "/usr/local/share/hadifix/data/" ;
 	  else
-	    path = "/usr/local/txt2pho/data/" ; }
+	    path = "/usr/local/share/txt2pho/data/" ; }
 #endif
 
 	strcpy(szProgramPath,path) ;
@@ -165,7 +166,7 @@ Synthese::Synthese(char* __hWnd, char* path, char* logprefix, int db, int pip, i
 #ifdef DEBUG3
 	f0fil=fopen(strcat(strcpy(temp,pid),".hadi.f0"),"w") ;
 #endif
-	errfile = fopen(strcat(strcpy(temp,pid),".hadi.log"),"w") ;
+	errfile = fopen(strcat(strcpy(temp,pid),".error.log"),"w") ;
 //	errfil = stderr ;
 #else
 
@@ -187,7 +188,7 @@ Synthese::Synthese(char* __hWnd, char* path, char* logprefix, int db, int pip, i
 
 #ifdef UNIX
 	if (debuglevel > 2) {
-	  strcat(strcpy(temp,pid),".juergen.log") ;
+	  strcat(strcpy(temp,pid),".debug.log") ;
 	  debugstr.open(temp) ; }
 #endif
 
@@ -240,8 +241,6 @@ Synthese::Synthese(char* __hWnd, char* path, char* logprefix, int db, int pip, i
 #endif
 	mulaw = 1 ;
 
-	fprintf(errfile,"INVENTORY %s blabla\n",inventname) ;
-	fprintf(errfile,"INVPASTH %s blabla\n",inventpath) ;
 	d = new Duration_Model(inventname,inventpath,bwl) ;
 	i = new Intonation_Model(inventname,inventpath) ;
 	a = new Intensity_Control(inventname,inventpath) ;
@@ -285,7 +284,7 @@ if (debuglevel > 0) {
 #else
 	strcpy(lexemfilnam,"") ;
 #endif
-	strcat(lexemfilnam,"hadivv.tmp") ;
+	strcat(lexemfilnam,".hadivv.tmp") ;
 #ifdef Windows
 	GetTempFileName(temppath,"hvv",0,lexemfilnam) ;
 #endif
@@ -437,7 +436,7 @@ int Synthese::change_voice(char* path, char* name) {
 #ifndef NOTREE
 	delete(b) ;
 #endif
-	fprintf(errfile,"1") ;
+	fprintf(errfile,"1\n") ;
 	fflush(errfile) ;
 	if (path != NULL) {
 	  delete(inventpath) ;

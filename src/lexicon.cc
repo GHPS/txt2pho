@@ -237,8 +237,8 @@ bool TLexicon::transcribe_literally (TLexem &lexem, TWordClass wcl)
       else
       	record = table[i] ;
 #endif
-      fprintf(stderr,"LEMMA %ld\n",i) ;
-      fflush(stderr) ;
+      //fprintf(stderr,"LEMMA %ld\n",i) ;
+      //fflush(stderr) ;
 		statistics("Lemma fetched") ;
 
 		// Wird keine bestimmte Wortart verlangt, soll ein Teil eines Kompositums

@@ -6,6 +6,8 @@
 #include "debug.h"
 #include "string.h"
 
+extern int debuglevel ;
+
 static string convert_string (const string &source, bool remap_case, bool remap_chars)
 {
 	size_t i = 0;
@@ -454,8 +456,10 @@ char* dummy = new char[1024]  ;
 #else
 	strncpy(dummy,(char*)&(lexikon[wordstart[i]]),1023) ;
 #endif
-//	fprintf(errfile,"dummy %100s\n",dummy) ;
-fflush(errfile) ;
+
+if (debuglevel > 1) {
+	fprintf(errfile,"Dummy %100s\n",dummy) ;
+	fflush(errfile) ;}
 #ifdef _Windows
 	TRecord temp((char*)dummy) ;
 #else
@@ -465,8 +469,10 @@ fflush(errfile) ;
 result = temp ;
 
 //delete dummy ;
-fprintf(errfile,"NOW HERE\n") ;
-	fflush(errfile) ;
+if (debuglevel > 1) {
+
+    fprintf(errfile,"Deleting Dummy\n") ;
+	fflush(errfile); }
 	return result;
 }
 

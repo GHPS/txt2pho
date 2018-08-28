@@ -5,6 +5,7 @@
 #endif
 
 #include <string.h>
+extern int debuglevel ;
 
 char* consonants = "ptkbdgfvszSZcjxhRlmnN" ;
 
@@ -12,13 +13,17 @@ char* vowels = "aeiou29EIOUyY6@" ;
 char* voiced = "aeiou29EIOYyY6@mnRlN" ;
 
 int find_diphon_in_liste(char* liste, char* key) {
-
-  //	fprintf(errfile,"LOOKING FOR %s\n",key) ;
-
+if (debuglevel > 1) {
+  	fprintf(errfile,"Looking for %s\n",key) ;
+    fflush(errfile) ;
+}
 	if (liste == NULL)
    	return(0) ;
 	if (strstr(liste,key) != NULL) {
-   	fprintf(errfile,"FOUND\n") ;
+if (debuglevel > 1) {
+   	fprintf(errfile,"Found\n") ;
+    fflush(errfile) ;
+}
    	return(1) ; }
    return(0) ; }
 
@@ -30,8 +35,9 @@ Soundlist::Soundlist() {
 	errorvalue.intensity = -1 ;
 	errorvalue.f0nr = 0 ; }
 
-Soundlist::~Soundlist() { ; }
-//	printf("now deleting soundlist\n") ; }
+Soundlist::~Soundlist() {  
+if (debuglevel > 1) {
+	printf("now deleting soundlist\n") ; }}
 
 Soundinfo* Soundlist::get_sound_pointer(int i) {
 	get(i) ;
