@@ -1,6 +1,6 @@
 CC=/usr/bin/g++
 CCC=/usr/bin/gcc
-CFLAGS=-g -ansi -Wno-write-strings
+CFLAGS=-g -ansi
 SRCPATH=src
 PPSRCPATH=$(SRCPATH)/preproc
 PPFLTSRCPATH=$(SRCPATH)/pipefilt
