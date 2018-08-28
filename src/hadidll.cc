@@ -769,7 +769,7 @@ if (debuglevel > 0) {
 	char* impbuffer = NULL ;
 	if (modus%10 == 8) {
 		strcpy(temp,szProgramPath) ;
-		strcat(temp,"imppairs.xxx") ;
+		strcat(temp,"imppairs.lst") ;
 		impfile = fopen(temp,"rb") ;
 		if (impfile != NULL) {
 			fseek(impfile,0L,SEEK_END) ;
