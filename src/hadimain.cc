@@ -14,7 +14,7 @@ char const* synopsis =
 "Hadifix reads text from stdin (if no filename is given with the -i option)\n"
 "and writes audio samples to stdout (if no filename is given with the -o option)\n"
 "Hadifix reads its global settings from a file \"hadifix.cfg\" located in\n"
-"a directory specified by the -p option. If a file \"~/.hadifixrc\" is found,\n"
+"a directory specified by the -p option. If the file \"~/.config/hadifixrc\" is found,\n"
 "its values overwrite those settings, and command line options overwrite the rest.\n"
 "Valid options are:\n"
 "  -p path      - This option specifies the path to the hadifix files. Default\n"

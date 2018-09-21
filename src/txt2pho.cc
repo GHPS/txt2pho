@@ -15,7 +15,7 @@ char const* synopsis =
 "Txt2pho reads text from stdin (if no filename is given with the -i option)\n"
 "and writes MBROLA input to stdout (if no filename is given with the -o option)\n"
 "Txt2pho reads its global settings from a file \"hadifix.cfg\" located in\n"
-"a directory specified by the -p option. If a file \"~/.txt2phorc\" is found,\n"
+"a directory specified by the -p option. If the file \"~/.config/txt2phorc\" is found,\n"
 "its values overwrite those settings, and command line options overwrite the rest.\n"
 "Valid options are:\n"
 "  -p path      - This option specifies the path to the txt2pho files. Default\n"

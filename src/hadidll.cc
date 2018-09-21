@@ -98,9 +98,9 @@ Synthese::Synthese(char* __hWnd, char* path, char* logprefix, int db, int pip, i
 	    strcpy(temp,".txt2phorc") ;
 	else    
 	  if (npp == 0)
-	    strcat(strcpy(temp,getenv("HOME")),"/.hadifixrc") ;
+	    strcat(strcpy(temp,getenv("HOME")),"/.config/hadifixrc") ;
 	  else
-	    strcat(strcpy(temp,getenv("HOME")),"/.txt2phorc") ;
+	    strcat(strcpy(temp,getenv("HOME")),"/.config/txt2phorc") ;
         FILE* rcfile=fopen(temp,"r") ;
         if (rcfile == NULL) {
 	  if (npp == 0)
