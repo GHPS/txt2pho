@@ -52,18 +52,18 @@ int main(int argc, char** argv) {
    al = NULL ;
 
    if (argc < 2) {
-   	fprintf(errfile,"Usage: preproc <Rulelist> <Abbreviationfile-optional> | read from stdin, write to stdout\n") ;
+   	fprintf(stdout,"Usage: preproc Rules-File <Abbreviations-File> | read from stdin, write to stdout\n") ;
 		return(1) ; }
 
    FILE* rlfile = fopen(argv[1],"r") ;
    if (rlfile == NULL) {
-   	fprintf(errfile,"Cannot open %s\n",argv[1]) ;
+   	fprintf(stderr,"Cannot open Rules-File %s\n",argv[1]) ;
       return(2) ; }
 
    if (argc > 2) {
    	abbfile = fopen(argv[2],"r") ;
 	   if (abbfile == NULL) {
-	   	fprintf(errfile,"Cannot open %s\n",argv[2]) ; } }
+	   	fprintf(stderr,"Cannot open Abbreviations-File %s\n",argv[2]) ; } }
 
    char p ;
    char* n ;
