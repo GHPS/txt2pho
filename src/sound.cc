@@ -37,7 +37,7 @@ Soundlist::Soundlist() {
 
 Soundlist::~Soundlist() {  
 if (debuglevel > 1) {
-	printf("now deleting soundlist\n") ; }}
+	fprintf(errfile,"now deleting soundlist\n") ; }}
 
 Soundinfo* Soundlist::get_sound_pointer(int i) {
 	get(i) ;
