@@ -1,0 +1,48 @@
+ Visual Basic interface
+
+These notes were written by Ed Schroeder
+EXTERNAL.BAS
+
+Declare Function SyndllSpeakString Lib "MBRSYN.DLL" Alias "#4" (ByVal
+SpeechString As String, ByVal OutFile As String, ByVal Test As String) As
+Integer
+
+Declare Function SyndllSpeak Lib "MBRSYN.DLL" Alias "#3" (ByVal InFileName
+As String, ByVal OutFile As String, ByVal Test As String) As Integer
+
+Declare Function SyndllStop Lib "MBRSYN.DLL" Alias "#5" () As Integer
+
+Declare Function SyndllClose Lib "MBRSYN.DLL" Alias "#1" () As Integer
+
+
+Declare Function SyndllInit Lib "MBRSYN.DLL" Alias "#2" (ByVal
+SpeechDatabase As String, ByVal ProgramPath As String) As Integer
+
+Here is a little VB initialization code always contained in a SUB called main and the VB compiler explicitly told to use it instead of a default form. (VB users should know this) And by the way, strings passed to a DLL need to be declared in VB as: Dim VarName as String * (length of string) Usually, the string is passed by reference to the DLL (called ByVal [for strings only] in VB go figure), equivalent to char * in C.
+SPEECH.BAS
+
+Sub Main()
+   Dim DatabaseFile As String * 255
+   Dim TxtToPhonFiles As String * 255
+   DatabaseFile = "c:\programme\mbrola\de1\de1" & Chr(0) 'add null character
+to be safe.
+   TxtToPhonFiles = "c:\programme\txt2pho\" & Chr(0)
+   Speak.Show 0 'note this is so the program can load and show on the
+                'on the screen while the txttophon DLL loads.
+
+   Test = SyndllInit(DatabaseFile, TxtToPhonFiles)
+End Sub
+
+Here is code to speak, and to close the DLL on exit from the program.
+SPEECH.FRM
+
+Private Sub Speak()
+
+Dim SpeechString As String * 5000
+Dim NullStr As String 'NULL ptr in C
+
+   SpeechString = Text1.Text & Chr(0)   
+   Test = SyndllSpeakString(SpeechString, NullStr, NullStr)
+End SubPrivate Sub Form_Unload(Cancel As Integer)
+        Test = SyndllClose()
+End Sub
