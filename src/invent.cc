@@ -41,7 +41,7 @@ long bt4(long inval) {
 	return(outval) ; }
 
 
-void inventory_error(char* origin, char* message, int level) {
+void inventory_error(const char* origin, const char* message, int level) {
 if (debuglevel > 0) {
 	fprintf(errfile,"Error during inventory handling (%s) : %s\n",origin,message) ;
 	fflush(errfile) ;
@@ -387,7 +387,7 @@ Unitindexlist::~Unitindexlist() {
 
           }
 
-int Unitindexlist::build_hashtable(char* iname, char* hname) {
+int Unitindexlist::build_hashtable(const char* iname, const char* hname) {
         Unitindex i[MAX_UNITS] ;
 
         int unitnr = 0 ;
@@ -454,7 +454,7 @@ int Unitindexlist::build_hashtable(char* iname, char* hname) {
         delete[](cl) ;
         return(unitnr) ; }
 
-int Unitindexlist::write(char* name) {
+int Unitindexlist::write(const char* name) {
         FILE* f = fopen(name,"wb") ;
         if (f == NULL) {
            fprintf(errfile,"Cannot open %s\n",name) ;
@@ -536,7 +536,7 @@ if (debuglevel > 1) {
         read("/tmp/scratch.ind","/tmp/scratch.hsh") ;
         return(0) ; }
 
-int Unitindexlist::read(char* indexfilename, char* hashfilename) {
+int Unitindexlist::read(const char* indexfilename, const char* hashfilename) {
  	char dummy[60] ;
 	char dummy4[4] ;
         unsigned i ;

@@ -109,7 +109,7 @@ char *VV::get_number (const char *in, int level = 0)
 	char inter[20] ;
 	int i,j=0,k = 0 ;
 	number = abs(atol(start)) ;
-	if ((number > 10000L && level == 0 && strcomp((char*)&in[digits-3],"00") != 0) || (digits > 2 && level == 2) || (in[0] == '0' && level != 2)) {
+	if ((number > 10000L && level == 0 && strcomp((char*)&in[digits-3],(char*)"00") != 0) || (digits > 2 && level == 2) || (in[0] == '0' && level != 2)) {
 		for (i=0 ; i < digits ; i++) {
 			inter[0] = in[i] ;
 			inter[1] = '\0' ;
@@ -250,9 +250,9 @@ char *VV::isnumber (const char *in)
 	char* b ;
 	char* vkresult ;
 	char* nkresult = NULL ;
-	char* komma = " Komma " ;
-	char* punkt = " Punkt " ;
-	char* uhr = " Doppelpunkt " ;
+	const char* komma = " Komma " ;
+	const char* punkt = " Punkt " ;
+	const char* uhr = " Doppelpunkt " ;
 	int ku = 'k' ;
 	strcpy(a,in) ;
 	vkresult = get_number(a) ;
@@ -868,12 +868,12 @@ if (debuglevel > 1) {
 			    fflush(errfile) ; }
 
 				switch (buffer[i]) {
-					case '.' : satzzeichen = "; Punkt## " ; break ;
-					case ',' : satzzeichen = "; Komma## " ; break ;
-					case '?' : satzzeichen = "; Fragezeichen## " ; break ;
-					case '!' : satzzeichen = "; Ausrufezeichen## " ; break ;
-					case ';' : satzzeichen = "; Semikolon## " ; break ;
-					case ':' : satzzeichen = "; Doppelpunkt## " ; break ; }
+					case '.' : satzzeichen = (char*)"; Punkt## " ; break ;
+					case ',' : satzzeichen = (char*)"; Komma## " ; break ;
+					case '?' : satzzeichen = (char*)"; Fragezeichen## " ; break ;
+					case '!' : satzzeichen = (char*)"; Ausrufezeichen## " ; break ;
+					case ';' : satzzeichen = (char*)"; Semikolon## " ; break ;
+					case ':' : satzzeichen = (char*)"; Doppelpunkt## " ; break ; }
 				switch (buffer[i]) {
 					case ':':
 						buffer[i] = ';' ;
@@ -919,12 +919,12 @@ if (debuglevel > 1) {
 							break ;
 						k++ ; }
 					if (!is_whitespace(buffer[k]) && strchr("abcdefghijklmnopqrstuvwxyzäüöß-;:$%&/=?+*<>1234567890",buffer[k]) != NULL) {
-						satzzeichen = "" ;
+						satzzeichen = (char*)"" ;
 						lastpoint = 0 ;
-						point = "" ; }
+						point = (char*)"" ; }
 					else {
 						lastpoint = 1 ; }
-						point = "." ;
+						point = (char*)"." ;
 					if (digicount > 0) {
 						digicount = 0 ;
 						a = isnumber(resultbuffer) ;

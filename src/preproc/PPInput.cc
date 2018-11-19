@@ -86,8 +86,8 @@ char PPInput::get_next_char(FILE* infile, char* spacer) {
 	z = nextz ;
 	return(lastz) ; }
 
-PPInput::PPInput(char* i, char* sp) {
-   spacer = sp ;
+PPInput::PPInput(const char* i, const char* sp) {
+   strcpy(spacer ,sp);
    if (strcmp(i,"-") == 0)
    	in = stdin ;
    else

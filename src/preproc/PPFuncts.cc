@@ -32,14 +32,14 @@ __________________________
 #define MAX_UNIT_LENGTH	20
 #define MAX(a,b) ((a)>(b)?(a):(b))
 
-char* strfind(char* s, char* targets) {
+char* strfind(char* s, const char* targets) {
 	unsigned int i ;
    for (i=0 ; i < strlen(s) ; i++) {
    	if (strchr(targets,s[i]) != NULL)
       	return(&s[i]) ; }
    return(NULL) ; }
 
-char* strrfind(char* s, char* targets) {
+char* strrfind(char* s, const char* targets) {
 	int i ;
    for (i=strlen(s)-1 ; i >=0 ; i--) {
    	if (strchr(targets,s[i]) != NULL)
@@ -634,7 +634,7 @@ char* spell(char* in) {
    unsigned int i ;
    for (i=0 ; i < strlen(in) ; i++) {
    	if (strchr("ABCDEFGHIJKLMNOPQRSTUVWXYZ",in[i]) != NULL) {
-		t = "gross " ;
+		t = (char*)"gross " ;
 		temp = Realloc(temp,strlen(temp)+strlen(t)+3) ;
    	   	strcat(temp,t) ; }
       	if (strchr("~-_@/",in[i]) != NULL) {

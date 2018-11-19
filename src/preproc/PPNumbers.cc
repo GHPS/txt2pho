@@ -45,7 +45,7 @@ static char *strcpy_reteos (char *dest, const char *src) {
 	return (dp - 1);
 }
 
-static char *digits_0_to_9[] = {"null", "eins", "zwei", "drei", "vier", "fünf", "sechs", "sieben", "acht", "neun"};
+static const char *digits_0_to_9[] = {"null", "eins", "zwei", "drei", "vier", "fünf", "sechs", "sieben", "acht", "neun"};
 
 char *digit2txt (char *dest, int number) {
 	return (strcpy_reteos (dest, digits_0_to_9[number]));

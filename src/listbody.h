@@ -2,7 +2,7 @@
 
 #define LISTBODY
 
-extern void syndata_error(char* origin, char* message, int level)  ;
+extern void syndata_error(const char* origin, const char* message, int level)  ;
 
 
 template <class Info> List<Info>::List() {

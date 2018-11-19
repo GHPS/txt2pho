@@ -120,7 +120,7 @@ float get_tr(Syllableinfo& syll, Soundlist* soli, float trval) {
 
 	return(zeit*trval) ; }
 
-Intensity_Control::Intensity_Control(char* intname, char* intpath) {
+Intensity_Control::Intensity_Control(const char* intname, const char* intpath) {
 	char fnam[512] ;
 	int i,j ;
 
@@ -867,7 +867,7 @@ float Intonation_Model::compute_f0_value(long sample, long totalms) {
 		return(rval+f0changeval) ; }
 	return (bval+f0changeval) ; }
 
-int Intonation_Model::compute_f0(Syllablelist& sy, Soundlist* soli, int modus, FILE* nnfile, long start, char* pid, int onlystress, Proslist* p) {
+int Intonation_Model::compute_f0(Syllablelist& sy, Soundlist* soli, int modus, FILE* nnfile, long start, const char* pid, int onlystress, Proslist* p) {
 	Syllableinfo syll ;
 	Soundinfo* s ;
 	I_Command i ;

@@ -35,7 +35,7 @@ Variable* Varlist::conc_and_get_pointer(Variable i, int cval) {
 	else
 		return(xappend(i)) ; }
 
-int Varlist::set_value(char* name, float value) {
+int Varlist::set_value(const char* name, float value) {
 	Variable i ;
 
 	strcpy(i.name, name) ;
@@ -46,7 +46,7 @@ int Varlist::set_value(char* name, float value) {
 	j->value = value ;
 	return(1) ; }
 
-float Varlist::get_value(char* name) {
+float Varlist::get_value(const char* name) {
 	Variable i ;
 	strcpy(i.name, name) ;
 	Variable* j = find_entry(i,0) ;
@@ -291,7 +291,7 @@ char* Baum::get_next_token(int& tokentype) {
    tokentype = -1 ;
 	return(NULL) ; }
 
-void Baum::treecheck(char* function, int inout) {
+void Baum::treecheck(const char* function, int inout) {
 	
 	if (inout == 1)
 		blanks += 3 ;
@@ -697,12 +697,12 @@ int Baum::compute_from_list_to_list(DBSyllist* dbs, Proslist* p) {
 
 
 
-int Baum::set_value(char* name, float value) {
+int Baum::set_value(const char* name, float value) {
 	if (in == NULL)
 		return(0) ;
 	return(in->set_value(name,value)) ; }
 
-float Baum::get_value(char* name) {
+float Baum::get_value(const char* name) {
 	if (in == NULL)
    	return(0.0) ;
 	return(in->get_value(name)) ; }

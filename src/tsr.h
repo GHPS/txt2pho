@@ -12,7 +12,7 @@ class TSR {
 
 public:
 
-  TSR(char* tsrfilename, char* path) ;
+  TSR(const char* tsrfilename, const char* path) ;
 
   ~TSR() ;
 

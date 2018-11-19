@@ -183,14 +183,14 @@ class Unitindexlist {
 		Unitindexlist(char* indexfilename, Inventoryinfo& header, char* hashfilename) ;
 		~Unitindexlist() ;
 
-		int write(char* indexfilename) ;
+		int write(const char* indexfilename) ;
 		int del(char* name, char type) ;
                 int add(Unitindex* i) ;
 		int size() ;
 
-		int read(char* indexfilename, char* hashfilename) ;
+		int read(const char* indexfilename, const char* hashfilename) ;
 
-		int build_hashtable(char* indexfilename, char* hashfilename) ;
+		int build_hashtable(const char* indexfilename, const char* hashfilename) ;
 		Unitindex* get_unit_index_pointer(char* name, char type) ;
 
 		Unitindex* get_index_by_number(int number) ;

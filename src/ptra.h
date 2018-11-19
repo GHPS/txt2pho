@@ -78,7 +78,7 @@ class PTRA
 {
 		Klassenliste *kli;
 		Regelliste **rl;
-		char *letters;
+		const char *letters;
 
 
 	      

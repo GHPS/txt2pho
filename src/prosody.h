@@ -114,7 +114,7 @@ class Intensity_Control {
 
 	public:
 
-		Intensity_Control(char* intname, char* intpath) ;
+		Intensity_Control(const char* intname, const char* intpath) ;
 		~Intensity_Control() ;
 		int compute_intensities(Soundlist* s) ; } ;
 
@@ -245,7 +245,7 @@ class Intonation_Model {
 		float get_declination() ;
 		int set_declination(float value) ;
 
-		int compute_f0(Syllablelist& syll, Soundlist* firstsound, int modus, FILE* nnfile = NULL, long start = 0L, char* pid = "", int onlystress = 0, Proslist* p = NULL) ; } ;
+		int compute_f0(Syllablelist& syll, Soundlist* firstsound, int modus, FILE* nnfile = NULL, long start = 0L, const char* pid = "", int onlystress = 0, Proslist* p = NULL) ; } ;
 
 
 

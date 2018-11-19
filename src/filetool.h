@@ -5,7 +5,7 @@
 
 long fsize (FILE* xstream);
 
-FILE* FOPEN(char*,char*) ;
+FILE* FOPEN(const char*,const char*) ;
 int FCLOSE(FILE*) ;
 
 #endif

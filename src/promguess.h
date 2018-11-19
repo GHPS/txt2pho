@@ -4,18 +4,18 @@
 
 typedef struct {
    float ACAT;
-   char* WAKZENT;
-   char* LAUT;
-   char* WSYLC;
-   char* WSYLP;
+   const char* WAKZENT;
+   const char* LAUT;
+   const char* WSYLC;
+   const char* WSYLP;
    float SONR;
    float BODI;
-   char* ACCE;
-   char* FACCE;
-   char* PACCE;
-   char* CODAC;
-   char* ONSEC;
-   char* WORTART;
+   const char* ACCE;
+   const char* FACCE;
+   const char* PACCE;
+   const char* CODAC;
+   const char* ONSEC;
+   const char* WORTART;
   } promguess_struct ;
 
 extern float promguess_wagon_comp(promguess_struct& st) ; 

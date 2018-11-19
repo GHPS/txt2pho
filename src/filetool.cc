@@ -19,7 +19,7 @@ long fsize (FILE * xstream)
 	return (length);
 }
 
-FILE* FOPEN(char* name, char* modus) {
+FILE* FOPEN(const char* name, const char* modus) {
 	FILE* result = fopen(name,modus) ;
 	if (result == NULL)
 		fprintf(errfile,"Cannot Open %s with %s - %d Open Files\n",name,modus,OpenFiles) ;

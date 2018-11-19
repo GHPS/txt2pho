@@ -13,7 +13,7 @@
 extern const int SOUNDNR ;
 extern int find_sound(char*& d) ;
 
-char* sylborder = "|" ;
+const char* sylborder = "|" ;
 static char ipasounds[87][4] = {
 	"p","b","b","t","d","d","k","g","g",				//Plosive
 	"p","b","b","t","d","d","k","g","g",   //Plosivpausen

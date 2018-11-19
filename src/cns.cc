@@ -77,7 +77,7 @@ linear_to_ulaw (short sample)
 }
 
 
-void concat_error(char* message, int level) {
+void concat_error(const char* message, int level) {
 	fprintf(errfile,"Error during concat : %s\n",message) ;
 	switch (level) {
 		case 0:

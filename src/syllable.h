@@ -37,7 +37,7 @@ class Syllablelist: public List<Syllableinfo> {
 		char* new_voice() ;
 		void pauses() ;
       int reduce(int level) ;
-      char* find_command(char*) ;
+      char* find_command(const char*) ;
 	void wagonprom() ;
 	int printmbrola(Soundlist* soli, FILE* outfile, char* impbuffer) ;
 	int printkalle(Soundlist* soli, FILE* outfile) ;

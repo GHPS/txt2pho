@@ -9,7 +9,7 @@ extern int optind,opterr,optopt ;
 
 extern char* optarg ;
 
-char const* synopsis = 
+const char* synopsis = 
 "This is txt2pho Version 0.95\n"
 "Usage is \"txt2pho -pfmdvioh\"\n"
 "Txt2pho reads text from stdin (if no filename is given with the -i option)\n"
@@ -46,7 +46,7 @@ int main (int argc, char** argv) {
 
 	char pid[64] ;
 	char temp[90] ;
-	char* voices[2] = {"male","female"} ;	
+	const char* voices[2] = {"male","female"} ;	
 	int voicenr = 1 ;
 	int piping = 1;
 	sprintf(pid,"%d",getpid()) ;
@@ -71,7 +71,7 @@ int main (int argc, char** argv) {
 	  case 'h': printf("%s\n",synopsis) ; return(0) ; }}
 
 	Synthese* s ;
-	s = new Synthese(pid,path,"/tmp/",debuglevel,piping,1,1) ;
+	s = new Synthese(pid,path,(char*)"/tmp/",debuglevel,piping,1,1) ;
 	s->change_voice(NULL,voices[voicenr]) ;
 	s->talk(outname,modus,inname) ;
 	delete(s) ;

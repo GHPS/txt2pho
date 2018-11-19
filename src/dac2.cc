@@ -57,10 +57,10 @@ void DAC::close_au(FILE* synfile) {
 
 DAC::DAC(FILE* synfile,int modus,int sf, int dares, int mulaw) {
 
-	char* name = "RIFF" ;
-	char* type = "WAVE" ;
-	char* fmt = "fmt " ;
-	char* data = "data" ;
+	const char* name = "RIFF" ;
+	const char* type = "WAVE" ;
+	const char* fmt = "fmt " ;
+	const char* data = "data" ;
 #ifdef _Windows
 	long length = sizeof(PCMWAVEFORMAT) ;
 #else

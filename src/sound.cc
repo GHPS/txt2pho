@@ -7,10 +7,10 @@
 #include <string.h>
 extern int debuglevel ;
 
-char* consonants = "ptkbdgfvszSZcjxhRlmnN" ;
+const char* consonants = "ptkbdgfvszSZcjxhRlmnN" ;
 
-char* vowels = "aeiou29EIOUyY6@" ;
-char* voiced = "aeiou29EIOYyY6@mnRlN" ;
+const char* vowels = "aeiou29EIOUyY6@" ;
+const char* voiced = "aeiou29EIOYyY6@mnRlN" ;
 
 int find_diphon_in_liste(char* liste, char* key) {
 if (debuglevel > 1) {

@@ -42,7 +42,7 @@ class PhonNetz {
 
 public:
 
-	PhonNetz(char* vname, char* kname, char* path) ;
+	PhonNetz(const char* vname, const char* kname, const char* path) ;
 	~PhonNetz() ;
 
 	int compute(Syllablelist* s, Soundlist* soli, DBSyllist* dbs, float sr = 1.0, int use_net=1) ; } ;

@@ -6,7 +6,7 @@
 
 #include <string.h>
 
-Environment::Environment(char* path, char* filename) {
+Environment::Environment(const char* path, const char* filename) {
 	list = NULL ;
 	char name[512] ;
 	strcat(strcpy(name,path),filename) ;
@@ -51,13 +51,13 @@ Environment::~Environment() {
 		delete[](list[i]) ;
 	free(list) ; }
 
-char* Environment::get_value(char* key) {
+char* Environment::get_value(const char* key) {
 	int i ;
 	int ln = strlen(key) ;
 	for (i=0 ; i < number ; i++)
 		if ((list[i][ln] == '=') && (strncmp(key,list[i],ln-1) == 0))
 			return(&(list[i][ln+1])) ;
-	return("") ; }
+	return((char*)"") ; }
 
 int Environment::put_value(char* key, char* value) {
 	int i ;
@@ -70,7 +70,7 @@ int Environment::put_value(char* key, char* value) {
 			break ; }
 	return(1) ; }
 
-void Environment::writex(char* filename) {
+void Environment::writex(const char* filename) {
 	FILE* env = FOPEN(filename,"w") ;
 	int i ;
 	for (i=0 ; i < number ; i++)

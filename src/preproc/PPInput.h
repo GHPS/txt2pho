@@ -41,7 +41,7 @@ class PPInput {
 
  public:
 
-   PPInput(char* i, char* sp) ;
+   PPInput(const char* i, const char* sp) ;
    ~PPInput() ;
    char* get_next_token(int& pos) ;
    char* get_next_token_with_lookahead(int& pos) ; } ;

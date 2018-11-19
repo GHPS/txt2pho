@@ -157,7 +157,7 @@ EXX_EXX_EXX	~Synthese() ;
 	char* EXX_EXX_EXX get_invent() ;
 	float EXX_EXX_EXX get_speechrate() ;
 	float EXX_EXX_EXX get_pitch() ;
-	int EXX_EXX_EXX change_voice(char* path, char* name) ;
+	int EXX_EXX_EXX change_voice(char* path, const char* name) ;
 	float EXX_EXX_EXX get_declination() ;
 	int EXX_EXX_EXX change_declination(float value) ;
 	int EXX_EXX_EXX change_speechrate(float value) ;

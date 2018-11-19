@@ -5,7 +5,7 @@ Synthese* s ;
 char pid[64] ;
 char temp[90] ;
 
-int Hadi_init(char* path, char* logpath="/tmp/",int debuglevel=0) {
+int Hadi_init(char* path, char* logpath=(char*)"/tmp/",int debuglevel=0) {
 
 	sprintf(pid,"%d",getpid()) ;
 	

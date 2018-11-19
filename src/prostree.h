@@ -18,8 +18,8 @@ class Varlist: public List<Variable> {
 
 	public:
 
-		int set_value(char* name, float value) ;
-      float get_value(char* name) ;
+		int set_value(const char* name, float value) ;
+      float get_value(const char* name) ;
 		Variable* conc_and_get_pointer(Variable i, int cval) ; } ;
 
 class Formel ;
@@ -105,7 +105,7 @@ class Baum {
       int errcount ;
 
 		void errore(int, char*) ;
-		void treecheck(char*,int) ;
+		void treecheck(const char*,int) ;
 		char gc(FILE*) ;
 		char* get_next_token(int&) ;
 
@@ -130,8 +130,8 @@ class Baum {
 		int compute() ;
       int compute_from_file_to_file(FILE* in, FILE* out) ;
       int compute_from_list_to_list(DBSyllist* dbs, Proslist* p) ;
-		int set_value(char* name, float value) ;
-		float get_value(char* name) ; } ;
+		int set_value(const char* name, float value) ;
+		float get_value(const char* name) ; } ;
 
 #endif
 

@@ -126,7 +126,7 @@ Synthese::Synthese(char* __hWnd, char* path, char* logprefix, int db, int pip, i
 
 
 	if (strlen(logprefix) == 0)
-	  logprefix = "/tmp/" ;
+	  logprefix = (char*) "/tmp/" ;
 	strcat(strcpy(pid,logprefix), "hadifix.") ;
 	strcat(pid, __hWnd) ;
 	piping = pip ;
@@ -154,9 +154,9 @@ Synthese::Synthese(char* __hWnd, char* path, char* logprefix, int db, int pip, i
 #ifdef UNIX
 	if (strlen(path) == 0) {
 	  if (npp == 0)
-	    path = "/usr/local/share/hadifix/data/" ;
+	    path = (char*) "/usr/local/share/hadifix/data/" ;
 	  else
-	    path = "/usr/local/share/txt2pho/data/" ; }
+	    path = (char*) "/usr/local/share/txt2pho/data/" ; }
 #endif
 
 	strcpy(szProgramPath,path) ;
@@ -419,7 +419,7 @@ void Synthese::set_mulaw(int value) {
 	mulaw = value ; }
 
 
-int Synthese::change_voice(char* path, char* name) {
+int Synthese::change_voice(char* path, const char* name) {
 	if (talknow)
 		return(0) ;
 	delete(d) ;

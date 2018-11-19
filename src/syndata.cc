@@ -10,7 +10,7 @@
 extern short bt2(short) ;
 extern long bt4(long) ;
 
-void syndata_error(char* origin, char* message, int level) {
+void syndata_error(const char* origin, const char* message, int level) {
 	if (level > 100) return ;
 	fprintf(errfile,"Error during syndata handling (%s) : %s\n",origin,message) ;
 	switch (level) {

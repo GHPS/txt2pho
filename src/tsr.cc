@@ -5,7 +5,7 @@
 
 extern FILE* errfile ;
 
-TSR::TSR(char* tsrfilename, char* path) {
+TSR::TSR(const char* tsrfilename, const char* path) {
 
   parameters=NULL ;
   coeffnr = 0 ;

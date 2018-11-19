@@ -17,7 +17,7 @@ extern char* optarg ;
 
 
 
-char* synopsis = 
+const char* synopsis = 
 "This is twhadi Version 0.92\n"
 "Usage is \"twadi -pdvlih\"\n"
 "Valid options are:\n"
@@ -73,11 +73,11 @@ int main (int argc, char** argv) {
 
 	if (RetiRoot == NULL)
 	  {
-	    RetiRoot = "/TalkingWeb" ;
+	    RetiRoot = (char*)"/TalkingWeb" ;
 	  }
 	if (RetiPcomDir == NULL)
 	  {
-	    RetiPcomDir = "/TalkingWeb/data/pcom_files" ;
+	    RetiPcomDir = (char*)"/TalkingWeb/data/pcom_files" ;
 	  }
 	  
 	char lockname[2048] ;

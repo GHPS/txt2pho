@@ -9,11 +9,11 @@ class Environment {
 	int number ;
 
 public:
-	Environment(char* path, char* filename) ;
+	Environment(const char* path, const char* filename) ;
 	~Environment() ;
-	void writex(char* filename) ;
+	void writex(const char* filename) ;
 	int put_value(char* key, char* value) ;
-	char* get_value(char* key) ; } ;
+	char* get_value(const char* key) ; } ;
 
 
 #endif

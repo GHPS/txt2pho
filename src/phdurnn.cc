@@ -42,12 +42,12 @@
 
 const int INPARS = 33 ;
 const int OUTPARS = 1 ;
-char* indatanames[INPARS] = {"TYP","ACAT","ACC_PH_P","FACCE","STRESS","B_ONC","B_WORTAR",
+const char* indatanames[INPARS] = {"TYP","ACAT","ACC_PH_P","FACCE","STRESS","B_ONC","B_WORTAR",
 							"FL_ARTAR","PDISS","FL_GERUN","FL_OF_GE","PL_VO_HI","SONR","BEATP","BEATC",
 							"FL_SH_SL","FL_VO_HI","FOSO","GERUNDET","HOCHTIEF","LANGKURZ","OF_GE",
 							"VOR_HIN","SH_SL","KONS_ART","PHR_POS","PLDISVH","PLIDS",
 							"PL_ARTAR","PL_GERUN","PL_OF_GE","PL_SH_SL","BODI"} ;
-char* outdatanames[OUTPARS] = {"LAUTDUR"} ;
+const char* outdatanames[OUTPARS] = {"LAUTDUR"} ;
 
 
 
@@ -91,7 +91,7 @@ int get_value(DBSyll* d, int i) {
 
 
 
-int findname(char** liste, int listlen, char* key) {
+int findname(const char** liste, int listlen, char* key) {
 	int i ;
 	for (i = 0 ; i < listlen ; i++) {
 		if (strcmp(liste[i],key) == 0)
@@ -276,7 +276,7 @@ int compute_features(Soundinfo* s, Phonfeatures& f) {
 	return(f.vokkns) ; }
 
 
-PhonNetz::PhonNetz(char* vname, char* kname, char* path) {
+PhonNetz::PhonNetz(const char* vname, const char* kname, const char* path) {
 
 
 	char temp[2048] ;

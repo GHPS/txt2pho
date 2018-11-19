@@ -11,7 +11,7 @@
 
 //#define DEBUG2
 
-extern void concat_error(char* message, int level) ;
+extern void concat_error(const char* message, int level) ;
 
 
 
@@ -32,7 +32,7 @@ if (debuglevel > 1) {
 	return(u.pitchmarks->get_period_next_to(offset+retval).start) ; }
 
 
-Markerinfo mm(char* a, long sigpos, long number = 0L) {
+Markerinfo mm(const char* a, long sigpos, long number = 0L) {
 	Markerinfo m ;
 	int pos ;
 	m.adress=sigpos;

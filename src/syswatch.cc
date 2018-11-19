@@ -6,7 +6,7 @@ int main (int argc, char** argv) {
 	int modus = 0 ;
 
 	unlink("/tmp/syninfil") ;
-	char* path = "/apps/hadifix/" ; 
+	char* path = (char*)"/apps/hadifix/" ; 
 	char pid[64] ;
 	char temp[90] ;
 
@@ -17,7 +17,7 @@ int main (int argc, char** argv) {
 	FILE* infile ;
 	FILE* scratch ;
 	FILE* out ;	
-      	Synthese s(pid,path,"/tmp/",3) ;
+      	Synthese s(pid,path,(char*)"/tmp/",3) ;
 	char buffer[4096] ;
 	scratch = fopen("/tmp/syswatch","w") ;
 	fprintf(scratch,"Synthese gestartet.") ;

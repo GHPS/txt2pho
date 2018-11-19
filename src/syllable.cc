@@ -105,17 +105,17 @@ Syllablelist::Syllablelist() {
         tokenpos = 0 ;
 	errorvalue.soundnr = 0 ;
 	errorvalue.firstsound = 0 ;
-	errorvalue.name = "ERROR" ;
-	errorvalue.prosinfo = "" ;
-	errorvalue.type = "ERROR" ;
+	errorvalue.name = (char*)"ERROR" ;
+	errorvalue.prosinfo = (char*)"" ;
+	errorvalue.type = (char*)"ERROR" ;
 	errorvalue.accent = -1 ; }
 
 Syllablelist::Syllablelist(FILE* in) {
 	errorvalue.soundnr = 0 ;
 	errorvalue.firstsound = 0 ;
-	errorvalue.name = "ERROR" ;
-	errorvalue.prosinfo = "" ;
-	errorvalue.type = "ERROR" ;
+	errorvalue.name = (char*)"ERROR" ;
+	errorvalue.prosinfo = (char*)"" ;
+	errorvalue.type = (char*)"ERROR" ;
 	errorvalue.accent = -1 ;
 
 	char* result ;
@@ -670,7 +670,7 @@ char* Syllablelist::new_voice() {
       return(&i.name[7]) ;
   return(NULL) ; }
 
-char* Syllablelist::find_command(char* c) {
+char* Syllablelist::find_command(const char* c) {
 	reset() ;
 	Syllableinfo i ;
 	while ((i = get_and_advance()).accent != errorvalue.accent)
@@ -697,7 +697,7 @@ void Syllablelist::wagonprom() {
    st.WORTART = "0" ;
  
 
-   char* nucstart = "aeiouEIOUyY29=@" ;
+   const char* nucstart = "aeiouEIOUyY29=@" ;
 
    char dummy[10][12] ;
 

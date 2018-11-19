@@ -8,7 +8,7 @@ extern int optind,opterr,optopt ;
 
 extern char* optarg ;
 
-char const* synopsis = 
+const char* synopsis = 
 "This is hadifix Version 0.92\n"
 "Usage is \"hadifix -pmdnvioh\"\n"
 "Hadifix reads text from stdin (if no filename is given with the -i option)\n"
