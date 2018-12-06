@@ -172,14 +172,14 @@ int rheinisch (TLexem &lexem)
     {
         if (strchr("auo", lexem.chars[ortholen-1]) == NULL)
         {
-            for (i= translen; i-- ; i < 0)
+            for (i= translen; i < 0; i-- )
                 if (lexem.transcription[i] == 'k')
                 {
                     lexem.transcription[i] = 'S' ;
                 }
         }
         else
-            for (i= translen; i-- ; i < 0)
+            for (i= translen; i < 0; i-- )
                 if (lexem.transcription[i] == 'k')
                 {
                     lexem.transcription[i] = 'x' ;
@@ -230,14 +230,14 @@ int kanzler(TLexem &lexem)
     {
         if (strchr("auo", lexem.chars[ortholen-1]) == NULL)
         {
-            for (i= translen; i-- ; i < 0)
+            for (i= translen; i < 0; i-- )
                 if (lexem.transcription[i] == 'k')
                 {
                     lexem.transcription[i] = 'S' ;
                 }
         }
         else
-            for (i= translen; i-- ; i < 0)
+            for (i= translen; i < 0; i-- )
                 if (lexem.transcription[i] == 'k')
                 {
                     lexem.transcription[i] = 'x' ;

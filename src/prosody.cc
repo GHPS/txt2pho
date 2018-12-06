@@ -71,7 +71,7 @@ float get_noteval(char* note)
             if (note[1] == 's')
                 result = 311.13 ;
             else
-                result = 329, 63 ;
+                result = 329.63 ;
             break ;
         case 'f':
             if (note[1] == 'i')

@@ -740,7 +740,7 @@ startpoint:
             if (strchr(digits, buffer[i]) != NULL)
             {
                 read++ ;
-                lastsymb=lastpoint=lastspace=lastcomma=lastsymb = 0 ;
+                lastsymb=lastpoint=lastspace=lastcomma= 0 ;
                 lastdigit = 1 ;
                 if (digicount++ == 0 && j > 0)
                 {
@@ -935,6 +935,7 @@ startpoint:
                 lastsymb=lastpoint = lastspace = lastcomma = lastdigit = 0 ;
             }
             if (is_whitespace(buffer[i]))
+            {    
                 if (lastspace == 0)
                 {
                     digicount = 0 ;
@@ -973,6 +974,7 @@ startpoint:
 //					if (lastspace == 3 && lastcomma == 0)
 //						fprintf(result," . ") ;
                 }
+            }    
             if (strchr(".,?!;:", buffer[i]) != NULL)
             {
                 if (debuglevel > 7)
