@@ -25,7 +25,6 @@ int main(int argc, char** argv)
     PPFunctionlist fl ;
     PPRulelist* rl ;
     PPAbbreviationlist* al ;
-    char namebuffer[256] ;
     char* xinput ;
     char* output ;
     int g ;

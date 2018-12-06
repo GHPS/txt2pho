@@ -1242,6 +1242,7 @@ int Regelliste::matcher (char* grapheme, int &graphempos, char* phoneme, int &ph
             CLEAR(revbuf);
         }
         if (r.precontext != NULL)
+        {    
             if (r.precontextmodus == 0)
             {
                 ALLOCATE(char, revbuf, phonempos + 1);
@@ -1274,6 +1275,7 @@ int Regelliste::matcher (char* grapheme, int &graphempos, char* phoneme, int &ph
                 }
                 CLEAR(revbuf);
             }
+        }    
         strcpy(&phoneme[phonempos], r.result);
         phonempos += strlen(r.result) /*-1*/ ;
         // OBEN KOMISCH
@@ -1293,7 +1295,7 @@ PTRA::PTRA (const string &datapath, const string &basename) :
     rl(NULL),
     letters("ABCDEFGHIJKLMNOPQRSTUVWXYZßÄÜÖ")
 {
-    unsigned int i, j;
+    unsigned int i;
     const TFile rulefile(datapath + basename + ".scr");
     if (!rulefile.Open('b'))
         ERRMSG("Konnte " << rulefile.Filename() << " nicht öffnen");

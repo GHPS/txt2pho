@@ -301,14 +301,9 @@ int Synthese::talk(const char* rf, int modus, const char* filename)
         fflush(errfile) ;
     }
     char buffer[256] ;
-    char xbuffer[256] ;
     infi = NULL ;
     int filetype = 0 ;
     FILE* outfile  = NULL ;
-    int danow = 0 ;
-    FILE* treef ;
-    FILE* xbs ;
-    FILE* kbs ;
     if (resultfilename[0]=='-')
     {
         outfile = stdout ;
@@ -337,17 +332,10 @@ int Synthese::talk(const char* rf, int modus, const char* filename)
     FILE* lexemfile = NULL ;
     char* result ;
     #ifdef NPR
-    FILE* nperfile = FOPEN("hadi.npr", "w") ;
-    FILE* nmrkfile = FOPEN("hadi.nmk", "w") ;
     FILE* nlabfile = FOPEN("hadi.lab", "w") ;
-    FILE* nmrk2file = FOPEN("hadi2.nmk", "w") ;
     #else
     FILE* nlabfile = NULL ;
-    FILE* nperfile = NULL ;
-    FILE* nmrkfile = NULL ;
-    FILE* nmrk2file = NULL ;
     #endif
-    int sf = 16000 ;
     Syllablelist* s = NULL;
     Proslist* p = NULL ;
     DBSyllist* dbs = NULL ;
@@ -355,15 +343,10 @@ int Synthese::talk(const char* rf, int modus, const char* filename)
     char* dialect= NULL ;
     char* transcription = NULL ;
     char* rhythm = NULL ;
-    FILE* rvfile ;
-    char optimethod[80] ;
-    optimethod[0] = '\0' ;
     int onlystress = 0 ;
     float preemp = 0.4 ;
     int use_net = def_use_net ;
-    float position = 0.4 ;
     char temp[290] ;
-    FILE* solifile ;
     char** lexemlist = NULL ;
     int lexcount = 0 ;
     long implen = -1L ;
@@ -394,7 +377,6 @@ int Synthese::talk(const char* rf, int modus, const char* filename)
             fprintf(errfile, "VOR LEXEMFILE Modus %d NPP %d\n\n\n", modus, nopreproc) ;
             fflush(errfile) ;
         }
-        int ppresult ;
         lexemfile = vvv->next_input("", (char*)filename, piping, pid, lexemfilnam) ;
         if (lexemfile == NULL)
         {

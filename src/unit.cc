@@ -29,7 +29,6 @@ const char prefix[PREFIXNR][6] =
     "SlY", "vRI", "vRU"
 } ;
 
-static const char* plosives = "bdgptk" ;
 static const char* listsounds = "bdgptkvzZjfsSCxmnNlRh6X" ;
 const char* exceptionlist [22][23] =
 {

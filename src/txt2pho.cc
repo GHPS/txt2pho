@@ -51,7 +51,6 @@ int main (int argc, char** argv)
     strcpy(outname, "-") ;
     int debuglevel = 0 ;
     char pid[64] ;
-    char temp[90] ;
     const char* voices[2] = {"male", "female"} ;
     int voicenr = 1 ;
     int piping = 1;
