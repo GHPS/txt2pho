@@ -85,15 +85,23 @@ template <class Info> Info List<Info>::get(int indexnumber)
         if (act->index == indexnumber)
             return (act->i) ;
         if (act->index < indexnumber)
+        {    
             if (act == end)
                 break ;
             else
+            {    
                 act = act->after ;
+            }
+        }    
         if (act->index > indexnumber)
+        {    
             if (act == start->after)
                 break ;
             else
+            {    
                 act = act->before ;
+            }    
+        }    
     }
     return (errorvalue) ;
 }

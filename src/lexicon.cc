@@ -188,10 +188,12 @@ bool TLexicon::transcribe_literally (TLexem &lexem, TWordClass wcl)
     else
         i= table.Search(lexem.Chars(), true);
     if (i == -1 || i == -2)
+    {    
         if (language == 1)
             i = brittable.Search(lexem.Chars(), false) ;
         else
             i = table.Search(lexem.Chars(), false);
+    }    
     TLexem xtmp = lexem ;
     if (i==-1 || i == -2)
     {
