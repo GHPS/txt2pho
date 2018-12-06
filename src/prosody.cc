@@ -23,6 +23,15 @@ extern char* strdup(char*) ;
 int tempo = 112 ;
 float octave = 0.5 ;
 
+void syndata_error(const char* origin, const char* message, int level) {
+	if (level > 100) return ;
+	fprintf(errfile,"Error during syndata handling (%s) : %s\n",origin,message) ;
+	switch (level) {
+		case 0:
+		case 1: exit(1) ; } }
+
+
+
 int get_notedur(int tempo, int note) {
 	float noteval = 4.0/(float)note ;
 	float bps = 60.0/float(tempo) ;

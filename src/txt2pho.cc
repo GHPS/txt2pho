@@ -71,7 +71,7 @@ int main (int argc, char** argv) {
 	  case 'h': printf("%s\n",synopsis) ; return(0) ; }}
 
 	Synthese* s ;
-	s = new Synthese(pid,path,(char*)"/tmp/",debuglevel,piping,1,1) ;
+	s = new Synthese(pid,path,(char*)"/tmp/",debuglevel,piping) ;
 	s->change_voice(NULL,voices[voicenr]) ;
 	s->talk(outname,modus,inname) ;
 	delete(s) ;

@@ -7,7 +7,6 @@ PPFLTSRCPATH=$(SRCPATH)/pipefilt
 HADIPATH=.
 INCLUDE=-I$(SRCPATH) -I$(HADIPATH)/src
 LDFLAGS=-g -L$(HADIPATH) 
-#LDFLAGS=-g -L$(HADIPATH) -static
 LOADLIBS=-lm lib/libhadi.a
 OBJPATH=obj
 DEFINES=-DSTATISTICS -DBORDERPROS -DNEWTREE -DNO_FILES -DNOWINMOD -DUNIX -DPHONDURNET -DLOWBORDERTONE -DIPHONDURNET -DLINUX -DGCC28 
@@ -27,22 +26,12 @@ $(OBJPATH)/PPRulchr.o \
 $(OBJPATH)/PPRule.o \
 $(OBJPATH)/PPRullst.o 
 
-OBJECTS=$(OBJPATH)/cns.o \
-$(PPOBJECTS) \
-$(OBJPATH)/conc.o \
-$(OBJPATH)/dac2.o \
-$(OBJPATH)/durint.o \
-$(OBJPATH)/environ.o \
+OBJECTS=  $(OBJPATH)/environ.o \
 $(OBJPATH)/filetool.o \
-$(OBJPATH)/hannwin.o \
-$(OBJPATH)/invent.o \
 $(OBJPATH)/prosody.o \
 $(OBJPATH)/prostree.o \
-$(OBJPATH)/relp.o \
 $(OBJPATH)/sound.o \
 $(OBJPATH)/syllable.o \
-$(OBJPATH)/syndata.o \
-$(OBJPATH)/uli.o \
 $(OBJPATH)/dialect.o \
 $(OBJPATH)/unit.o \
 $(OBJPATH)/nn.o \
@@ -84,38 +73,31 @@ $(OBJPATH)/sdb.o \
 $(OBJPATH)/hadidll.o 
 
 
-$(OBJPATH)/%.o		:  $(SRCPATH)/%.cc
-	 $(CC) $(INCLUDE) $(CFLAGS) $(DEFINES) -o $@ -c $<
 
-$(OBJPATH)/%.o		:  $(PPSRCPATH)/%.cc
+$(OBJPATH)/%.o		:  $(SRCPATH)/%.cc
 	 $(CC) $(INCLUDE) $(CFLAGS) $(DEFINES) -o $@ -c $<
 
 $(OBJPATH)/%.o		:  $(SRCPATH)/%.c
 	 $(CCC) $(INCLUDE) $(CFLAGS) $(DEFINES) -o $@ -c $<
 
+$(OBJPATH)/%.o		:  $(PPSRCPATH)/%.cc
+	 $(CC) $(INCLUDE) $(CFLAGS) $(DEFINES) -o $@ -c $<
 
-all		:	hadifix syswatch txt2pho twhadi preproc
-hadifix		:	$(OBJPATH)/hadimain.o libhadi
-	$(CC) $(LDFLAGS) -o hadifix $(OBJPATH)/hadimain.o $(LOADLIBS)
+
+all		:	txt2pho pipefilt preproc
 
 txt2pho		:	$(OBJPATH)/txt2pho.o libhadi
 	$(CC) $(LDFLAGS) -o txt2pho $(OBJPATH)/txt2pho.o $(LOADLIBS)
 
-syswatch		:	$(OBJPATH)/syswatch.o libhadi
-	$(CC) $(LDFLAGS) -o syswatch $(OBJPATH)/syswatch.o $(LOADLIBS)
-
-twhadi			:	$(OBJPATH)/twhadi.o $(OBJPATH)/tags.o libhadi
-	$(CC) $(LDFLAGS) -o twhadi $(OBJPATH)/twhadi.o $(OBJPATH)/tags.o $(LOADLIBS)
-	strip twhadi
+libhadi			:       $(OBJECTS) #$(OBJPATH)/libhadi.o
+	ar -r lib/libhadi.a $(OBJECTS) #$(OBJPATH)/libhadi.o
 
 preproc		:	$(PPOBJECTS) $(OBJPATH)/preproc.o
 	$(CC) $(LDFLAGS) -o preproc $(PPOBJECTS) $(OBJPATH)/preproc.o $(LOADLIBS)
 
-pipefilt		:	
+pipefilt	:
 	$(CC) -o pipefilt $(CFLAGS) $(DEFINES) $(PPFLTSRCPATH)/*.cc 
 
-libhadi			:       $(OBJECTS) $(OBJPATH)/libhadi.o
-	ar -r lib/libhadi.a $(OBJECTS) $(OBJPATH)/libhadi.o
 
 clean	 	:
 	rm -f $(OBJPATH)/*.o lib/*.a
