@@ -36,9 +36,9 @@ TLexem::TLexem ()
 TLexem::TLexem (const string &s) :
     chars(s),
     wordClasses(NULL),
-    flexrul(""),
     cntWordClasses(0),
-    type(nothing)
+    type(nothing),
+    flexrul("")
 {
     statistics("TLexem::TLexem: Laenge == " << s.length());
     SetWordClass(Unknown);
