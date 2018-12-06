@@ -54,7 +54,7 @@ extern std::ofstream debugstr ;
     do                                                                                 \
     {                                                                                  \
         debugstr << "\n"                                                                   \
-                 << "\aFehler in '"__FILE__ << "' (" << __LINE__ << "): " << str << "!\n"  \
+                 << "\aFehler in '" __FILE__ << "' (" << __LINE__ << "): " << str << "!\n"  \
                  << endl;                                                                  \
         exit(0);                                                            \
     }   while (0)
@@ -66,7 +66,7 @@ extern std::ofstream debugstr ;
     do                                                                                 \
     {                                                                                  \
         debugstr << "\n"                                                                   \
-                 << "\aWarnung in '"__FILE__ << "' (" << __LINE__ << "): " << str << "!\n" \
+                 << "\aWarnung in '" __FILE__ << "' (" << __LINE__ << "): " << str << "!\n" \
                  << "\n"                                                                   \
                  << "'Q' fNr Abbruch, jede andere Taste zum Fortsetzen ";                  \
         int c = cin.get();                                                             \
