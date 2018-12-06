@@ -1052,7 +1052,7 @@ void Syllablelist::print(FILE* ascoutfil)
 }
 
 
-int Syllablelist::printmbrola(Soundlist* soli, FILE* ascoutfil, char* impbuffer)
+void Syllablelist::printmbrola(Soundlist* soli, FILE* ascoutfil, char* impbuffer)
 {
     reset() ;
     Soundinfo i, lasti ;
