@@ -18,7 +18,6 @@
 PPCString::PPCString(char* in)
 {
     target = NULL ;
-    int i ;
     target = new char[strlen(in)+1] ;
     strcpy(target, in) ;
 }
@@ -38,7 +37,7 @@ int PPCString::find(char* in, int tokenstart, int direction, int &left, PPRulech
     PPCString* temp ;
     char v ;
     j = tokenstart ;
-    while (i < strlen(target))
+    while (i < (int)strlen(target))
     {
         if (target[i] == '*')
         {
