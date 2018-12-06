@@ -1,23 +1,24 @@
 /*
 
-  This file is part of the project txt2pho.
-  The project is released under the AGPL 3.0 license.
-  For details concerning the resulting rights and
-  conditions of this license see file License.txt.
+    This file is part of the project txt2pho.
+    The project is released under the AGPL 3.0 license.
+    For details concerning the resulting rights and
+    conditions of this license see file License.txt.
 
 */
 
 /*********************************************************
-  vokale.h
-  --------------------------------------------------------
-  generated at Wed May 20 14:53:50 1998
-  by snns2c ( Bernward Kett 1995 ) 
+    vokale.h
+    --------------------------------------------------------
+    generated at Wed May 20 14:53:50 1998
+    by snns2c ( Bernward Kett 1995 )
 *********************************************************/
 
-extern "C" int vokale(float *in, float *out, int init);
+extern "C" int vokale(float* in, float* out, int init);
 
-static struct {
-  int NoOfInput;    /* Number of Input Units  */
-  int NoOfOutput;   /* Number of Output Units */
-  int(* propFunc)(float *, float*, int);
-} vokaleREC = {30,1,vokale};
+static struct
+{
+    int NoOfInput;    /* Number of Input Units  */
+    int NoOfOutput;   /* Number of Output Units */
+    int(* propFunc)(float*, float*, int);
+} vokaleREC = {30, 1, vokale};

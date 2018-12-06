@@ -1,9 +1,9 @@
 /*
 
-  This file is part of the project txt2pho.
-  The project is released under the AGPL 3.0 license.
-  For details concerning the resulting rights and
-  conditions of this license see file License.txt.
+    This file is part of the project txt2pho.
+    The project is released under the AGPL 3.0 license.
+    For details concerning the resulting rights and
+    conditions of this license see file License.txt.
 
 */
 
@@ -14,14 +14,14 @@ using namespace std ;
 
 
 #if 'z' - 'a' + 1 != 26
-#error "Kein ASCII-Zeichensatz"
+    #error "Kein ASCII-Zeichensatz"
 #endif
 
 #ifdef _Windows
-#include <cstring.h>
-#include <classlib/defs.h>
+    #include <cstring.h>
+    #include <classlib/defs.h>
 #else
-#include <string>
+    #include <string>
 #endif
 
 
@@ -102,7 +102,7 @@ char remap_char (char c);
 
 inline bool is_whitespace (char c)
 {
-	return c == '\0' || c == '\t' || c == '\n' || c == '\r' || c == ' ' || c == 0x0d || c == 0x0a || c == 0x20 ;
+    return c == '\0' || c == '\t' || c == '\n' || c == '\r' || c == ' ' || c == 0x0d || c == 0x0a || c == 0x20 ;
 }
 
 
@@ -110,28 +110,28 @@ inline bool is_whitespace (char c)
 
 inline bool is_ascii_vowel (char ch)
 {
-#ifdef _Windows
-   return asc_vowels.contains(ch) ? true : false;
-#else
-	return asc_vowels.find(ch) != string::npos;
-#endif
+    #ifdef _Windows
+    return asc_vowels.contains(ch) ? true : false;
+    #else
+    return asc_vowels.find(ch) != string::npos;
+    #endif
 }
 
 
 inline bool is_ascii_consonant (char ch)
 {
-#ifdef _Windows
-   return asc_consonants.contains(ch) ? true : false;
-#else
-	return asc_consonants.find(ch) != string::npos;
-#endif
+    #ifdef _Windows
+    return asc_consonants.contains(ch) ? true : false;
+    #else
+    return asc_consonants.find(ch) != string::npos;
+    #endif
 }
 
 
 ////////////////////////////////////////////////////////////////////////////////////////
 
 //#if defined(__GNUC__)
-char *strrev(char *str);
+char* strrev(char* str);
 //char *strdup(const char *str);
 //#endif
 

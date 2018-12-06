@@ -1,9 +1,9 @@
 /*
 
-  This file is part of the project txt2pho.
-  The project is released under the AGPL 3.0 license.
-  For details concerning the resulting rights and
-  conditions of this license see file License.txt.
+    This file is part of the project txt2pho.
+    The project is released under the AGPL 3.0 license.
+    For details concerning the resulting rights and
+    conditions of this license see file License.txt.
 
 */
 
@@ -46,10 +46,10 @@ const char ipa_sonorants[] = "6rlmnN";
 
 const string spelling[29] =
 {
-	"?a:", "be:", "tse:", "de:", "?e:", "?Ef",  "ge:",      "ha:",  "?i:",
-	"jOt", "ka:", "?El",  "?Em", "?En", "?o:",  "pe:",      "ku:",  "?Er",
-	"?Es", "te:", "?u:",  "faU", "ve:", "?Iks", "?YpsilOn", "tsEt", "?E:",
-	"?2:", "?y:"
+    "?a:", "be:", "tse:", "de:", "?e:", "?Ef",  "ge:",      "ha:",  "?i:",
+    "jOt", "ka:", "?El",  "?Em", "?En", "?o:",  "pe:",      "ku:",  "?Er",
+    "?Es", "te:", "?u:",  "faU", "ve:", "?Iks", "?YpsilOn", "tsEt", "?E:",
+    "?2:", "?y:"
 };
 
 

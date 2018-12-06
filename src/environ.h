@@ -1,9 +1,9 @@
 /*
 
-  This file is part of the project txt2pho.
-  The project is released under the AGPL 3.0 license.
-  For details concerning the resulting rights and
-  conditions of this license see file License.txt.
+    This file is part of the project txt2pho.
+    The project is released under the AGPL 3.0 license.
+    For details concerning the resulting rights and
+    conditions of this license see file License.txt.
 
 */
 
@@ -12,17 +12,19 @@
 #define __ENVIRON_H__
 
 
-class Environment {
+class Environment
+{
 
-	char** list ;
-	int number ;
+        char** list ;
+        int number ;
 
-public:
-	Environment(const char* path, const char* filename) ;
-	~Environment() ;
-	void writex(const char* filename) ;
-	int put_value(char* key, char* value) ;
-	char* get_value(const char* key) ; } ;
+    public:
+        Environment(const char* path, const char* filename) ;
+        ~Environment() ;
+        void writex(const char* filename) ;
+        int put_value(char* key, char* value) ;
+        char* get_value(const char* key) ;
+} ;
 
 
 #endif

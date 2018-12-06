@@ -1,13 +1,13 @@
 /*
 
-  This file is part of the project txt2pho.
-  The project is released under the AGPL 3.0 license.
-  For details concerning the resulting rights and
-  conditions of this license see file License.txt.
+    This file is part of the project txt2pho.
+    The project is released under the AGPL 3.0 license.
+    For details concerning the resulting rights and
+    conditions of this license see file License.txt.
 
 */
 
-/* Copyright (C) 1998  Thomas Portele
+/*  Copyright (C) 1998  Thomas Portele
 
 
 */
@@ -17,16 +17,18 @@
 #include "PPRlchls.h"
 #include <stdio.h>
 
-class PPCString {
+class PPCString
+{
 
-	char* target ;
+        char* target ;
 
-public:
+    public:
 
-	PPCString(char* in) ;
-   ~PPCString() ;
-   int find(char* in, int tokenstart, int direction, int& left, PPRulecharlist& rcl) ;
-   void list(FILE* lf) ; } ;
+        PPCString(char* in) ;
+        ~PPCString() ;
+        int find(char* in, int tokenstart, int direction, int &left, PPRulecharlist &rcl) ;
+        void list(FILE* lf) ;
+} ;
 
 #endif
 

@@ -1,9 +1,9 @@
 /*
 
-  This file is part of the project txt2pho.
-  The project is released under the AGPL 3.0 license.
-  For details concerning the resulting rights and
-  conditions of this license see file License.txt.
+    This file is part of the project txt2pho.
+    The project is released under the AGPL 3.0 license.
+    For details concerning the resulting rights and
+    conditions of this license see file License.txt.
 
 */
 
@@ -12,49 +12,53 @@
 #define __PHDURNN_H__
 
 #if !defined(__LIST_H__)
-#include "list.h"
+    #include "list.h"
 #endif
 
 #if !defined(__SYLLABLE_H__)
-#include "syllable.h"
+    #include "syllable.h"
 #endif
 
 class PhonNetz;
 
 #if !defined(__PROSODY_H__)
-#include "prosody.h"
+    #include "prosody.h"
 #endif
 
 
 #if !defined(__TSR_H__)
-#include "tsr.h"
+    #include "tsr.h"
 #endif
 
-class PhonNetz {
+class PhonNetz
+{
 
-	struct Condition{
-		int column ;
-		int block ;
-		float minval ;
-		float maxval ; } ;
+        struct Condition
+        {
+            int column ;
+            int block ;
+            float minval ;
+            float maxval ;
+        } ;
 
-	TSR* voktsr;
-	TSR* kontsr;
+        TSR* voktsr;
+        TSR* kontsr;
 
-	
-	int kinputvaluenr ;
-	int vinputvaluenr ;
-	int outputvaluenr ;
-	Condition* kinputvalues ;
-	Condition* vinputvalues ;
-	Condition* outputvalues ;
 
-public:
+        int kinputvaluenr ;
+        int vinputvaluenr ;
+        int outputvaluenr ;
+        Condition* kinputvalues ;
+        Condition* vinputvalues ;
+        Condition* outputvalues ;
 
-	PhonNetz(const char* vname, const char* kname, const char* path) ;
-	~PhonNetz() ;
+    public:
 
-	int compute(Syllablelist* s, Soundlist* soli, DBSyllist* dbs, float sr = 1.0, int use_net=1) ; } ;
+        PhonNetz(const char* vname, const char* kname, const char* path) ;
+        ~PhonNetz() ;
+
+        int compute(Syllablelist* s, Soundlist* soli, DBSyllist* dbs, float sr = 1.0, int use_net=1) ;
+} ;
 
 #endif
 

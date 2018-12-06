@@ -1,9 +1,9 @@
 /*
 
-  This file is part of the project txt2pho.
-  The project is released under the AGPL 3.0 license.
-  For details concerning the resulting rights and
-  conditions of this license see file License.txt.
+    This file is part of the project txt2pho.
+    The project is released under the AGPL 3.0 license.
+    For details concerning the resulting rights and
+    conditions of this license see file License.txt.
 
 */
 
@@ -19,7 +19,7 @@
 
 
 
-/*==========================================================================
+/*  ==========================================================================
 
 	definition of template List - describes a doubly linked list with
 		a pointer to the actual position
@@ -47,46 +47,50 @@
 			retrieves the information at the actual position and moves
 				the actual position pointer to the next element of the list
 
-================================*/
-template <class Info> class List {
+    ================================*/
+template <class Info> class List
+{
 
-	protected:
+    protected:
 
-		Info errorvalue ;		// special error item
+        Info errorvalue ;		// special error item
 
-		typedef struct listentry {	// element of the list
-			Info i ;		// information
-			int index ;		// index number
-			listentry* after ;	// successor
-			listentry* before ; } Listentry ;	// predecessor
+        typedef struct listentry  	// element of the list
+        {
+            Info i ;		// information
+            int index ;		// index number
+            listentry* after ;	// successor
+            listentry* before ;
+        } Listentry ;	// predecessor
 
-		Listentry* start ;		// first element (no information)
-		Listentry* end ;		// last element of the list
-		Listentry* act ;		// pointer to actual element
-		int append(Info i) ;		// appends Info i to end of list
-		Info* xappend(Info i) ;
+        Listentry* start ;		// first element (no information)
+        Listentry* end ;		// last element of the list
+        Listentry* act ;		// pointer to actual element
+        int append(Info i) ;		// appends Info i to end of list
+        Info* xappend(Info i) ;
 
-	public:
+    public:
 
-		int numb ;
-		List() ;			// constructor
-		virtual ~List() ;		// destructor
+        int numb ;
+        List() ;			// constructor
+        virtual ~List() ;		// destructor
 
-		void exclude(int index) ;
-		void insert(Info i, int index) ;
-		int advance() ;
-		int decrease() ;
-		int length() ;
-		Info exclude_and_advance_and_get() ;
-		void clear() ;
-		void reset() ;			// see above comment
-		Info get(int indexnumber) ;
-		Info get() ;
-		int get_number() ;
-		Info get_and_advance() ; } ;
+        void exclude(int index) ;
+        void insert(Info i, int index) ;
+        int advance() ;
+        int decrease() ;
+        int length() ;
+        Info exclude_and_advance_and_get() ;
+        void clear() ;
+        void reset() ;			// see above comment
+        Info get(int indexnumber) ;
+        Info get() ;
+        int get_number() ;
+        Info get_and_advance() ;
+} ;
 
 #if !defined(__LISTBODY_H__)
-#include "listbody.h"
+    #include "listbody.h"
 #endif
 
 #endif

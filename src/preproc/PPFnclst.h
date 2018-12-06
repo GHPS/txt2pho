@@ -1,24 +1,26 @@
 /*
 
-  This file is part of the project txt2pho.
-  The project is released under the AGPL 3.0 license.
-  For details concerning the resulting rights and
-  conditions of this license see file License.txt.
+    This file is part of the project txt2pho.
+    The project is released under the AGPL 3.0 license.
+    For details concerning the resulting rights and
+    conditions of this license see file License.txt.
 
 */
 
-/* Copyright (C) 1998  Thomas Portele
+/*  Copyright (C) 1998  Thomas Portele
 
 
 */
 #ifndef _PPFNCLST_H_
 #define _PPFNCLST_H
 
-class PPFunctionlist {
+class PPFunctionlist
+{
 
-public:
+    public:
 
-   char* call(char* in) ; } ;
+        char* call(char* in) ;
+} ;
 
 #endif
 

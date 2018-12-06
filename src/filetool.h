@@ -1,9 +1,9 @@
 /*
 
-  This file is part of the project txt2pho.
-  The project is released under the AGPL 3.0 license.
-  For details concerning the resulting rights and
-  conditions of this license see file License.txt.
+    This file is part of the project txt2pho.
+    The project is released under the AGPL 3.0 license.
+    For details concerning the resulting rights and
+    conditions of this license see file License.txt.
 
 */
 
@@ -14,7 +14,7 @@
 
 long fsize (FILE* xstream);
 
-FILE* FOPEN(const char*,const char*) ;
+FILE* FOPEN(const char*, const char*) ;
 int FCLOSE(FILE*) ;
 
 #endif

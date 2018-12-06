@@ -1,9 +1,9 @@
 /*
 
-  This file is part of the project txt2pho.
-  The project is released under the AGPL 3.0 license.
-  For details concerning the resulting rights and
-  conditions of this license see file License.txt.
+    This file is part of the project txt2pho.
+    The project is released under the AGPL 3.0 license.
+    For details concerning the resulting rights and
+    conditions of this license see file License.txt.
 
 */
 
@@ -13,8 +13,8 @@
 
 
 #ifdef UNIX
-#define String string
-#define _USERENTRY
+    #define String string
+    #define _USERENTRY
 #endif
 
 
@@ -37,10 +37,10 @@ extern ofstream debugstr ;
 #undef strlen
 
 #if !defined(__FILETOOL_H__)
-#include "filetool.h"
+    #include "filetool.h"
 #endif
 #if !defined(__LIST_H__)
-#include "list.h"
+    #include "list.h"
 #endif
 
 

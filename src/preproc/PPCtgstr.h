@@ -1,13 +1,13 @@
 /*
 
-  This file is part of the project txt2pho.
-  The project is released under the AGPL 3.0 license.
-  For details concerning the resulting rights and
-  conditions of this license see file License.txt.
+    This file is part of the project txt2pho.
+    The project is released under the AGPL 3.0 license.
+    For details concerning the resulting rights and
+    conditions of this license see file License.txt.
 
 */
 
-/* Copyright (C) 1998  Thomas Portele
+/*  Copyright (C) 1998  Thomas Portele
 
 
 */
@@ -17,17 +17,19 @@
 #include "PPCStrin.h"
 #include "PPCConte.h"
 
-class PPCategorystring {
+class PPCategorystring
+{
 
-	PPCString* str ;
-   PPCContext** con ;
-   int contextnr ;
+        PPCString* str ;
+        PPCContext** con ;
+        int contextnr ;
 
-public:
+    public:
 
-	PPCategorystring(char* in) ;
-   ~PPCategorystring() ;
-   void list(FILE* lf) ;
-   int find(char* in, int tokenstart, int& left, PPRulecharlist& rcl) ; } ;
+        PPCategorystring(char* in) ;
+        ~PPCategorystring() ;
+        void list(FILE* lf) ;
+        int find(char* in, int tokenstart, int &left, PPRulecharlist &rcl) ;
+} ;
 
 #endif

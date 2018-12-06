@@ -1,13 +1,13 @@
 /*
 
-  This file is part of the project txt2pho.
-  The project is released under the AGPL 3.0 license.
-  For details concerning the resulting rights and
-  conditions of this license see file License.txt.
+    This file is part of the project txt2pho.
+    The project is released under the AGPL 3.0 license.
+    For details concerning the resulting rights and
+    conditions of this license see file License.txt.
 
 */
 
-/* Copyright (C) 1998  Thomas Portele
+/*  Copyright (C) 1998  Thomas Portele
 
 
 */
@@ -15,14 +15,16 @@
 #define _PPABBLST_H_
 #include <stdio.h>
 
-class PPAbbreviationlist {
+class PPAbbreviationlist
+{
 
-	char* abbreviations ;
+        char* abbreviations ;
 
-public:
+    public:
 
-	PPAbbreviationlist(FILE* abbfile) ;
-   ~PPAbbreviationlist() ;
-   char* apply(char* in) ; } ;
+        PPAbbreviationlist(FILE* abbfile) ;
+        ~PPAbbreviationlist() ;
+        char* apply(char* in) ;
+} ;
 
 #endif

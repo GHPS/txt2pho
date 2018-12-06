@@ -1,9 +1,9 @@
 /*
 
-  This file is part of the project txt2pho.
-  The project is released under the AGPL 3.0 license.
-  For details concerning the resulting rights and
-  conditions of this license see file License.txt.
+    This file is part of the project txt2pho.
+    The project is released under the AGPL 3.0 license.
+    For details concerning the resulting rights and
+    conditions of this license see file License.txt.
 
 */
 
@@ -12,10 +12,10 @@ using namespace std ;
 #define IPA_HEADER
 
 #ifdef _Windows
-#include <cstring.h>
-#include <classlib/defs.h>
+    #include <cstring.h>
+    #include <classlib/defs.h>
 #else
-#include <string>
+    #include <string>
 #endif
 
 
@@ -65,37 +65,37 @@ extern const string spelling[29];
 
 inline bool is_ipa_vowel (char ch)
 {
-#ifndef _Windows
-	return ipa_vowels.find(ch) != string::npos;
-#else
-   return ipa_vowels.contains(ch) ? true : false;
-#endif
+    #ifndef _Windows
+    return ipa_vowels.find(ch) != string::npos;
+    #else
+    return ipa_vowels.contains(ch) ? true : false;
+    #endif
 }
 
 
 inline bool is_ipa_consonant (char ch)
 {
-#ifndef _Windows
-	return ipa_consonants.find(ch) != string::npos;
-#else
-   return ipa_consonants.contains(ch) ? true : false;
-#endif
+    #ifndef _Windows
+    return ipa_consonants.find(ch) != string::npos;
+    #else
+    return ipa_consonants.contains(ch) ? true : false;
+    #endif
 }
 
 
 inline bool is_ipa_non_syllabic_vowel (char ch)
 {
-#ifndef _Windows
-	return ipa_non_syllabic_vowels.find(ch) != string::npos;
-#else
-   return ipa_non_syllabic_vowels.contains(ch) ? true : false;
-#endif
+    #ifndef _Windows
+    return ipa_non_syllabic_vowels.find(ch) != string::npos;
+    #else
+    return ipa_non_syllabic_vowels.contains(ch) ? true : false;
+    #endif
 }
 
 
 inline bool is_ipa_stress (char ch)
 {
-	return ch == ipa_primary_stress || ch == ipa_secondary_stress;
+    return ch == ipa_primary_stress || ch == ipa_secondary_stress;
 }
 
 

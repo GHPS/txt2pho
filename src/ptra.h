@@ -1,9 +1,9 @@
 /*
 
-  This file is part of the project txt2pho.
-  The project is released under the AGPL 3.0 license.
-  For details concerning the resulting rights and
-  conditions of this license see file License.txt.
+    This file is part of the project txt2pho.
+    The project is released under the AGPL 3.0 license.
+    For details concerning the resulting rights and
+    conditions of this license see file License.txt.
 
 */
 
@@ -13,9 +13,9 @@
 
 
 #ifdef Windows
-#include <cstring.h>
+    #include <cstring.h>
 #else
-#include <string>
+    #include <string>
 #endif
 
 
@@ -28,8 +28,8 @@
 
 struct Klasse
 {
-	char members[80];
-	char name[10];
+    char members[80];
+    char name[10];
 };
 
 
@@ -37,9 +37,9 @@ struct Klasse
 
 class Klassenliste : public List<Klasse>
 {
-	public:
-		Klassenliste (const TFile &rulefile);
-		int ismember (char input, char *name, int modus);
+    public:
+        Klassenliste (const TFile &rulefile);
+        int ismember (char input, char* name, int modus);
 };
 
 
@@ -47,21 +47,21 @@ class Klassenliste : public List<Klasse>
 
 struct Regel
 {
-	char *precontext;
-	char *suchtext;
-	char *postcontext;
-	int ucasesuchtext;
-	int precontextmodus;
-	char *result;
+    char* precontext;
+    char* suchtext;
+    char* postcontext;
+    int ucasesuchtext;
+    int precontextmodus;
+    char* result;
 
-	Regel () :
-		precontext(NULL),
-		suchtext(NULL),
-		postcontext(NULL),
-		ucasesuchtext(0),
-		precontextmodus(0),
-		result(NULL)
-		{  }
+    Regel () :
+        precontext(NULL),
+        suchtext(NULL),
+        postcontext(NULL),
+        ucasesuchtext(0),
+        precontextmodus(0),
+        result(NULL)
+    {  }
 
 //	virtual ~Regel ();
 };
@@ -71,13 +71,13 @@ struct Regel
 
 class Regelliste : public List<Regel>
 {
-                int trace ;
-	  
-	public:
+        int trace ;
 
-		Regelliste (char letter, const TFile &rulefil);
-		virtual ~Regelliste ();
-		int matcher (char *grapheme, int &graphempos, char *phoneme, int &phonempos, Klassenliste* kl);
+    public:
+
+        Regelliste (char letter, const TFile &rulefil);
+        virtual ~Regelliste ();
+        int matcher (char* grapheme, int &graphempos, char* phoneme, int &phonempos, Klassenliste* kl);
 };
 
 
@@ -85,19 +85,19 @@ class Regelliste : public List<Regel>
 
 class PTRA
 {
-		Klassenliste *kli;
-		Regelliste **rl;
-		const char *letters;
+        Klassenliste* kli;
+        Regelliste** rl;
+        const char* letters;
 
 
-	      
 
-	public:
-		PTRA (const string &datapath, const string &basename);
-		virtual ~PTRA ();
-		char* sylborders (char *in, bool gs_insert);
-		char* accents (char *in);
-		char* transcribe (const char *word);
+
+    public:
+        PTRA (const string &datapath, const string &basename);
+        virtual ~PTRA ();
+        char* sylborders (char* in, bool gs_insert);
+        char* accents (char* in);
+        char* transcribe (const char* word);
 };
 
 
