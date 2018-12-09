@@ -19,7 +19,7 @@ extern int optind, opterr, optopt ;
 extern char* optarg ;
 
 const char* synopsis =
-    "This is txt2pho Version 0.95\n"
+    "This is txt2pho Version 0.96\n"
     "Usage is \"txt2pho -pfmdvioh\"\n"
     "Txt2pho reads text from stdin (if no filename is given with the -i option)\n"
     "and writes MBROLA input to stdout (if no filename is given with the -o option)\n"
@@ -64,7 +64,7 @@ int main (int argc, char** argv)
         switch (optc)
         {
             case 'v':
-                printf("This is txt2pho Version 0.95\n") ;
+                printf("This is txt2pho Version 0.96\n") ;
                 return (0) ;
             case 'p':
                 if (optarg != NULL)strcpy(path, optarg) ;
