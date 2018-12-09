@@ -7,10 +7,6 @@
 
 */
 
-/*  Copyright (C) 1998  Thomas Portele
-
-
-*/
 #ifndef _PPRULE_H_
 #define _PPRULE_H_
 

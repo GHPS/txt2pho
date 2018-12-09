@@ -7,10 +7,6 @@
 
 */
 
-/*  Copyright (C) 1998  Thomas Portele
-
-
-*/
 #ifndef _PPCTGSTR_H_
 #define _PPCTGSTR_H_
 

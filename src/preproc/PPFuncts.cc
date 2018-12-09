@@ -7,10 +7,6 @@
 
 */
 
-/*  Copyright (C) 1998  Thomas Portele
-
-
-*/
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>

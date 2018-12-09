@@ -7,10 +7,6 @@
 
 */
 
-/*  Copyright (C) 1998  Thomas Portele
-
-
-*/
 #ifndef _PPRULCHR_H_
 #define _PPRULCHR_H_
 #include <stdio.h>

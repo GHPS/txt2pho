@@ -7,10 +7,6 @@
 
 */
 
-/*  Copyright (C) 1998  Thomas Portele
-
-
-*/
 #include "PPFnclst.h"
 #include "PPFuncts.h"
 #include <string.h>

@@ -7,10 +7,6 @@
 
 */
 
-/*  Copyright (C) 1998  Thomas Portele
-
-
-*/
 #ifndef _PPRULLST_H_
 #define _PPRULLST_H_
 

@@ -7,10 +7,6 @@
 
 */
 
-/*  Copyright (C) 1998  Thomas Portele
-
-
-*/
 #ifndef _PPRLCHLS_H_
 #define _PPRLCHLS_H_
 #include <stdio.h>

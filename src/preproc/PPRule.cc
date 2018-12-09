@@ -7,10 +7,6 @@
 
 */
 
-/*  Copyright (C) 1998  Thomas Portele
-
-
-*/
 #include "PPRule.h"
 #include <string.h>
 #include "PPdebug.h"

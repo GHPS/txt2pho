@@ -7,10 +7,6 @@
 
 */
 
-/*  Copyright (C) 1998  Thomas Portele
-
-
-*/
 #include "PPInput.h"
 #include "PPdebug.h"
 #include <string.h>

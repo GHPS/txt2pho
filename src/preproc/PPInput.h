@@ -7,10 +7,6 @@
 
 */
 
-/*  Copyright (C) 1998  Thomas Portele
-
-
-*/
 #ifndef _PPINPUT_H_
 #define _PPINPUT_H_
 #include <stdio.h>

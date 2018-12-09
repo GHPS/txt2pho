@@ -7,10 +7,6 @@
 
 */
 
-/*  Copyright (C) 1998  Thomas Portele
-
-
-*/
 #include "PPCStrin.h"
 #include "PPdebug.h"
 #include <string.h>

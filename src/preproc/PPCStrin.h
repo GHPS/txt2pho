@@ -7,10 +7,6 @@
 
 */
 
-/*  Copyright (C) 1998  Thomas Portele
-
-
-*/
 #ifndef _PPCSTRIN_H_
 #define _PPCSTRIN_H_
 

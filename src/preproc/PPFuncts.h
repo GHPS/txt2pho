@@ -7,10 +7,6 @@
 
 */
 
-/*  Copyright (C) 1998  Thomas Portele
-
-
-*/
 #ifndef _PPFUNCTS_H_
 #define _PPFUNCTS_H_
 

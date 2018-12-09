@@ -7,10 +7,6 @@
 
 */
 
-/*  Copyright (C) 1998  Thomas Portele
-
-
-*/
 #include "PPRullst.h"
 #include "PPInput.h"
 #include "PPAbblst.h"

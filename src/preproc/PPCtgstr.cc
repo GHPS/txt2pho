@@ -7,10 +7,6 @@
 
 */
 
-/*  Copyright (C) 1998  Thomas Portele
-
-
-*/
 #include "PPCtgstr.h"
 #include <string.h>
 #include <stdlib.h>

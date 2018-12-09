@@ -7,10 +7,6 @@
 
 */
 
-/*  Copyright (C) 1998  Thomas Portele
-
-
-*/
 #include "PPRulchr.h"
 #include <stdlib.h>
 #include <string.h>
