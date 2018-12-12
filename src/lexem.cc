@@ -465,7 +465,6 @@ void fwrite_lexem (FILE* outfile, const TLexem &lexem)
     if (lexem.Type() == TLexem::wordform || lexem.Type() == TLexem::control)
     {
         string str = wcl2str(lexem.WordClassesCount(), lexem.WordClasses());
-        statistics("Hallo") ;
         statistics(lexem.Transcription()) ;
         statistics(str) ;
         fprintf(outfile, "%s %s X LEX%s (%s) [%s]\n", lexem.Transcription().c_str(), str.c_str(), lexem.Chars().c_str(), lexem.Lemma().c_str(), lexem.flexrul.c_str());
