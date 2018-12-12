@@ -143,10 +143,12 @@ inline void TLexem::SetChars (size_t n, const string &s)
 
 ////////////////////////////////////////////////////////////////////////////////////////
 
-inline void TLexem::SetChars (size_t n, char c)
+inline void TLexem::SetChars (size_t n, const char c)
 {
     assert(n <= chars.length());
-    chars.replace(n, chars.length() - n, &c);
+    string stInsertCharacter;
+    stInsertCharacter=c;
+    chars.replace(n, 1, stInsertCharacter);
     setType();
 }
 
