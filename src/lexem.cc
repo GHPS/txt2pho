@@ -263,42 +263,42 @@ int TLexem::EmailChange()
         {
             chars[i] = 'ö' ;
             cremove(chars, i+1) ;
-            statistics("EMAIL CHANGE oe " << chars) ;
+            statistics("TLexem::EmailChange <oe> " << chars) ;
             done = 1 ;
         }
         if (chars[i] == 'a' && chars[i+1] == 'e' && email == 1)
         {
             chars[i] = 'ä' ;
             cremove(chars, i+1) ;
-            statistics("EMAIL CHANGE ae " << chars) ;
+            statistics("TLexem::EmailChange <ae> " << chars) ;
             done = 1 ;
         }
         if (chars[i] == 'u' && chars[i+1] == 'e' && email == 1)
         {
             chars[i] = 'ü' ;
             cremove(chars, i+1) ;
-            statistics("EMAIL CHANGE ue " << chars) ;
+            statistics("TLexem::EmailChange <ue> " << chars) ;
             done = 1 ;
         }
         if (chars[i] == 'O' && chars[i+1] == 'e' && email == 1)
         {
             chars[i] = 'Ö' ;
             cremove(chars, i+1) ;
-            statistics("EMAIL CHANGE Oe " << chars) ;
+            statistics("TLexem::EmailChange <Oe> " << chars) ;
             done = 1 ;
         }
         if (chars[i] == 'A' && chars[i+1] == 'e' && email == 1)
         {
             chars[i] = 'Ä' ;
             cremove(chars, i+1) ;
-            statistics("EMAIL CHANGE Ae " << chars) ;
+            statistics("TLexem::EmailChange <Ae> " << chars) ;
             done = 1 ;
         }
         if (chars[i] == 'U' && chars[i+1] == 'e' && email == 1)
         {
             chars[i] = 'Ü' ;
             cremove(chars, i+1) ;
-            statistics("EMAIL CHANGE Ue " << chars) ;
+            statistics("TLexem::EmailChange <Ue> " << chars) ;
             done = 1 ;
         }
     }
@@ -311,7 +311,7 @@ int TLexem::SetUmlaut (int email)
     int i ;
     if (email)
         EmailChange() ;
-    statistics("In SET UMLAUT " << email << " " << Chars()) ;
+    statistics("Applying TLexem::SetUmlaut " << email << " " << Chars()) ;
     for (i = strlen(chars.c_str()) - 2; i > -1 ; i--)
     {
         if (chars[i] == asc_o_umlaut)
@@ -351,13 +351,13 @@ int TLexem::SetUmlaut (int email)
             break ;
         }
     }
-    statistics("nach SET UMLAUT " << Chars()) ;
+    statistics("Result in TLexem::SetUmlaut " << Chars()) ;
     return (done) ;
 }
 
 void TLexem::SetUmlautPhon ()
 {
-    statistics("in  SET UMLAUT PHON " << Transcription()) ;
+    statistics("Applying TLexem::SetUmlautPhon " << Transcription()) ;
     int i ;
     int umlaut_found = 0 ;
     int maxone =  strlen(transcription.c_str()) - 1 ;
@@ -410,7 +410,7 @@ void TLexem::SetUmlautPhon ()
                 if (transcription[i+2] == 'x' && strchr("::", transcription[i+1]) != NULL)
                     transcription[i+2] = 'C' ;
         }
-    statistics("nach  SET UMLAUT PHON " << Transcription()) ;
+    statistics("Result in TLexem::SetUmlautPhon " << Transcription()) ;
 }
 
 
@@ -447,14 +447,13 @@ void TLexem::init (const TLexem &l)
 
 void fread_lexem (FILE* infile, TLexem &lexem)
 {
-    statistics("fread_lexem betreten");
+    statistics("Applying fread_lexem ");
     char buffer[1024];
     buffer[0] = '\0';
     if (!feof(infile))
         fscanf(infile, "%s", buffer);
     lexem = TLexem((char*)buffer);
-    statistics("in fread_lexem");
-    statistics("fread_lexem: " << lexem.Chars());
+    statistics("Result in fread_lexem " << lexem.Chars());
 }
 
 
@@ -481,7 +480,7 @@ void fwrite_lexem (FILE* outfile, const TLexem &lexem)
         fprintf(outfile, "%s\n", lexem.Chars().c_str());
         fflush(outfile) ;
     }
-    statistics("fwrite_lexem: " << lexem.Chars());
+    statistics("Result in fwrite_lexem " << lexem.Chars());
 }
 
 

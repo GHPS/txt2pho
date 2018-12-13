@@ -81,7 +81,7 @@ TLexicon::~TLexicon ()
 
 void TLexicon::transcribe (TLexem &lexem, int sevenbit)
 {
-    statistics("transcribe (TLexem &lexem = \"" << lexem.Chars() << "\")");
+    statistics("Applying TLexicon::transcribe (TLexem &lexem = \"" << lexem.Chars() << "\")");
     char* tempstr ;
     char* t2str ;
     bool transcribed = false;
@@ -138,15 +138,14 @@ void TLexicon::transcribe (TLexem &lexem, int sevenbit)
         lexem.type = TLexem::nothing ;
         return ;
     }
-    statistics("Akzente und Silbengrenzen!");
+    statistics("Accents and syllable border");
     #if !defined(NPETRA)
     t2str = strdup(lexem.Transcription().c_str()) ;
     tempstr = ptra->accents(ptra->sylborders(t2str, transcribed_by_PTRA));
     lexem.transcription = tempstr;
     CLEAR(tempstr);
     #endif
-    statistics("Transkription erfolgreich!") ;
-//  cout << lexem.Transcription() << " ";
+    statistics("TLexicon::transcribe successfull, transcription " << lexem.Transcription());
 }
 
 
@@ -168,9 +167,9 @@ void TLexicon::transcribe (TLexem &lexem, int sevenbit)
 //      keine
 
 
-bool TLexicon::transcribe_literally (TLexem &lexem, TWordClass wcl)
+bool TLexicon::transcribe_literally(TLexem &lexem, TWordClass wcl)
 {
-    statistics("literally (TLexem &lexem = \"" << lexem.Chars() << "\", TWordClass wcl = " << wcl2str(wcl) << ")");
+    statistics("Applying TLexicon::transcribe_literally (TLexem &lexem = \"" << lexem.Chars() << "\", TWordClass wcl = " << wcl2str(wcl) << ")");
     valid_prefix = 1 ;
     if (language == 0 && (strlen(lexem.Chars().c_str()) > 1 || wcl != Unknown))
         if (!lexem.is_valid_word())
@@ -216,9 +215,7 @@ bool TLexicon::transcribe_literally (TLexem &lexem, TWordClass wcl)
         else
             record = table[i] ;
         #endif
-        //fprintf(stderr,"LEMMA %ld\n",i) ;
-        //fflush(stderr) ;
-        statistics("Lemma fetched") ;
+        statistics("Fetched lemma " << i);
         // Wird keine bestimmte Wortart verlangt, soll ein Teil eines Kompositums
         // transkribiert werden oder hat das Lemma die verlangte Wortart?
         if (wcl == Unknown || wcl == KMP || record.has_word_class(wcl))
@@ -237,19 +234,19 @@ bool TLexicon::transcribe_literally (TLexem &lexem, TWordClass wcl)
                 lexem.SetWordClasses(record.WordClassesCount(), record.WordClasses());
             else
                 lexem.SetWordClass(wcl);
-            statistics ("Result in literally " << true << " WCL " << lexem.wordClasses[0]) ;
-            statistics (record.Transcription() << record.Lemma() ) ;
+            statistics ("Result in TLexicon::transcribe_literally " << true << " WCL " << lexem.wordClasses[0]);
+            statistics ("Lemma " << record.Lemma() << ", Transcription " << record.Transcription());
             return true;
         }
         else
         {
-            statistics ("Result in literally " << false) ;
+            statistics ("Result in TLexicon::transcribe_literally " << false) ;
             return false;
         }
     }
     else
     {
-        statistics ("Result in literally " << false) ;
+        statistics ("Result in TLexicon::transcribe_literally " << false) ;
 //		if (i == -2)
 //			valid_prefix = 0 ;
         return false;
@@ -263,7 +260,7 @@ bool TLexicon::transcribe_literally (TLexem &lexem, TWordClass wcl)
 
 bool TLexicon::transcribe_as_abbreviation (TLexem &lexem)
 {
-    statistics("abbreviation (TLexem &lexem = \"" << lexem.Chars() << "\")");
+    statistics("Applying TLexicon::transcribe_as_abbreviation (TLexem &lexem = \"" << lexem.Chars() << "\")");
     string s;
     char c;
     for (int i = 0; i < (int)lexem.Chars().length() - 1; i++)
@@ -300,7 +297,7 @@ bool TLexicon::transcribe_as_abbreviation (TLexem &lexem)
         c -= 'A';
     s += "'";
     s += spelling[c];
-    lexem.lemma = "AbkNrzung";
+    lexem.lemma = "Abkuerzung";
     lexem.transcription = s;
     lexem.SetWordClass(NAM);
     return true;
@@ -313,7 +310,7 @@ bool TLexicon::transcribe_as_abbreviation (TLexem &lexem)
 
 bool TLexicon::transcribe_as_inflected (TLexem &lexem, TWordClass wcl)
 {
-    statistics("inflected (TLexem &lexem = \"" << lexem.Chars() << "\", TWordClass wcl = " << wcl2str(wcl) << ")");
+    statistics("Applying TLexicon::transcribe_as_inflected (TLexem &lexem = \"" << lexem.Chars() << "\", TWordClass wcl = " << wcl2str(wcl) << ")");
     statistics("email " << email) ;
     // Eine flektierte Form eines deutschen Wortes hat mindestens drei Buchstaben.
     if (lexem.Chars().length() < 3)
@@ -415,7 +412,7 @@ bool TLexicon::transcribe_as_inflected (TLexem &lexem, TWordClass wcl)
         if (transcribed)
             lexem = tmp;
     }
-    statistics ("Result in as_inflected " << transcribed << " WCL " << lexem.wordClasses[0]) ;
+    statistics ("Result in TLexicon::transcribe_as_inflected " << transcribed << " WCL " << lexem.wordClasses[0]) ;
     return transcribed;
 }
 
@@ -505,7 +502,7 @@ bool TLexicon::transcribe_as_prefix(TLexem &lexem)
 
 bool TLexicon::transcribe_as_compound (TLexemNode* root)
 {
-    statistics("compound (TLexemNode *root = {\"" << root->Head().Chars() << "\", \"" << root->Rest().Chars() <<"\"})");
+    statistics("Applying TLexicon::transcribe_as_compound (TLexemNode *root = {\"" << root->Head().Chars() << "\", \"" << root->Rest().Chars() <<"\"})");
     // Der zu transkribierende Rest des Kompositums darf nicht die L?nge Null haben.
     assert(root->Rest().Chars().length() != 0);
     TLexem head = root->Head(), rest = root->Rest();
@@ -613,7 +610,7 @@ bool TLexicon::transcribe_as_compound (TLexemNode* root)
 
 bool TLexicon::transcribe_with_PTRA (TLexem &lexem)
 {
-    statistics("with_PTRA (TLexem &lexem = \"" << lexem.Chars() << "\")");
+    statistics("Applying TLexicon::transcribe_with_PTRA (TLexem &lexem = \"" << lexem.Chars() << "\")");
     char* temp = ptra->transcribe(lexem.Chars().c_str());
     if (temp == NULL)
         return false ;

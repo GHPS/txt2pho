@@ -474,7 +474,7 @@ long Newtable::Search(string str, int locase)
     delete[](s) ;
     delete[](Ss) ;
     delete[](S) ;
-    statistics("Result in Lexsearch " << index)  ;
+    statistics("Result in newtable::search " << index)  ;
     return (index) ;
 }
 

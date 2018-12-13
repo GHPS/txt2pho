@@ -443,9 +443,9 @@ char* PTRA::sylborders (char* in, bool gs_include)
     int kv = 0 ;
     int schwav = 0 ;
     int slkns = 0 ;
-    statistics("Syllable Borders for " << in) ;
+    statistics("Applying PTRA::sylborders for " << in) ;
     changesounds(in, intermed) ;
-    statistics("Syllable Borders after changesounds " << in) ;
+    statistics("PTRA::sylborders after changesounds " << in) ;
     len = strlen(intermed) ;
     if (strchr(ipa_sylcor, intermed[0]) != NULL && language != 1)
         result[j++] = '?';
@@ -540,7 +540,7 @@ char* PTRA::sylborders (char* in, bool gs_include)
     {
         result[j] = '\0' ;
         syl[k] = '\0' ;
-        statistics("NOW " << intermed[i]<< " i " << i << " BISHER " << result << " j " << j << " SYL " << syl << " k " << k) ;
+        statistics("NOW " << intermed[i]<< " i " << i << " BEFORE " << result << " j " << j << " SYL " << syl << " k " << k) ;
         if (strchr(ipa_sylcor, intermed[i]) == NULL)
         {
             if (intermed[i] == '<')
@@ -602,7 +602,7 @@ char* PTRA::sylborders (char* in, bool gs_include)
     result[j] = '\0';
     CLEAR(in);
     CLEAR(intermed) ;
-    statistics("Syllable Borders Result " << result) ;
+    statistics("Result in PTRA::sylborders " << result) ;
     return result;
 }
 
@@ -668,7 +668,7 @@ char* PTRA::accents (char* in)
         }
     }
     CLEAR(in);
-    statistics("Accents result " << result) ;
+    statistics("Result in PTRA::accents " << result) ;
     return result;
 }
 
@@ -824,7 +824,7 @@ static bool turn (char* in, int len)
     assert(len - (i + 1) >= 0 && len - (i + 1) < len);
     turn(&inter[ipos + 1], len - (i + 1));
     if (strlen(inter) > strlen(in))
-        ERRMSG("String 'inter' ist l?nger als String 'in'");
+        ERRMSG("String 'inter' is longer than string 'in'");
     strncpy(in, inter, len);
     CLEAR(inter);
     return true;
@@ -1150,7 +1150,7 @@ Regelliste::Regelliste (char letter, const TFile &rulefile)
             if (end == NULL)
             {
 //#pragma message Incorrect format-string for printf
-                fprintf(errfile, "%s fucked up\n", buffer);
+                fprintf(errfile, "%s is corrupted\n", buffer);
                 fflush(errfile) ;
                 exit(EXIT_FAILURE);
             }
@@ -1171,7 +1171,7 @@ Regelliste::Regelliste (char letter, const TFile &rulefile)
             {
 //#pragma message Incorrect format-string for printf
 //              printf("result %s fucked up\n");
-                fprintf(errfile, "%s fucked up\n", buffer);
+                fprintf(errfile, "%s is corrupted\n", buffer);
                 fflush(errfile) ;
                 exit(EXIT_FAILURE);
             }
