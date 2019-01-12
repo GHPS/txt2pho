@@ -37818,7 +37818,7 @@ nฤL•ฉR	W4	ั6ฤNL4R
 M•ยbb	W4N้ฬ0	สb
 M•ยbbt•L“€ฆเ	W4	ัสbรbtNL“ร๏ฆNห
 M•ยbbM•ฆR	W4	ัสb๓-R
-“M•ยbbฆR	้ฬ0	ัส%-R
+“M•ยbbฆR	้ฬ0	ัสb-R
 M•ยbbฆยR	W4	ัสb-สR
 M•ยbb“๛t“L	W4	ัสb“ร๛t“L
 M•ยbb“ฆเย“Lฆ	W4	ัสb“ฆNรเส“Lซ(
