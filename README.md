@@ -1,7 +1,7 @@
 # txt2pho
 A TTS frontend for the German inventories of the MBROLA project (Official Repository)
 
-# Introduction/
+# Introduction
 
 txt2pho is one part of a system to generate German text-to-speech
 synthesis. As the name implies txt2pho can convert pure text input to
@@ -14,7 +14,7 @@ the majority of its users are German speakers, the rest of this
 documentation is in German. Nonetheless the source files, all commits and
 most bug reports of this project are in English.
 
-#Überblick 
+# Überblick 
 
 txt2pho ist Teil eines Systems zur computergestützten Sprachausgabe von
 deutschen Texten (TTS). Der Name suggeriert bereits, dass txt2pho in der
