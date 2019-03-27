@@ -1,0 +1,41 @@
+# .txt2phorc Configuration
+# --------------------------------------
+#
+# PATH variables
+# All path names must end with a separator!
+#
+DATAPATH=../data/
+
+# Path to voice files
+INVPATH=../data/
+
+# Path to temporary and log files (default: /tmp/)
+TEMPPATH=/tmp/
+
+#
+# DEFAULT variables
+# --------------------------------------
+#
+# Default prosody (male or female)
+INVENTORY=male
+
+# Debuglevel
+DEBUGLEVEL=0
+
+# PROSODY variables
+# --------------------------------------
+#
+# Name of prosody generation tree
+NEWTREE=newtree
+
+# Reduction level
+REDUCTION=1
+
+# Prominence computation by rule or CART tree
+PROMCOMP=1
+
+# Default speech rate
+SPEECHRATE=1.0
+
+# Duration computation
+USENET=3
