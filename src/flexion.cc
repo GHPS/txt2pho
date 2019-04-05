@@ -58,17 +58,17 @@ TFlexion::TRule::TRule (const string &of, const string &ob, const string &pb, co
     else if (mu == "-")
         may_umlaut = false;
     else
-        ERRMSG("Falsche Angabe fNr <may_umlaut>");
+        ERRMSG("Falsche Angabe für <may_umlaut>");
     promote_from = p_f;
     promote_to = str2wcl(p_t.c_str());
     if (promote_to == Unknown || promote_to == Error)
-        ERRMSG("Falsche Angabe fNr <promote_to>");
+        ERRMSG("Falsche Angabe für <promote_to>");
 }
 
 
 ////////////////////////////////////////////////////////////////////////////////////////
 
-// !!! ACHTUNG !!!  Ver?ndert »mema!
+// !!! ACHTUNG !!!  Verändert »mema!
 
 TFlexion::TRule::TRule (const char* &mem)
 {
@@ -270,8 +270,8 @@ int TFlexion::GetLine (const TFile &sourcefile, string &s1, string &s2, string &
 //      TFile &binaryfile
 //          die Datei, in die die Ausgabe geschrieben werden soll
 //  Zweck:
-//      Erstellt aus einer Eingabedatei im ASCII-Zeichensatz (bzw. IPA-Zeichensatz fNr
-//      die Transkriptionen) eine komprimierte Datei in einem Bin?rformat. Das Format
+//      Erstellt aus einer Eingabedatei im ASCII-Zeichensatz (bzw. IPA-Zeichensatz für
+//      die Transkriptionen) eine komprimierte Datei in einem Binärformat. Das Format
 //      eines Blocks in der Eingabe sieht wie folgt aus:
 //
 //      FLEXION <wordClass>
@@ -283,11 +283,11 @@ int TFlexion::GetLine (const TFile &sourcefile, string &s1, string &s2, string &
 //      Es können beliebig viele dieser Blöcke in der Eingabe angegeben werden. In der
 //      Datei können Kommentare stehen, die mit "//" beginnen und mit dem Ende der
 //      jeweiligen Zeile aufhören (also wie in C++). Leerzeilen sind ebenso erlaubt.
-//      Die Wörter "FLEXION" und "ENDE" sind SchlNsselwörter, die den Anfang bzw. das
+//      Die Wörter "FLEXION" und "ENDE" sind Schlüsselwörter, die den Anfang bzw. das
 //      Ende eines Regelblocks markieren. Alle Regeln, die innerhalb dieses Blocks
-//      aufgefNhrt werden, werden nur auf Wörter angewandt, deren Wortklasse mit der
+//      aufgeführt werden, werden nur auf Wörter angewandt, deren Wortklasse mit der
 //      hinter "FLEXION" angegebenen Nbereinstimmt. FNr <wordClass> sind die im
-//      Aufz?hlungstyp TWordClass (s. "wrdclass.h") definierten Werte zul?ssig.
+//      Aufzählungstyp TWordClass (s. "wrdclass.h") definierten Werte zulässig.
 //      Hier nun die Bedeutung der einzelnen Felder in jeder Zeile:
 //          <orth_flex>     eine mögliche lexikalische Wortendung
 //          <orth_base>     die lexikalische Endung der zugehörigen Grundform
@@ -300,10 +300,10 @@ int TFlexion::GetLine (const TFile &sourcefile, string &s1, string &s2, string &
 //      Die Funktion Nbersetzt das in
 //        - eine Tabelle mit Anzahl der Regeln pro Endbuchstabe
 //        - eine Liste der Regeln mit jeweils
-//            - vier nullterminierten Zeichenketten fNr die Endungen
-//            - einem Bin?rwert fNr <umlaut>
-//            - einem Bin?rwert fNr die Ausgangswortklasse
-//            - einem Bin?rwert fNr die Zielwortklasse
+//            - vier nullterminierten Zeichenketten für die Endungen
+//            - einem Binärwert für <umlaut>
+//            - einem Binärwert für die Ausgangswortklasse
+//            - einem Binärwert für die Zielwortklasse
 
 bool TFlexion::Compile (const TFile &sourcefile, TFile &binaryfile)
 {
@@ -319,26 +319,26 @@ bool TFlexion::Compile (const TFile &sourcefile, TFile &binaryfile)
     // bis zum Ende der Datei lesen
     while ((cnt = GetLine(sourcefile, tok1, tok2, tok3, tok4, tok5, tok6)) != EOF)
     {
-        // F?ngt diese Zeile nicht mit dem Wort "FLEXION" an?
+        // Fängt diese Zeile nicht mit dem Wort "FLEXION" an?
         if (tok1 != "FLEXION")
-            ERRMSG("(" << sourcefile.Filename() << ", " << cnt_lines << "): SchlNsselwort 'FLEXION' nicht gefunden");
+            ERRMSG("(" << sourcefile.Filename() << ", " << cnt_lines << "): Schlüsselwort 'FLEXION' nicht gefunden");
         // Ist "FLEXION" das einzige Wort in dieser Zeile?
         if (cnt == 1)
             ERRMSG("(" << sourcefile.Filename() << ", " << cnt_lines << "): Keine Wortartenangabe nach 'FLEXION'");
-        // Gibt es mehr als einen Parameter fNr die Wortart?
+        // Gibt es mehr als einen Parameter für die Wortart?
         if (cnt != 2)
             ERRMSG("(" << sourcefile.Filename() << ", " << cnt_lines << "): Zuviele Angaben nach 'FLEXION'");
         wcl = str2wcl(tok2);
-        // Wurde eine ungNltige Wortart angegeben?
+        // Wurde eine ungültige Wortart angegeben?
         if (wcl >= NumberOfWordClasses)
             ERRMSG("(" << sourcefile.Filename() << ", " << cnt_lines << "): Fehlerhafte Wortartenangabe");
-        // eine korrekte Flexionsregel besteht aus fNnf bzw. sechs Feldern
+        // eine korrekte Flexionsregel besteht aus fünf bzw. sechs Feldern
         while ((cnt = GetLine(sourcefile, tok1, tok2, tok3, tok4, tok5, tok6)) == 5 || cnt == 6)
         {
             // Ist der bereits angeforderte Speicher schon aufgebraucht?
             if (used == size)
             {
-                // Speicher fNr 50 weitere Verweise auf Flexionsregeln anfordern, ...
+                // Speicher für 50 weitere Verweise auf Flexionsregeln anfordern, ...
                 TRule** temp = NULL;
                 #ifdef _Windows
                 try
@@ -360,7 +360,7 @@ bool TFlexion::Compile (const TFile &sourcefile, TFile &binaryfile)
                     for (i = 0; i < used; i++)
                         delete rules[i];
                     delete[] rules;
-                    ERRMSG("Speicheranforderung fNr Zeiger 'temp' fehlgeschlagen");
+                    ERRMSG("Speicheranforderung für Zeiger 'temp' fehlgeschlagen");
                 }
                 // ... die alten Verweise auf Regeln umkopieren, ...
                 for (i = 0; i < used; i++)
@@ -399,7 +399,7 @@ bool TFlexion::Compile (const TFile &sourcefile, TFile &binaryfile)
                     for (i = 0; i < used; i++)
                         delete rules[i];
                     delete[] rules;
-                    ERRMSG("Speicheranforderung fNr neue Regel fehlgeschlagen");
+                    ERRMSG("Speicheranforderung für neue Regel fehlgeschlagen");
                 }
 //				fprintf(errfile,"%s - %s - %s - %s - %d - %d -  %d\n",rules[used]->orth_flex.c_str(),rules[used]->orth_base.c_str(),rules[used]->phon_base.c_str(),rules[used]->phon_flex.c_str(),rules[used]->may_umlaut,rules[used]->promote_from,rules[used]->promote_to) ;
                 used++;
@@ -407,22 +407,22 @@ bool TFlexion::Compile (const TFile &sourcefile, TFile &binaryfile)
             // Wieso wurde das Lesen des vorherigen Regelblocks abgebrochen?
             switch (cnt)
             {
-                // die Datei wurde vollst?ndig bearbeitet ==> FEHLER!
+                // die Datei wurde vollständig bearbeitet ==> FEHLER!
                 case EOF:
                     ERRMSG("(" << sourcefile.Filename() << ", " << cnt_lines << "): Unerwartetes Dateiende");
                     break;
-                // die Zeile bestand aus weniger als fNnf Feldern ==> FEHLER!
+                // die Zeile bestand aus weniger als fünf Feldern ==> FEHLER!
                 case 2:
                 case 3:
                 case 4:
                 // die Zeile bestand aus mehr als sechs Feldern ==> FEHLER!
                 case 7:
-                    ERRMSG("(" << sourcefile.Filename() << ", " << cnt_lines << "): UngNltiges Zeilenformat");
+                    ERRMSG("(" << sourcefile.Filename() << ", " << cnt_lines << "): Ungültiges Zeilenformat");
                     break;
             }
             // Lautet das einzige Wort auf dieser Zeile nicht "ENDE"?
             if (cnt == 1 && tok1 != "ENDE")
-                ERRMSG("(" << sourcefile.Filename() << ", " << cnt_lines << "): SchlNsselwort 'ENDE' nicht gefunden");
+                ERRMSG("(" << sourcefile.Filename() << ", " << cnt_lines << "): Schlüsselwort 'ENDE' nicht gefunden");
         }
         if (!sourcefile.Close())
             WARNMSG("(" << sourcefile.Filename() << "): Datei konnte nicht geschlossen werden");
@@ -452,7 +452,7 @@ bool TFlexion::Compile (const TFile &sourcefile, TFile &binaryfile)
                 for (i = 0; i < used; i++)
                     delete rules[i];
                 delete[] rules;
-                ERRMSG("Speicheranforderung fNr Zeiger 'cnt_rules' fehlgeschlagen");
+                ERRMSG("Speicheranforderung für Zeiger 'cnt_rules' fehlgeschlagen");
             }
             for (i = 0; i < used; i++)
             {
@@ -464,7 +464,7 @@ bool TFlexion::Compile (const TFile &sourcefile, TFile &binaryfile)
                 else if (ch == asc_sz_lig)
                     cnt_rules[0]++;
                 else
-                    WARNMSG("Regel mit ungNltigem Buchstaben '" << rules[i]->orth_flex << "'");
+                    WARNMSG("Regel mit ungültigem Buchstaben '" << rules[i]->orth_flex << "'");
             }
             char listbuf[(cnt_chars_in_alphabet+1)*2] ;
             short dummy, j =0 ;
@@ -530,10 +530,10 @@ bool TFlexion::Compile (const TFile &sourcefile, TFile &binaryfile)
         bool TFlexion::Load (const TFile &binaryfile)
         {
             short dummy, i, j =0 ;
-            // Konnte die Datei mit den bin?ren Flexionsregeln nicht geöffnet werden?
+            // Konnte die Datei mit den binären Flexionsregeln nicht geöffnet werden?
             if (!binaryfile.Open('b'))
                 return false;
-            // Größe der bin?ren Regeldatei feststellen
+            // Größe der binären Regeldatei feststellen
             long blocksize = binaryfile.Size();
             // Konnte die Größe nicht festgestellt werden?
             if (blocksize == -1)
@@ -542,7 +542,7 @@ bool TFlexion::Compile (const TFile &sourcefile, TFile &binaryfile)
                 binaryfile.Close();
                 return false;
             }
-            // Anzahl der fNr die Regeln benötigten Bytes berechnen
+            // Anzahl der für die Regeln benötigten Bytes berechnen
             blocksize -= (cnt_chars_in_alphabet + 1) * sizeof(short);
             #ifdef _Windows
             try
@@ -580,7 +580,7 @@ bool TFlexion::Compile (const TFile &sourcefile, TFile &binaryfile)
             short cnt = 0;
             for (i = 0; i < cnt_chars_in_alphabet + 1; i++)
                 cnt += cnt_rules[i];
-            // Zwischenspeicher fNr die Regeln anfordern
+            // Zwischenspeicher für die Regeln anfordern
             char* data = NULL;
             #ifdef _Windows
             try
@@ -616,7 +616,7 @@ bool TFlexion::Compile (const TFile &sourcefile, TFile &binaryfile)
             if (!binaryfile.Close())
                 return false;
             data[blocksize] = '\0';
-            // Speicher fNr die Regeln anfordern
+            // Speicher für die Regeln anfordern
             #ifdef _Windows
             try
             #endif
@@ -640,7 +640,7 @@ bool TFlexion::Compile (const TFile &sourcefile, TFile &binaryfile)
                 delete[] data;
                 return false;
             }
-            // die Regeln aus dem Zwischenspeicher in die endgNltige Tabelle Nbertragen
+            // die Regeln aus dem Zwischenspeicher in die endgültige Tabelle Nbertragen
             const char* mem = data;
             for (i = 0; i < cnt; i++)
             {

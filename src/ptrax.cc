@@ -1312,7 +1312,7 @@ PTRA::PTRA (const string &datapath, const string &basename) :
     #endif
     {
         rulefile.Close();
-        ERRMSG("Speicheranforderung fNr Zeiger 'kli' fehlgeschlagen");
+        ERRMSG("Speicheranforderung für Zeiger 'kli' fehlgeschlagen");
     }
     #ifdef _Windows
     try
@@ -1330,7 +1330,7 @@ PTRA::PTRA (const string &datapath, const string &basename) :
     {
         delete kli;
         rulefile.Close();
-        ERRMSG("Speicheranforderung fNr Zeiger 'rl' fehlgeschlagen");
+        ERRMSG("Speicheranforderung für Zeiger 'rl' fehlgeschlagen");
     }
     #ifdef _Windows
     try
@@ -1347,7 +1347,7 @@ PTRA::PTRA (const string &datapath, const string &basename) :
         delete[] rl;
         delete kli;
         rulefile.Close();
-        ERRMSG("Speicheranforderung fNr Zeiger rl[" << i << "] fehlgeschlagen");
+        ERRMSG("Speicheranforderung für Zeiger rl[" << i << "] fehlgeschlagen");
     }
     #endif
     rulefile.Close();

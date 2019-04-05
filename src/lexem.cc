@@ -63,7 +63,7 @@ TLexem::~TLexem ()
 //      const TLexem &l
 //          ein transkribiertes Lexem
 //  Zweck:
-//      VerknNpft das Urpsrungslexem mit dem transkribiertem Lexem »la.
+//      Verknüpft das Urpsrungslexem mit dem transkribiertem Lexem »la.
 //  Seiteneffekte:
 //      keine
 //  Ausgabe:
@@ -79,11 +79,11 @@ TLexem &TLexem::operator+= (const TLexem &l)
         return *this;
     }
     // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-    // die Orthographie des Lexems »la an die ursprNngliche Orthographie anh?ngen
+    // die Orthographie des Lexems »la an die ursprüngliche Orthographie anhängen
     chars += l.Chars();
     // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-    // die Transkription des Lexems »la an die ursprNngliche Transkription anh?ngen
-    // F?ngt das anzuh?ngende Lexem mit einem (betonten oder unbetonten) Vokal an?
+    // die Transkription des Lexems »la an die ursprüngliche Transkription anhängen
+    // Fängt das anzuhängende Lexem mit einem (betonten oder unbetonten) Vokal an?
     if (is_ipa_vowel(l.Transcription(0)) ||
             is_ipa_vowel(l.Transcription(1)) && is_ipa_stress(l.Transcription(0)))
     {
@@ -101,7 +101,7 @@ TLexem &TLexem::operator+= (const TLexem &l)
     }
     else
         transcription += l.Transcription();
-    // alle Hauptbetonungen außer der ersten zu Nebenbetonungen abschw?chen
+    // alle Hauptbetonungen außer der ersten zu Nebenbetonungen abschwächen
     size_t pos = transcription.find(ipa_primary_stress);
     #ifdef Windows
     if (pos != NPOS)
@@ -118,7 +118,7 @@ TLexem &TLexem::operator+= (const TLexem &l)
             transcription[pos] = ipa_secondary_stress;
     }
     // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-    // die dazugehörigen Lemmata verknNpfen
+    // die dazugehörigen Lemmata verknüpfen
     lemma = Lemma() + " + " + l.Lemma();
     // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     // die resultierende Wortklasse eintragen
@@ -194,12 +194,12 @@ bool TLexem::contains_only (const string &charset) const
 //  Eingabe:
 //      keine
 //  Zweck:
-//      ÜberprNft, ob das Lexem formal ein Wort sein kann.
+//      Überprüft, ob das Lexem formal ein Wort sein kann.
 //  Seiteneffekte:
 //      keine
 //  Ausgabe:
 //      return bool:
-//       -  false    das Lexem kann aus formalen GrNnden kein Wort sein
+//       -  false    das Lexem kann aus formalen Gründen kein Wort sein
 //       -  true     sonst
 
 bool TLexem::is_valid_word () const

@@ -32,7 +32,7 @@ using namespace std ;
 ////////////////////////////////////////////////////////////////////////////////////////
 
 
-// Definitionen fNr Teilmengen des IPA-Alphabets
+// Definitionen für Teilmengen des IPA-Alphabets
 
 extern const string ipa_vowels;
 extern const string ipa_consonants;

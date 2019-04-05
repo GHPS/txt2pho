@@ -32,11 +32,11 @@ extern int language ;
 //
 //  Eingabe:
 //      const string &datapath
-//          Name des Verzeichnisses, in dem die Dateien fNr das Lexikon liegen
+//          Name des Verzeichnisses, in dem die Dateien für das Lexikon liegen
 //  Zweck:
 //      Baut ein Lexikon auf. Dazu werden die Tabelle der Wörter und Transkriptionen,
-//      die Liste der Funktionswörter, drei verschiedene Regelapparate fNr die
-//      Wortflexion und ein Regelapparat fNr die Fugenmorpheme von Komposita geladen und
+//      die Liste der Funktionswörter, drei verschiedene Regelapparate für die
+//      Wortflexion und ein Regelapparat für die Fugenmorpheme von Komposita geladen und
 //      eine Instanz von P-TRA erzeugt.
 //  Seiteneffekte:
 //      keine:
@@ -162,7 +162,7 @@ void TLexicon::transcribe (TLexem &lexem, int sevenbit)
 //  Zweck:
 //      Versucht ein Lexem mit Hilfe des Lexikons zu transkribieren.
 //  Seiteneffekte:
-//      In »lexema wird im Erfolgsfall die Transkription zurNckgegeben
+//      In »lexema wird im Erfolgsfall die Transkription zurückgegeben
 //  Ausgabe:
 //      keine
 
@@ -503,13 +503,13 @@ bool TLexicon::transcribe_as_prefix(TLexem &lexem)
 bool TLexicon::transcribe_as_compound (TLexemNode* root)
 {
     statistics("Applying TLexicon::transcribe_as_compound (TLexemNode *root = {\"" << root->Head().Chars() << "\", \"" << root->Rest().Chars() <<"\"})");
-    // Der zu transkribierende Rest des Kompositums darf nicht die L?nge Null haben.
+    // Der zu transkribierende Rest des Kompositums darf nicht die Länge Null haben.
     assert(root->Rest().Chars().length() != 0);
     TLexem head = root->Head(), rest = root->Rest();
-    // Wörter mit der L?nge Eins können nicht Teil eines Kompositums sein.
+    // Wörter mit der Länge Eins können nicht Teil eines Kompositums sein.
     if (rest.Chars().length() == 1)
         return false;
-    // Der Rest des Kompositums muß eine gNltige Struktur besitzen.
+    // Der Rest des Kompositums muß eine gültige Struktur besitzen.
     if (!rest.is_valid_word())
         return false;
     TLexem tmp;
@@ -530,10 +530,10 @@ bool TLexicon::transcribe_as_compound (TLexemNode* root)
     }
     // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     // Betrachte den Rest des Kompositums wieder als Kompositum, d.h. versuche alle
-    // möglichen Anf?nge des Rests zu transkribieren.
+    // möglichen Anfänge des Rests zu transkribieren.
     tmp.SetChars(0, rest.Chars(0));
     size_t i ;
-    // verl?ngere das tempor?re Lexem zeichenweise
+    // verlängere das temporäre Lexem zeichenweise
     for (i = 1; i < rest.Chars().length() - 1; i++)
     {
         bool transcribed = false ;
@@ -541,7 +541,7 @@ bool TLexicon::transcribe_as_compound (TLexemNode* root)
         tmp.SetChars(i, ch);
         if (strlen(tmp.Chars().c_str()) < 2)
             continue ;
-        // transkribiere das tempor?re Lexem ohne Fugenmorphem
+        // transkribiere das temporäre Lexem ohne Fugenmorphem
         if (tmp.Chars() != "er" && tmp.Chars() != "Er")
             transcribed = transcribe_literally(tmp);
         if (valid_prefix == 0)
@@ -561,10 +561,10 @@ bool TLexicon::transcribe_as_compound (TLexemNode* root)
         if (transcribed)
             root->insert(new TLexemNode(tmp, rest.Chars(i+1, rest.Chars().length() -i -1))) ;
         #endif
-        // Sind noch mindestens 3 Zeichen an das tempor?re Lexem anzuh?ngen?
+        // Sind noch mindestens 3 Zeichen an das temporäre Lexem anzuhängen?
         if ((!transcribed) && rest.Chars().length() - i > 3)
         {
-            // Endet das tempor?re Lexem mit einem Konsonanten, und steht an der n?chsten zu
+            // Endet das temporäre Lexem mit einem Konsonanten, und steht an der nächsten zu
             // kopierenden Stelle der gleiche Konsonant gefolgt von einem Vokal?
             if (is_ascii_consonant(ch) && rest.Chars(i + 1) == ch && is_ascii_vowel(rest.Chars(i + 2)))
             {

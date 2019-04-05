@@ -167,7 +167,7 @@ Newtable::TRecord::TRecord () :
 
 ////////////////////////////////////////////////////////////////////////////////////////
 
-// !!! ACHTUNG !!!  Ver?ndert »mema!
+// !!! ACHTUNG !!!  Verändert »mema!
 
 Newtable::TRecord::TRecord (char* &mem) :
     wordClasses(NULL),

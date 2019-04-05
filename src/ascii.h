@@ -30,8 +30,8 @@ using namespace std ;
 //                                   A C H T U N G                                    //
 //                                  ---------------                                   //
 //                                                                                    //
-// Diese Datei enth„lt String- und Character-Konstanten mit ASCII- und IPA-Zeichen.   //
-// Sie darf unter keinen Umst„nden automatisch in einen anderen Zeichensatz           //
+// Diese Datei enthält String- und Character-Konstanten mit ASCII- und IPA-Zeichen.   //
+// Sie darf unter keinen Umständen automatisch in einen anderen Zeichensatz           //
 // konvertiert werden.                                                                //
 //                                                                                    //
 ////////////////////////////////////////////////////////////////////////////////////////

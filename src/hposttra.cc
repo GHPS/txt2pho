@@ -908,7 +908,7 @@ void prosogenx (char** lexlist, Syllablelist* s, int cnt_lexem, FILE* debugfile)
             continue ;
         }
 // Christinas Regeln 3. Stufe
-// #Finden von verbundenen Teils?tzen#
+// #Finden von verbundenen Teilsätzen#
         number = wl.get_number() ;
         wa_1f = wl.get_wordclass(number, 1) ;
         if ((w->konstit == TPP || w->konstit == TNP) && wa_1f == VKN && wl.get_following_constituents(number, 1) == TVP)
@@ -970,7 +970,7 @@ void prosogenx (char** lexlist, Syllablelist* s, int cnt_lexem, FILE* debugfile)
         }
         number = wl.get_number() ;
 // Christinas Regeln 5. Stufe
-// #Zuweisen der Betonungswerte am Teilsatz bzw. Satzende und vor bzw. nach emphatischen AusdrNcken#
+// #Zuweisen der Betonungswerte am Teilsatz bzw. Satzende und vor bzw. nach emphatischen Ausdrücken#
         if (w->konstit == teilsatzende)
         {
             w->pg_betonung = 3;
@@ -1013,9 +1013,9 @@ void prosogenx (char** lexlist, Syllablelist* s, int cnt_lexem, FILE* debugfile)
 void prosogen (const TFile &infile, TFile &outfile, int cnt_lexem)
 {
     if (!infile.Open('t'))
-        ERRMSG("Konnte Eingabedatei fNr prosogen nicht öffnen");
+        ERRMSG("Konnte Eingabedatei für prosogen nicht öffnen");
     if (!outfile.Append('t'))
-        ERRMSG("Konnte Ausgabedatei fNr prosogen nicht öffnen");
+        ERRMSG("Konnte Ausgabedatei für prosogen nicht öffnen");
     Wordlist wl((TFile &)infile) ;
     int number ;
     Word* w ;
@@ -1145,7 +1145,7 @@ void prosogen (const TFile &infile, TFile &outfile, int cnt_lexem)
             continue ;
         }
 // Christinas Regeln 3. Stufe
-// #Finden von verbundenen Teils?tzen#
+// #Finden von verbundenen Teilsätzen#
         number = wl.get_number() ;
         wa_1f = wl.get_wordclass(number, 1) ;
         if ((w->konstit == TPP || w->konstit == TNP) && wa_1f == VKN && wl.get_following_constituents(number, 1) == TVP)
@@ -1207,7 +1207,7 @@ void prosogen (const TFile &infile, TFile &outfile, int cnt_lexem)
         }
         number = wl.get_number() ;
 // Christinas Regeln 5. Stufe
-// #Zuweisen der Betonungswerte am Teilsatz bzw. Satzende und vor bzw. nach emphatischen AusdrNcken#
+// #Zuweisen der Betonungswerte am Teilsatz bzw. Satzende und vor bzw. nach emphatischen Ausdrücken#
         if (w->konstit == teilsatzende)
         {
             w->pg_betonung = 3;

@@ -143,12 +143,12 @@ TLexemNode::~TLexemNode ()
 //      keine
 //  Zweck:
 //      Bestimmt, ob ein Teilzerlegungsbaum entfernt werden muß, weil er eine der
-//      folgenden Bedingungen erfNllt:
+//      folgenden Bedingungen erfüllt:
 //       -  die Teilzerlegung beginnt mit einem Lemma, das nicht als Teil einer
-//      Zerlegung erwNnscht ist
-//       -  alle Unterb?ume mußten entfernt werden
+//      Zerlegung erwünscht ist
+//       -  alle Unterbäume mußten entfernt werden
 //  Seiteneffekte:
-//      löscht möglicherweise Unterb?ume
+//      löscht möglicherweise Unterbäume
 //  Ausgabe:
 //      return bool:
 //       -  false    der Knoten kann beibehalten werden
@@ -184,7 +184,7 @@ bool TLexemNode::is_unwanted ()
         #else
         for (unsigned int i = LowerBound(); i < LowerBound() + GetItemsInContainer(); i++)
         {
-            // ist die »ia-te Teilzerlegung unerwNnscht?
+            // ist die »ia-te Teilzerlegung unerwünscht?
             if ((children[i]->Head()).Lemma() == "Praefix")
             {
                 statistics("UNWANTED DECOMPOSITION be+Praefix") ;
@@ -229,7 +229,7 @@ bool TLexemNode::is_unwanted ()
     #else
     for (unsigned int i = LowerBound(); i < LowerBound() + GetItemsInContainer(); i++)
     {
-        // ist die »ia-te Teilzerlegung unerwNnscht?
+        // ist die »ia-te Teilzerlegung unerwünscht?
         if (children[i]->is_unwanted())
         {
             statistics("UNWANTED DECOMPOSITION") ;

@@ -68,7 +68,7 @@ extern std::ofstream debugstr ;
         debugstr << "\n"                                                                   \
                  << "\aWarnung in '" __FILE__ << "' (" << __LINE__ << "): " << str << "!\n" \
                  << "\n"                                                                   \
-                 << "'Q' fNr Abbruch, jede andere Taste zum Fortsetzen ";                  \
+                 << "'Q' für Abbruch, jede andere Taste zum Fortsetzen ";                  \
         int c = cin.get();                                                             \
         cerr << endl;                                                                  \
         if (c == 0)                                                                    \
@@ -87,16 +87,16 @@ extern std::ofstream debugstr ;
         size_t size = n;                                                               \
         \
         if (dest)                                                                      \
-            WARNMSG("Speicheranforderung fNr bereits benutzten Zeiger '"#dest"'");     \
+            WARNMSG("Speicheranforderung für bereits benutzten Zeiger '"#dest"'");     \
         if (size < 1)                                                                  \
-            ERRMSG("Nicht-positive Speicheranforderung fNr Zeiger '"#dest"'");         \
+            ERRMSG("Nicht-positive Speicheranforderung für Zeiger '"#dest"'");         \
         try                                                                            \
         {                                                                              \
             (dest) = new type[size];                                                   \
         }                                                                              \
         catch (xalloc)                                                                 \
         {                                                                              \
-            ERRMSG("Speicheranforderung fNr Zeiger '"#dest"' fehlgeschlagen");         \
+            ERRMSG("Speicheranforderung für Zeiger '"#dest"' fehlgeschlagen");         \
         }                                                                              \
     }   while (0)
 
@@ -104,7 +104,7 @@ extern std::ofstream debugstr ;
     do                                                                                 \
     {                                                                                  \
         if (dest)                                                                      \
-            WARNMSG("Speicheranforderung fNr bereits benutzten Zeiger '"#dest"'");     \
+            WARNMSG("Speicheranforderung für bereits benutzten Zeiger '"#dest"'");     \
         if (!(source))                                                                 \
         {                                                                              \
             WARNMSG("Kopieren des unbenutzen Zeigers '"#source"'");                    \
@@ -118,7 +118,7 @@ extern std::ofstream debugstr ;
             }                                                                          \
             catch (xalloc)                                                             \
             {                                                                          \
-                ERRMSG("Speicheranforderung fNr Zeiger '"#dest"' fehlgeschlagen");     \
+                ERRMSG("Speicheranforderung für Zeiger '"#dest"' fehlgeschlagen");     \
             }                                                                          \
             strcpy(dest, source);                                                      \
         }                                                                              \
@@ -146,7 +146,7 @@ extern std::ofstream debugstr ;
         }                                                                              \
         catch (xalloc)                                                                 \
         {                                                                              \
-            ERRMSG("Speicheranforderung fNr Zeiger '"#dest"' fehlgeschlagen");         \
+            ERRMSG("Speicheranforderung für Zeiger '"#dest"' fehlgeschlagen");         \
         }                                                                              \
     }   while (0)
 
@@ -159,7 +159,7 @@ extern std::ofstream debugstr ;
         }                                                                              \
         catch (xalloc)                                                                 \
         {                                                                              \
-            ERRMSG("Speicheranforderung fNr Zeiger '"#dest"' fehlgeschlagen");         \
+            ERRMSG("Speicheranforderung für Zeiger '"#dest"' fehlgeschlagen");         \
         }                                                                              \
         strcpy(dest, source);                                                          \
     }   while (0)
@@ -185,7 +185,7 @@ extern std::ofstream debugstr ;
         }                                                                              \
         if ((dest) == NULL)								\
         {                                                                              \
-            ERRMSG("Speicheranforderung fNr Zeiger '"#dest"' fehlgeschlagen");         \
+            ERRMSG("Speicheranforderung für Zeiger '"#dest"' fehlgeschlagen");         \
         }                                                                              \
     }   while (0)
 
@@ -197,7 +197,7 @@ extern std::ofstream debugstr ;
         }                                                                              \
         if ((dest) == NULL) 								\
         {                                                                              \
-            ERRMSG("Speicheranforderung fNr Zeiger '"#dest"' fehlgeschlagen");         \
+            ERRMSG("Speicheranforderung für Zeiger '"#dest"' fehlgeschlagen");         \
         }                                                                              \
         strcpy(dest, source);                                                          \
     }   while (0)

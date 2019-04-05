@@ -33,7 +33,7 @@ class TTable
         {
                 // das Lemma in korrekter Groß-/Kleinschreibung
                 string lemma;
-                // das Lemma vollst?ndig großgeschrieben
+                // das Lemma vollständig großgeschrieben
                 string LEMMA;
                 // die Transkription
                 string transcription;
@@ -63,15 +63,15 @@ class TTable
                     return *this;
                 }
 
-                // Zugriffsfunktionen fNr private Datenelemente
+                // Zugriffsfunktionen für private Datenelemente
                 inline const string &Lemma () const;
                 inline const string &Transcription () const;
                 inline const TWordClass* WordClasses () const;
                 inline short WordClassesCount () const;
 
-                // zum ÜberprNfen der Wortklassen
+                // zum Überprüfen der Wortklassen
                 bool has_word_class (TWordClass wcl) const;
-                // Vergleichsfunktion fNr »qsorta und »bsearcha
+                // Vergleichsfunktion für »qsorta und »bsearcha
                 static int _USERENTRY compare (const void* cvpa, const void* cvpb);
                 static int _USERENTRY compare_as_prefixes (const void* cvpa, const void* cvpb);
                 static int _USERENTRY compare_ptr (const void* cvpa, const void* cvpb);
@@ -91,11 +91,11 @@ class TTable
         const TIndex index;
         // Nummer des momentan geladenen Blocks
         mutable short loaded_block;
-        // Anzahl der Eintr?ge im momentan geladenen Block
+        // Anzahl der Einträge im momentan geladenen Block
         mutable short cnt_records_in_block;
-        // Anzahl der Eintr?ge im Lexikon
+        // Anzahl der Einträge im Lexikon
         long cnt_records;
-        // l?dt einen Block aus dem Lexikon nach
+        // lädt einen Block aus dem Lexikon nach
         void Load (short pos) const;
 
     public:
@@ -103,7 +103,7 @@ class TTable
         virtual ~TTable ();
         // findet Index zu einem Lexem
         long Search (const string &lexem, bool exactly) const;
-        // Zugriffsfunktionen fNr private Datenelemente
+        // Zugriffsfunktionen für private Datenelemente
         inline long Entries () const;
         const TRecord &operator[] (long i) const;
 };

@@ -20,7 +20,7 @@ class Newtable
         {
                 // das Lemma in korrekter Groß-/Kleinschreibung
                 string lemma;
-                // das Lemma vollst?ndig großgeschrieben
+                // das Lemma vollständig großgeschrieben
                 string LEMMA;
                 // die Transkription
                 string transcription;
@@ -50,13 +50,13 @@ class Newtable
                     return *this;
                 }
 
-                // Zugriffsfunktionen fNr private Datenelemente
+                // Zugriffsfunktionen für private Datenelemente
                 inline const string &Lemma () const;
                 inline const string &Transcription () const;
                 inline const TWordClass* WordClasses () const;
                 inline short WordClassesCount () const;
 
-                // zum ÜberprNfen der Wortklassen
+                // zum Überprüfen der Wortklassen
                 bool has_word_class (TWordClass wcl) const;
 
             protected:
