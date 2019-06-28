@@ -52,7 +52,7 @@ int main (int argc, char** argv)
     int debuglevel = 0 ;
     char pid[64] ;
     const char* voices[2] = {"male", "female"} ;
-    int voicenr = 1 ;
+    int voicenr = 255 ;
     int piping = 1;
     sprintf(pid, "%d", getpid()) ;
     setvbuf(stdin, NULL, _IOLBF, BUFSIZ);
@@ -92,7 +92,8 @@ int main (int argc, char** argv)
     }
     Synthese* s ;
     s = new Synthese(pid, path, (char*)"/tmp/", debuglevel, piping) ;
-    s->change_voice(NULL, voices[voicenr]) ;
+    if (voicenr!=255)
+        s->change_voice(NULL, voices[voicenr]) ;
     s->talk(outname, modus, inname) ;
     delete (s) ;
     return (0) ;
