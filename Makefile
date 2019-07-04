@@ -90,7 +90,7 @@ txt2pho		:	$(OBJPATH)/txt2pho.o libhadi
 	$(CC) $(LDFLAGS) -o txt2pho $(OBJPATH)/txt2pho.o $(LOADLIBS)
 
 libhadi			:       $(OBJECTS) #$(OBJPATH)/libhadi.o
-	ar -r lib/libhadi.a $(OBJECTS) #$(OBJPATH)/libhadi.o
+	ar -c -r lib/libhadi.a $(OBJECTS) #$(OBJPATH)/libhadi.o 
 
 preproc		:	$(PPOBJECTS) $(OBJPATH)/preproc.o
 	$(CC) $(LDFLAGS) -o preproc $(PPOBJECTS) $(OBJPATH)/preproc.o $(LOADLIBS)
