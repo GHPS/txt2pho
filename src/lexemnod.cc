@@ -156,11 +156,6 @@ TLexemNode::~TLexemNode ()
 
 bool TLexemNode::is_unwanted ()
 {
-// ACHTUNG, die folgenden 3 Zeilen sind wegen einem Bug im g++2.7.2 drin,
-//	sollte schon g++2.7.2.1 sein
-    //#ifdef GCC28
-//	return(false) ;
-    //#endif
     statistics("Applying TLexem::is_unwanted() for " << Head().Lemma() << " " << Rest().Lemma()) ;
     // steht am Anfang der Zerlegung ein unerwuenschtes Wort?
     if (Head().Lemma() == "er" || Head().Lemma() == "es" || Head().Lemma() == "ich")
