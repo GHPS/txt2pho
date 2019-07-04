@@ -149,6 +149,7 @@ inline void TLexem::SetChars (size_t n, const char c)
     string stInsertCharacter;
     stInsertCharacter=c;
     chars.replace(n, 1, stInsertCharacter);
+    chars.resize(n+1);
     setType();
 }
 
