@@ -64,7 +64,7 @@ TLexemNode::TLexemNode () :
     children()
     #endif
 {
-    statistics("TLexemNode::TLexemNode ()");
+    statistics("Constructor TTLexemNode::TLexemNode() - Empty Node");
 }
 
 
@@ -95,8 +95,8 @@ TLexemNode::TLexemNode (const TLexem &l1, const TLexem &l2) :
     children()
     #endif
 {
-    statistics("TLexemNode (const TLexem &head = " << l1.Chars() << " - const TLexem &lemma = " << head.Lemma() << " - const TLexem &rest = " << l2.Chars() << ")");
-    statistics("TRANSCRIPTION HEAD " << l1.Transcription()) ;
+    statistics("Constructor TLexemNode::TLexemNode(const TLexem &head = " << l1.Chars() << " - const TLexem &lemma = " << head.Lemma() << " - const TLexem &rest = " << l2.Chars() << ")");
+    statistics("Transcription Head " << l1.Transcription()) ;
     if (head.Chars().length() != head.Lemma().length())
         penalty = 3 ;
     else penalty = 2 ;
@@ -120,7 +120,7 @@ TLexemNode::TLexemNode (const TLexem &l1, const TLexem &l2) :
 
 TLexemNode::~TLexemNode ()
 {
-    statistics("DELETING" << head.Chars()) ;
+    statistics("Applying TLexem::delete() " << head.Chars()) ;
     // alle Unterbaeume des Knotens loeschen
     #ifdef _Windows
     for (unsigned int i = LowerBound(); i < LowerBound() + GetItemsInContainer(); i++)
@@ -128,7 +128,7 @@ TLexemNode::~TLexemNode ()
     #else
     for (iterator i = begin(); i < end(); i++)
     {
-        statistics("TRYING TO DELETE " << (*i)->head.Chars()) ;
+        statistics("Applying TLexem::delete SubTree " << (*i)->head.Chars()) ;
         delete (*i);
     }
     #endif
@@ -161,7 +161,7 @@ bool TLexemNode::is_unwanted ()
     //#ifdef GCC28
 //	return(false) ;
     //#endif
-    statistics("IN UNWANTED WITH " << Head().Lemma() << " " << Rest().Lemma()) ;
+    statistics("Applying TLexem::is_unwanted() for " << Head().Lemma() << " " << Rest().Lemma()) ;
     // steht am Anfang der Zerlegung ein unerwuenschtes Wort?
     if (Head().Lemma() == "er" || Head().Lemma() == "es" || Head().Lemma() == "ich")
     {
@@ -273,6 +273,8 @@ bool TLexemNode::is_unwanted ()
 
 TLexem get_best_decomposition (TLexemNodePointer root, int &s, int &p)
 {
+    statistics("Applying TLexem::get_best_decomposition (TLexemNode *root = {\"" << root->Head().Chars() << "\", \"" << root->Rest().Chars() <<"\"})");
+
     int s1, s3;
     // ist das hier ein Blatt?
     if (root->is_empty())
@@ -288,25 +290,25 @@ TLexem get_best_decomposition (TLexemNodePointer root, int &s, int &p)
             root->penalty += 5 ;
             p = root->penalty ;
         }
-        statistics("Zerlegung Blatt " << root->Head().Chars() << " " << root->Rest().Chars() << " " << s << " PENALTY " << p) ;
-        statistics("Transkription " << root->Head().Transcription() << " + " << root->Rest().Transcription()) ;
+        statistics("Decomposition Leaf (TLexemNode *root = {\"" << root->Head().Chars() << "\", \"" << root->Rest().Chars() <<"\"})" << " Score " << s << " Penalty " << p) ;
+        statistics("Transcription " << root->Head().Transcription() << " + " << root->Rest().Transcription()) ;
         return root->Head() + root->Rest();
     }
     // die beste Teilzerlegung aus den Unterbaeumen suchen
-    statistics("KEIN BLATT " << root->Head().Chars()) ;
+    statistics("No Leaf for " << root->Head().Chars()) ;
     int best_score = -32000, res_score;
     int pen, bestpen=0 ;
     TLexem best_lexem, res_lexem;
     #ifndef _Windows
     for (TLexemNode::const_iterator i = root->begin(); i < root->end(); i++)
     {
-        statistics("IN LOOP WITH " << (*i)->Head().Chars()) ;
+        statistics("Searching Subtree, Current item " << (*i)->Head().Chars()) ;
         res_lexem = get_best_decomposition(*i, res_score, pen);
         res_score -= pen * 100 ;
-        statistics("SCORE OBTAINED " << res_score << " CURRENT BEST " << best_score) ;
+        statistics("Score Obtained " << res_score << " Current Best " << best_score) ;
         if (res_score > best_score)
         {
-            statistics("NEW BEST SCORE") ;
+            statistics("New Best Score") ;
             best_score = res_score;
             best_lexem = res_lexem;
             bestpen = pen ;
@@ -317,10 +319,10 @@ TLexem get_best_decomposition (TLexemNodePointer root, int &s, int &p)
     {
         res_lexem = get_best_decomposition(root->Children(i), res_score, pen);
         res_score -= pen*100 ;
-        statistics("SCORE OBTAINED " << res_score << " CURRENT BEST " << best_score) ;
+        statistics("Score Obtained " << res_score << " Current Best " << best_score) ;
         if (res_score > best_score)
         {
-            statistics("NEW BEST SCORE") ;
+            statistics("New Best Score") ;
             best_score = res_score ;
             bestpen = pen ;
             best_lexem = res_lexem;
@@ -332,7 +334,8 @@ TLexem get_best_decomposition (TLexemNodePointer root, int &s, int &p)
     s = s1 * s1 + (best_score + bestpen*100);
     root->penalty += bestpen ;
     p = root->penalty ;
-    statistics("Zerlegung " << root->Head().Chars() << " " << best_lexem.Chars() << " " << s << " PENALTY " << p) ;
+    statistics("Result TLexem::get_best_decomposition Score " << s << " Penalty " << p << " for TLexemNode *root = {\"" << root->Head().Chars() << " " << best_lexem.Chars() << " " << "\"})") ;
+
     return root->Head() + best_lexem;
 }
 

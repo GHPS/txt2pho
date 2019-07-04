@@ -412,7 +412,7 @@ bool TLexicon::transcribe_as_inflected (TLexem &lexem, TWordClass wcl)
         if (transcribed)
             lexem = tmp;
     }
-    statistics ("Result in TLexicon::transcribe_as_inflected " << transcribed << " WCL " << lexem.wordClasses[0]) ;
+    statistics ("Result in TLexicon::transcribe_as_inflected " << transcribed << " WCL " << lexem.wordClasses[0] << " (TLexem &lexem = \"" << lexem.Chars() << "\", TWordClass wcl = " << wcl2str(wcl) << ")") ;
     return transcribed;
 }
 
@@ -494,6 +494,7 @@ bool TLexicon::transcribe_as_prefix(TLexem &lexem)
         lexem.lemma = "Praefix";
         lexem.SetWordClass(ART);
     }
+    statistics ("Result in TLexicon::transcribe_as_prefix " << result << " (TLexem &lexem = \"" << lexem.Chars() << ")") ;
     return result ;
 }
 
@@ -539,6 +540,7 @@ bool TLexicon::transcribe_as_compound (TLexemNode* root)
         bool transcribed = false ;
         char ch = rest.Chars(i);
         tmp.SetChars(i, ch);
+
         if (strlen(tmp.Chars().c_str()) < 2)
             continue ;
         // transkribiere das temporäre Lexem ohne Fugenmorphem
@@ -600,6 +602,7 @@ bool TLexicon::transcribe_as_compound (TLexemNode* root)
         }
     }
     #endif
+    statistics("Result in TLexicon::transcribe_as_compound " << root->is_empty() << " (TLexemNode *root = {\"" << root->Head().Chars() << "\", \"" << root->Rest().Chars() <<"\"})");
     return (root->is_empty()) ? false : true;
 }
 
@@ -614,7 +617,7 @@ bool TLexicon::transcribe_with_PTRA (TLexem &lexem)
     char* temp = ptra->transcribe(lexem.Chars().c_str());
     if (temp == NULL)
         return false ;
-    lexem.lemma = "PTRA-Transkription";
+    lexem.lemma = "PTRA-Transcription";
     lexem.transcription = temp;
     lexem.SetWordClass(NAM);
     CLEAR(temp);
