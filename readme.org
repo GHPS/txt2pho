@@ -30,3 +30,123 @@ auszugeben, dürften die meisten seiner Nutzer deutschsprachig sein. Der
 Rest der Dokumentation ist daher in Deutsch. Dennoch ist Englisch die
 lingua franca der Programmentwicklung, weshalb alle Quelltexte, die
 Commits und die meisten Fehlerberichte auf Englisch sind.
+
+* Installation
+
+txt2pho wird nur in Form von Quelltexten bereitgestellt, da es 
+einerseits sehr einfach ist, den Code in eine ausführbare Form
+zu übersetzen, andererseits das Programm auf einer Vielzahl höchst
+unterschiedlicher Plattformen benutzt werden kann. Da txt2pho im
+Prinzip nur ein Text-Konverter ist, der eine Texteingabedatei in
+in natürlicher Sprache in eine Textausgabedatei - die genannte
+PHO-Datei - umwandelt, ist hierfür lediglich ein c++-Compiler
+mit wenigen Standard-Librarys (aus der C++STD) erforderlich.
+Entwickelt wurde txt2pho (und die anderen Programme aus diesem
+Repository) mit GNU c++ 2.7, heute kommt hierfür GNU c++ 7.4
+zum Einsatz.
+
+Da im Laufe der Zeit c++ auf nahezu alle verfügbaren Hardware-Architekturen 
+portiert wurde, dürfte auch txt2pho auf fast jeder beliebigen Plattform
+lauffähig sein, sofern genug Speicher zum Ausführen des Programms
+und zum Vorhalten der Lexika zur Verfügung steht. Nutzer haben txt2pho
+bereits auf sehr heterogenen Betriebssystemen wie Unix, MacOS, Sun und
+Windows eingesetzt und dabei so unterschiedliche Hardware wie Desktop
+PC, Laptops und Single-Board-Computer (etwa dem Raspberry Pi) genutzt. 
+Gegenwärtig wird txt2pho unter Linux (Kubuntu 18.04) entwickelt. 
+
+Die Installation besteht im Wesentlichen aus dem Klonen des Repositorys,
+dem Compilen der Quellen und der Installation des auf das lokale System
+angepassten Settings.
+
+#+BEGIN_SRC sh
+    git clone https://github.com/GHPS/txt2pho.git
+    cd txt2pho
+    make clean
+    make all
+#+END_SRC
+
+Nach dem erfolgreichen Compilieren steht die ausführbare Datei txt2pho
+direkt im obersten Projektordner zur Verfügung.
+
+Jetzt gilt es noch, die Einstellungen an einen Ort zu kopieren, den
+txt2pho standardmäßig erwartet (etwa ~/.config), und diese Datei - 
+vor allem die Pfade INVPATH und DATAPATH - auf die eigenen Gegebenheiten
+anzupassen.
+
+#+BEGIN_SRC sh
+cp settings/txt2phorc ~/.config/txt2phorc
+vim ~/.config/txt2phorc (oder der eigene Editor)
+#+END_SRC
+
+Dann steht einem ersten Test nichts mehr im Wege:
+
+#+BEGIN_SRC sh
+echo "Hallo Welt"|./txt2pho -m 
+#+END_SRC
+
+Dieser sollte folgendes Ergebnis liefern:
+
+#+BEGIN_SRC sh
+_ 10   0  86
+h 75  25  87  52  88  79  90
+a 81   5  92  30  94  54  96  79  97
+l 38   8  99  61 100
+o: 77   6 102  32 102  58 103  84  84
+v 57  14  83  49  82  84  81
+E 87  13  81  36  80  59  79  82  78
+l 62   6  78  39  77  71  77
+t 73   3  76  30  76
+_ 483   2  85   6  85  10  85  14  85  18  85  23  85  27  85  31  85  35  85  39  85
+#+END_SRC
+
+Glückwunsch! Jetzt lassen sich beliebige deutsche Texte in Phonem-Dateien konvertieren, die dann
+von MBROLA zu echten Audio-Dateien umgewandelt werden können.
+
+* Häufig gestellte Fragen (FAQ)
+
+** txt2pho spricht Wörter mit Umlauten falsch aus
+
+txt2pho erwartet eine Eingabedatei, in der die deutschen Umlaute nach ISO-8859-1 kodiert sind. Dieser
+Standard ist etwas in die Jahre gekommen, heutzutage werden viele Texte von Editoren, aber auch von der
+Shell in dem flexibleren und leistungsfähigeren UTF-8 kodiert. Deshalb ist es notwendig, entweder
+direkt den Editor auf diese Kodierung umzustellen oder die Eingabedatei selbst zu konvertieren. Beides
+ist recht einfach.
+
+Unter Linux bietet sich zur Konvertierung das Tool iconv an, etwa in der Eingabepipe von txt2pho.
+
+#+BEGIN_SRC sh
+ iconv -cs -f UTF-8 -t ISO-8859-1
+#+END_SRC
+
+Aus einer pho-Datei, in der die Umlaute fehlen, 
+
+#+BEGIN_SRC sh
+echo "Äpfel"|./txt2pho -m
+_ 10   0  91
+p 105   5  83  24  82  43  81
+f 76  18  80  45  79  71  79  97  78
+E 71  25  77  54  77  82  76
+l 60  12  76  45  76  78  76
+_ 483   1  85   6  85  10  85  14  85  18  85  22  85  26  85  30  85  35  85  39  85
+#+END_SRC
+
+wird dann eine Datei mit korrekter Kodierung.
+
+#+BEGIN_SRC sh
+echo "Äpfel"| iconv -cs -f UTF-8 -t ISO-8859-1|./txt2pho -m
+_ 10   0  89 
+_ 56  34  88  70  86 
+E 89   3  85  26  84  48  84  71  83  93  82 
+p 84   8  80  32  80 
+f 65  15  79  46  78  77  78 
+@ 52  10  77  48  76  87  76 
+l 55  24  76  60  76  96  76 
+_ 483   4  85   8  85  12  85  16  85  20  85  24  85  29  85  33  85  37  85  41  85 
+#+END_SRC
+
+** Programmentwicklung
+Sie haben einen Fehler in txt2pho oder den beiliegenden Programmen gefunden und korrigiert? Super -
+teilen Sie bitte Ihre Arbeit mit dem Rest der Welt, damit dieses Projekt noch besser wird! 
+
+Verwenden Sie hierfür bitte das Pull Request System von Github.
+
