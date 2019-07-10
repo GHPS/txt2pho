@@ -47,7 +47,10 @@ class TLexicon
 
 
         int valid_prefix ;
+        #ifdef EMAIL
         int email ;
+        #endif
+
 
         bool transcribe_literally (TLexem &lexem, TWordClass wcl = Unknown);
         #if !defined(NSPELLING)

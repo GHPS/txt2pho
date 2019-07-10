@@ -250,7 +250,7 @@ void TLexem::SetWordClass (TWordClass wcl)
     SetWordClasses(1, &wcl);
 }
 
-
+#ifdef EMAIL
 ////////////////////////////////////////////////////////////////////////////////////////
 int TLexem::EmailChange()
 {
@@ -305,12 +305,17 @@ int TLexem::EmailChange()
     return (done) ;
 }
 
+
+#endif
+
 int TLexem::SetUmlaut (int email)
 {
     int done = 0 ;
     int i ;
+#ifdef EMAIL
     if (email)
         EmailChange() ;
+#endif
     statistics("Applying TLexem::SetUmlaut " << email << " " << Chars()) ;
     for (i = strlen(chars.c_str()) - 2; i > -1 ; i--)
     {

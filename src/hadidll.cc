@@ -415,7 +415,11 @@ int Synthese::talk(const char* rf, int modus, const char* filename)
                     if (lexem.Type() != TLexem::nothing)
                     {
                         cnt_lexem++;
+                        #ifdef EMAIL
                         lexicon->transcribe(lexem, 1);
+                        #else
+                        lexicon->transcribe(lexem, 0);
+                        #endif
                         if (lexem.Type() == TLexem::wordform)
                             cnt_real_lexem++ ;
                         if (lexem.Type() == TLexem::comment)

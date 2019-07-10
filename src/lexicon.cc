@@ -88,8 +88,10 @@ void TLexicon::transcribe (TLexem &lexem, int sevenbit)
     #if !defined(NPETRA)
     bool transcribed_by_PTRA = false;
     #endif
+    #ifdef EMAIL
     email = sevenbit ;
     statistics("email in transcribe " << email) ;
+    #endif
     if (lexem.Type() == TLexem::control)
     {
         transcribed = transcribed_by_PTRA = transcribe_with_PTRA(lexem);
@@ -194,6 +196,7 @@ bool TLexicon::transcribe_literally(TLexem &lexem, TWordClass wcl)
             i = table.Search(lexem.Chars(), false);
     }    
     TLexem xtmp = lexem ;
+    #ifdef EMAIL
     if (i==-1 || i == -2)
     {
         if (xtmp.EmailChange() == 1)
@@ -203,6 +206,7 @@ bool TLexicon::transcribe_literally(TLexem &lexem, TWordClass wcl)
                 i = table.Search(xtmp.Chars(), false) ;
         }
     }
+    #endif
     // Wurde ein Lemma gefunden?
     if (i != -1 && i != -2)
     {
@@ -311,7 +315,9 @@ bool TLexicon::transcribe_as_abbreviation (TLexem &lexem)
 bool TLexicon::transcribe_as_inflected (TLexem &lexem, TWordClass wcl)
 {
     statistics("Applying TLexicon::transcribe_as_inflected (TLexem &lexem = \"" << lexem.Chars() << "\", TWordClass wcl = " << wcl2str(wcl) << ")");
+#ifdef EMAIL
     statistics("email " << email) ;
+#endif
     // Eine flektierte Form eines deutschen Wortes hat mindestens drei Buchstaben.
     if (lexem.Chars().length() < 3)
         return false;
@@ -323,6 +329,7 @@ bool TLexicon::transcribe_as_inflected (TLexem &lexem, TWordClass wcl)
     TLexem xtmp = lexem ;
     if (xtmp.SetUmlaut(0) == 1)
         transcribed = transcribe_literally(xtmp, Unknown);
+#ifdef EMAIL
     if (!transcribed && email)
     {
         xtmp = lexem ;
@@ -334,6 +341,7 @@ bool TLexicon::transcribe_as_inflected (TLexem &lexem, TWordClass wcl)
                     transcribed = transcribe_literally(xtmp, Unknown);
         }
     }
+#endif
     statistics(transcribed << " " << xtmp.Transcription() << " " << xtmp.Chars()) ;
     if (transcribed)
     {
@@ -378,10 +386,12 @@ bool TLexicon::transcribe_as_inflected (TLexem &lexem, TWordClass wcl)
                 }
                 if (1 /*rule.may_umlaut == true*/)
                 {
+#ifdef EMAIL
 // Hier muesste noch der Umlautungskram kommen
 // Warum sind manche Regeln nicht fuer Umlautung gedacht???
                     if (tmp.SetUmlaut(email) == 1)
                         transcribed = transcribe_literally(tmp, rule.promote_from);
+#endif
                     if (transcribed && rule.promote_from == KMP)
                     {
                         if (tmp.wordClasses[0] == ADD || tmp.wordClasses[0] == ART ||
