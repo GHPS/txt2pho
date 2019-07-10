@@ -1,7 +1,6 @@
-* txt2pho
+* txt2pho Official Repository
 
 A TTS frontend for the German inventories of the MBROLA project
-(Official Repository)
 
 * Inhaltsverzeichnis
 - [[#introduction][Introduction]]
