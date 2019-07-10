@@ -3,6 +3,14 @@
 A TTS frontend for the German inventories of the MBROLA project
 (Official Repository)
 
+* Inhaltsverzeichnis
+- [[#introduction][Introduction]]
+- [[#überblick][Überblick]]
+- [[#installation][Installation]]
+    - [[#txt2pho][txt2pho]]
+    - [[#mbrola][MBROLA]]
+- [[#häufig-gestellte-fragen-faq][Häufig gestelle Fragen (FAQ)]]
+
 * Introduction
 
 txt2pho is one part of a system to generate German text-to-speech
@@ -32,6 +40,7 @@ lingua franca der Programmentwicklung, weshalb alle Quelltexte, die
 Commits und die meisten Fehlerberichte auf Englisch sind.
 
 * Installation
+** txt2pho
 
 txt2pho wird nur in Form von Quelltexten bereitgestellt, da es 
 einerseits sehr einfach ist, den Code in eine ausführbare Form
@@ -57,6 +66,17 @@ Gegenwärtig wird txt2pho unter Linux (Kubuntu 18.04) entwickelt.
 Die Installation besteht im Wesentlichen aus dem Klonen des Repositorys,
 dem Compilen der Quellen und der Installation des auf das lokale System
 angepassten Settings.
+
+Zum Compilieren wird ein c-Compiler und das Programm make benötigt. Sind
+beide noch nicht installiert, lässt sich dies schnell korrigieren -
+unter Ubuntu etwa mit dem Befehl.
+
+#+BEGIN_SRC sh
+   sudo apt-get install make gcc
+#+END_SRC
+
+Stehen der Compiler und make zur Verfügung, kann der Installationsprozess
+beginnen.
 
 #+BEGIN_SRC sh
     git clone https://github.com/GHPS/txt2pho.git
@@ -101,6 +121,11 @@ _ 483   2  85   6  85  10  85  14  85  18  85  23  85  27  85  31  85  35  85  3
 
 Glückwunsch! Jetzt lassen sich beliebige deutsche Texte in Phonem-Dateien konvertieren, die dann
 von MBROLA zu echten Audio-Dateien umgewandelt werden können.
+
+** MBROLA
+
+Im zweiten Schritt sind noch das Programm MBROLA und eine Sprachdatei für die deutsche
+Sprache zu installieren. Wie beides geht, erklärt die [[https://github.com/numediart/MBROLA][mbrola Entwicklungsseite]].
 
 * Häufig gestellte Fragen (FAQ)
 
