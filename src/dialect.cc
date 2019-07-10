@@ -13,12 +13,6 @@
 
 #include <string.h>
 
-#ifndef GCC28
-    #define erase remove
-#endif
-
-
-
 extern const int SOUNDNR ;
 extern int find_sound(char* &d) ;
 
