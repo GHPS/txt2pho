@@ -70,7 +70,7 @@ $(OBJPATH)/z.o \
 $(OBJPATH)/promguess.o \
 $(OBJPATH)/wrdclass.o \
 $(OBJPATH)/sdb.o \
-$(OBJPATH)/hadidll.o 
+$(OBJPATH)/synthese.o 
 
 
 
