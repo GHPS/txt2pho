@@ -369,7 +369,7 @@ int Synthese::talk(const char* rf, int modus, const char* filename)
         }
     }
     if (finish)
-        goto ganz_am_ende ;
+        goto EndOfLoop ;
     do
     {
         if (debuglevel > 0)
@@ -386,7 +386,7 @@ int Synthese::talk(const char* rf, int modus, const char* filename)
                 fflush(errfile) ;
             }
             error = 1 ;
-            goto hinter_ganz_am_ende ;
+            goto EndOfLoop ;
         }
         modus %= 10 ;
         cnt_lexem=0 ;
@@ -518,7 +518,7 @@ int Synthese::talk(const char* rf, int modus, const char* filename)
                 fflush(errfile) ;
             }
             if (finish)
-                goto ganz_am_ende ;
+                goto EndOfLoop ;
             if (cnt_lexem == 0)
             {
                 if (s != NULL)
@@ -527,7 +527,7 @@ int Synthese::talk(const char* rf, int modus, const char* filename)
                 break ;
             }
             if (cnt_real_lexem == 0)
-                goto hinter_ganz_am_ende ;
+                goto EndOfLoop ;
             if (modus == 3 || modus == 4)
             {
                 if (s != NULL)
@@ -822,7 +822,7 @@ int Synthese::talk(const char* rf, int modus, const char* filename)
                 {
                     delete (soli) ;
                     delete (s) ;
-                    goto ganz_am_ende ;
+                    goto EndOfLoop ;
                 }
                 if (nlabfile != NULL)
                     s->printkalle(soli, nlabfile) ;
@@ -841,11 +841,8 @@ int Synthese::talk(const char* rf, int modus, const char* filename)
         }
     }
     while (piping) ;
-    goto hinter_ganz_am_ende ;
 
-ganz_am_ende:
-
-hinter_ganz_am_ende :
+EndOfLoop:
 
     fflush(errfile) ;
     if (infi != NULL)
