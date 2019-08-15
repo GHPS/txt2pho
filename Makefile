@@ -20,7 +20,6 @@ $(OBJPATH)/PPFnclst.o \
 $(OBJPATH)/PPFuncts.o \
 $(OBJPATH)/PPNumbers.o \
 $(OBJPATH)/PPInput.o \
-$(OBJPATH)/PPMain.o \
 $(OBJPATH)/PPRlchls.o \
 $(OBJPATH)/PPRulchr.o \
 $(OBJPATH)/PPRule.o \
