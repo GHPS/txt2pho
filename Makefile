@@ -1,5 +1,5 @@
-CC=/usr/bin/g++
-CCC=/usr/bin/gcc
+CC=/usr/bin/gcc
+CPP=/usr/bin/g++
 CFLAGS=-g -ansi
 SRCPATH=src
 PPSRCPATH=$(SRCPATH)/preproc
@@ -74,28 +74,28 @@ $(OBJPATH)/synthese.o
 
 
 $(OBJPATH)/%.o		:  $(SRCPATH)/%.cc
-	 $(CC) $(INCLUDE) $(CFLAGS) $(DEFINES) -o $@ -c $<
+	 $(CPP) $(INCLUDE) $(CFLAGS) $(DEFINES) -o $@ -c $<
 
 $(OBJPATH)/%.o		:  $(SRCPATH)/%.c
-	 $(CCC) $(INCLUDE) $(CFLAGS) $(DEFINES) -o $@ -c $<
+	 $(CC) $(INCLUDE) $(CFLAGS) $(DEFINES) -o $@ -c $<
 
 $(OBJPATH)/%.o		:  $(PPSRCPATH)/%.cc
-	 $(CC) $(INCLUDE) $(CFLAGS) $(DEFINES) -o $@ -c $<
+	 $(CPP) $(INCLUDE) $(CFLAGS) $(DEFINES) -o $@ -c $<
 
 
 all		:	txt2pho pipefilt preproc
 
 txt2pho		:	$(OBJPATH)/txt2pho.o libhadi
-	$(CC) $(LDFLAGS) -o txt2pho $(OBJPATH)/txt2pho.o $(LOADLIBS)
+	$(CPP) $(LDFLAGS) -o txt2pho $(OBJPATH)/txt2pho.o $(LOADLIBS)
 
 libhadi			:       $(OBJECTS) #$(OBJPATH)/libhadi.o
 	ar -c -r lib/libhadi.a $(OBJECTS) #$(OBJPATH)/libhadi.o 
 
 preproc		:	$(PPOBJECTS) $(OBJPATH)/preproc.o
-	$(CC) $(LDFLAGS) -o preproc $(PPOBJECTS) $(OBJPATH)/preproc.o $(LOADLIBS)
+	$(CPP) $(LDFLAGS) -o preproc $(PPOBJECTS) $(OBJPATH)/preproc.o $(LOADLIBS)
 
 pipefilt	:
-	$(CC) -o pipefilt $(CFLAGS) $(DEFINES) $(PPFLTSRCPATH)/*.cc 
+	$(CPP) -o pipefilt $(CFLAGS) $(DEFINES) $(PPFLTSRCPATH)/*.cc 
 
 
 clean	 	:
