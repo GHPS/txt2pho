@@ -19,8 +19,8 @@ extern int optind, opterr, optopt ;
 extern char* optarg ;
 
 const char* synopsis =
-    "This is txt2pho Version 0.96\n"
-    "Usage is \"txt2pho -pfmdvioh\"\n"
+    "txt2pho 0.96\n"
+    "Usage: \"txt2pho -pfmdvioh\"\n"
     "Txt2pho reads text from stdin (if no filename is given with the -i option)\n"
     "and writes MBROLA input to stdout (if no filename is given with the -o option)\n"
     "Txt2pho reads its global settings from a file \"hadifix.cfg\" located in\n"
@@ -64,7 +64,7 @@ int main (int argc, char** argv)
         switch (optc)
         {
             case 'v':
-                printf("This is txt2pho Version 0.96\n") ;
+                printf("txt2pho 0.96\n") ;
                 return (0) ;
             case 'p':
                 if (optarg != NULL)strcpy(path, optarg) ;
