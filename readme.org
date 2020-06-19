@@ -9,6 +9,10 @@ A TTS frontend for the German inventories of the MBROLA project
     - [[#txt2pho][txt2pho]]
     - [[#mbrola][MBROLA]]
 - [[#häufig-gestellte-fragen-faq][Häufig gestelle Fragen (FAQ)]]
+    - [[#txt2pho-spricht-wörter-mit-umlauten-falsch-aus][txt2pho spricht Wörter mit Umlauten falsch aus]]
+    - [[#andere-compilerversion-verwenden][Andere Compilerversion verwenden]]
+    - [[#aktuelle-größe-des-projekts][Aktuelle Größe des Projekts]]
+    - [[#programmentwicklung][Programmentwicklung]]
 
 * Introduction
 
@@ -25,18 +29,158 @@ commits and most bug reports of this project are in English.
 
 * Überblick
 
-txt2pho ist Teil eines Systems zur computergestützten Sprachausgabe von
-deutschen Texten (TTS). Der Name suggeriert bereits, dass txt2pho in der
-Lage ist, reine Textdateien in sogenannte Phonem-Dateien umzuwandeln.
-Diese Dateien können in einem zweiten Schritt mit Hilfe des Programms
-MBROLA in Sounddateien, beispielsweise im WAV Format, umgewandelt und
-anschließend mit einem beliebigen Audioprogramm abgespielt werden.
+** Anfänge des Projekts
 
-Da der Sinn von txt2pho darin besteht, deutsche Texte als Sprache
-auszugeben, dürften die meisten seiner Nutzer deutschsprachig sein. Der
-Rest der Dokumentation ist daher in Deutsch. Dennoch ist Englisch die
-lingua franca der Programmentwicklung, weshalb alle Quelltexte, die
-Commits und die meisten Fehlerberichte auf Englisch sind.
+txt2pho ist Teil eines Systems zur computergestützten
+Sprachausgabe von deutschen Texten (TTS). Der Name
+suggeriert bereits, dass txt2pho in der Lage ist, reine
+Textdateien in sogenannte Phonem-Dateien umzuwandeln. Diese
+Dateien können in einem zweiten Schritt mit Hilfe des
+Programms MBROLA in Sounddateien, beispielsweise im WAV
+Format, umgewandelt und anschließend mit einem beliebigen
+Audioprogramm abgespielt werden.
+
+Da der Sinn von txt2pho darin besteht, deutsche Texte als
+Sprache auszugeben, dürften die meisten seiner Nutzer
+deutschsprachig sein. Der Rest der Dokumentation ist daher
+in Deutsch. Dennoch ist Englisch die lingua franca der
+Programmentwicklung, weshalb alle Quelltexte, die Commits
+und die meisten Fehlerberichte auf Englisch sind.
+
+** Warum txt2pho?
+
+Das Programm txt2pho wurde Mitte der 90er Jahre von einem
+Team von Forschern am Institut für Kommunikationsforschung
+und Phonetik der Universität Bonn als Teil des
+Projekts Hadifix entwickelt. Neben der Erforschung der
+wissenschaftlichen Grundlagen einer Synthese menschlicher
+Sprache war ein Ziel des Projekts auch die Entwicklung von
+Software, um eine solche Synthese in der Praxis durchführen
+zu können. Das Ergebnis im Bereich der Softwareentwicklung
+ist ein System, das ein - für die 90er Jahre - recht gutes
+Sprachergebnis erzielt.
+
+Gut ein Vierteljahrhundert später stellt sich die Frage,
+warum man eine so alte Software heute noch einsetzen, ja
+sogar weiterentwickeln sollte. Da heute jedes Smartphone mit
+(mindestens) einer App zur Sprachausgabe ausgeliefert wird,
+sich über den Apple/Google Play Store in Minutenschnelle
+weitere Programme mit diesem Zweck installieren lassen und
+diese Systeme in der Regel eine sehr gute, geschliffene
+Sprachausgabe ermöglichen, liegt diese Frage nah.
+
+Bei diesen Systemen wird die gute Sprachqualität oft durch
+stark vernetzte, serverbasierte Ansätze erzielt, bei denen
+mit Hilfe von umfangreichen Audiobibliotheken aus Aufnahmen von
+Millionen von Nutzern durch rechenintensive neuronale Netze 
+eine natürlich klingende Sprachausgabe erzeugt wird. Die
+hierbei eingesetzten Ressourcen und die zur Verfügung
+stehenden finanziellen Mittel sind enorm.
+
+Trotz der jahrelangen Forschungsarbeit, die in das
+Projekt investiert wurde, liegt auf der Hand, dass ein
+Programm wie txt2pho nicht mit den Forschungsbudgets
+und Entwicklerteamgrößen der Sprachausgabe-Projekte
+internationaler Softwarekonzerne konkurrieren kann. Angesichts
+dieser offensichtlichen Schwächen stellt sich damit die 
+relevante Frage anders: Was sind die Stärken von txt2pho?
+
+1) Flexibilität der Einsatzmöglichkeiten
+
+    Viele Systeme der Sprachausgabe werden auf ein bestimmtes
+    Einsatzfeld hin optimiert, d.h. sie beherrschen das
+    Vokabular in diesem Bereich fehlerfrei und elegant.
+    Bleibt der Einsatz auf diesen Bereich beschränkt,
+    sind eng fokussierte Ansätze für Nutzer eine gute
+    Lösung.
+
+    Sollen jedoch beliebige Texte - von allgemeinen
+    Zeitungsartikeln, über Webseiten und Blogeinträgen bis hin zu
+    eMails, wissenschaftlichen Aufsätzen oder ganzen Büchern -
+    in Sprache umgewandelt werden, scheitern Systeme mit einem
+    engen Fokus vielfach in einer Weise, dass die Sprachausgabe
+    nicht nur schwieriger, sondern völlig unverständlich wird. Wenn
+    bei einem flexiblen Eingangsvokabular Teile des Textes als
+    sinnentstellte Laute ausgegeben werden, verschlechtern diese
+    Fehler das Verständnis des Textes beim Hörer ungemein,
+    was in Ausnahmefällen akzeptabel sein kann, bei einem
+    wiederholten Auftreten das ganze System jedoch unbrauchbar
+    macht.
+
+    Im Sinne der Einsatzflexibilität kommt txt2pho sehr gut
+    mit Texten zurecht, die ein freies, nicht definiertes
+    Vokabular verwenden, da selbst Fremdworte oder Neologismen
+    in einer Weise ausgesprochen werden, die zwar falsch sein
+    mag, aber verständlich bleibt. Dies ist der Grund, warum
+    im deutschsprachigen Raum viele Sprachausgabe-Systeme und
+    ScreenReader für Blinde txt2pho einsetzen. Aufgrund
+    ihrer Sehbehinderung können Blinde bei einem Versagen
+    der Sprachausgabe gerade nicht auf den Bildschirm schauen,
+    um den Sinn des falsch ausgesprochenen Wortes zu identifizieren.
+
+2) Unverfälschtheit der Sprachausgabe
+
+    Die nicht übermäßig polierte Sprachausgabe von txt2pho hat
+    zudem den direkten Vorteil, dass der Text so vorgelesen
+    wird, wie er wirklich geschrieben ist. Jeder Fehler
+    im Eingabetext, sei es ein klassischer Tippfehler,
+    ein Endungsfehler oder ein fehlendes Komma, werden
+    unmittelbar hörbar. Das System eignet sich also sehr gut zum
+    Korrekturlesen von Texten.
+
+3) Datenschutz und Datensouveränität
+
+    Alle Daten im Prozess der Sprachgenerierung werden lokal,
+    ohne Netzwerk- oder Serveranbindung erzeugt. txt2pho kann
+    somit problemlos offline in einer abgeschotteten
+    Umgebung verwendet werden - die verarbeiteten Daten verlassen
+    diese zu keinem Zeitpunkt. Forderungen nach Datensicherheit
+    und dem Schutz eigener und fremder Daten lassen sich somit
+    deutlich einfacher erfüllen als in einem cloud-basierten,
+    weltweit verteilten Servernetzwerk. Die Souveränität
+    über die verarbeiteten Daten geht niemals verloren - ein
+    Aspekt, der vor allem in Geschäftsbereichen mit erhöhten
+    Datenschutzanforderungen wie Krankenhäusern, Ärzten,
+    Rechtsanwälten und Journalisten wichtig ist.
+
+    Überdies stellt die Verfügbarkeit der vollständigen
+    Quelltexte sicher, dass ein möglicher Nutzer sich
+    einen differenzierten Überblick über die verwendeten
+    Algorithmen verschaffen und so sicherstellen kann,
+    dass in der Software keine Hintertüren oder versteckten
+    Abhörmöglichkeiten implementiert sind.
+
+4) Umweltschutz und Verbrauch der Ressourcen Energie/Wasser 
+
+    Das Alter von txt2pho hat zudem den Vorteil, dass es
+    zum Zeitpunkt der Entwicklung mit den damals verfügbaren
+    Ressourcen an Rechen- und Speicherkapazität auskommen musste.
+    Aus heutiger Sicht, 25 Jahre später, sind diese Anforderungen
+    winzig - die Software lässt sich folglich auf nahezu
+    jeder beliebigen Rechnerarchitektur und Systemgröße einsetzen.
+    Ein ausgedienter Laptop kann ebenso zur Sprachausgabe
+    genutzt werden wie ein Raspberry Pi, welche beide
+    extrem günstig, oft sogar kostenlos verfügbar sind.
+
+    Dem Schutz der Umwelt ist durch dieses Recycling
+    alter Hardware gedient. Die nicht benötigte
+    Netzwerk- und vor allem Serveranbindung senken erheblich
+    die Auswirkungen der Software auf die Umwelt, gehen
+    cloud-basierte Ansätze doch regelmäßig mit einem erheblichen
+    Einsatz der Ressourcen Energie und Wasser einher.
+
+Zusammenfassend gibt es auf die Frage nach den Stärken
+von txt2pho eine Reihe von Antworten, die für den
+jeweiligen Nutzer und Einsatzzweck unterschiedlich
+relevant sind. 
+
+Gegenüber konkurrierenden Systemen sind
+die Vorteile von txt2pho 
+- die Flexibilität im Einsatz
+- die Unverfälschtheit der Ausgabe
+- der Schutz und die Souveränität über die genutzten Daten
+- die Verfügbarkeit des gesamten Quellcodes
+- die Schonung von Umweltressourcen
 
 * Installation
 ** txt2pho
@@ -48,9 +192,9 @@ unterschiedlicher Plattformen benutzt werden kann. Da txt2pho im
 Prinzip nur ein Text-Konverter ist, der eine Texteingabedatei in
 in natürlicher Sprache in eine Textausgabedatei - die genannte
 PHO-Datei - umwandelt, ist hierfür lediglich ein c++-Compiler
-mit wenigen Standard-Librarys (aus der C++STD) erforderlich.
+mit wenigen Standard-Libraries (aus der C++STD) erforderlich.
 Entwickelt wurde txt2pho (und die anderen Programme aus diesem
-Repository) mit GNU c++ 2.7, heute kommt hierfür GNU c++ 7.4
+Repository) mit GNU c++ 2.7, heute kommt hierfür GNU c++ 8.3
 zum Einsatz.
 
 Da im Laufe der Zeit c++ auf nahezu alle verfügbaren Hardware-Architekturen 
@@ -168,9 +312,39 @@ l 55  24  76  60  76  96  76
 _ 483   4  85   8  85  12  85  16  85  20  85  24  85  29  85  33  85  37  85  41  85 
 #+END_SRC
 
+** Andere Compilerversion verwenden
+
+   Um eine andere, modernere Version des c-Compilers zu verwenden,
+   reicht es aus, dem make-Kommando die entsprechenden Versionen als
+   Parameter zu übergeben. Natürlich muss diese Compiler-Version auch
+   installiert sein.
+
+#+BEGIN_SRC sh
+    make CC=gcc-8 CPP=g++-8
+#+END_SRC
+
+** Aktuelle Größe des Projekts
+
+#+BEGIN_SRC sh
+ cloc src
+     146 text files.
+     146 unique files.                                          
+       3 files ignored.
+
+github.com/AlDanial/cloc v 1.80  T=0.97 s (147.5 files/s, 78909.4 lines/s)
+-------------------------------------------------------------------------------
+Language                     files          blank        comment           code
+-------------------------------------------------------------------------------
+C                               23           4587            600          41859
+C++                             45           1344           1367          21355
+C/C++ Header                    75           1361            883           3140
+-------------------------------------------------------------------------------
+SUM:                           143           7292           2850          66354
+-------------------------------------------------------------------------------
+#+END_SRC
+
 ** Programmentwicklung
 Sie haben einen Fehler in txt2pho oder den beiliegenden Programmen gefunden und korrigiert? Super -
 teilen Sie bitte Ihre Arbeit mit dem Rest der Welt, damit dieses Projekt noch besser wird! 
 
 Verwenden Sie hierfür bitte das Pull Request System von Github.
-

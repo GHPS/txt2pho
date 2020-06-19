@@ -1,9 +1,7 @@
 # .txt2phorc Configuration
 # --------------------------------------
-#
 # PATH variables
 # All path names must end with a separator!
-#
 DATAPATH=../data/
 
 # Path to voice files
@@ -12,20 +10,15 @@ INVPATH=../data/
 # Path to temporary and log files (default: /tmp/)
 TEMPPATH=/tmp/
 
-#
-# DEFAULT variables
+# Default Settings
 # --------------------------------------
-#
-# Default prosody (male or female)
+# Prosody
+# Possible Values: male, female
 INVENTORY=male
 
-# Debuglevel
-DEBUGLEVEL=0
-
-# PROSODY variables
-# --------------------------------------
-#
-# Name of prosody generation tree
+# Prosody generation tree
+# Possible Values: male, female, newtree
+# Best: newtree
 NEWTREE=newtree
 
 # Reduction level
@@ -38,4 +31,9 @@ PROMCOMP=1
 SPEECHRATE=1.0
 
 # Duration computation
+# Possible Values: 0-4
+# Best: 3
 USENET=3
+ 
+# Debuglevel
+DEBUGLEVEL=0
