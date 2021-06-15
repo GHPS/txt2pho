@@ -13,7 +13,7 @@
 #include <stdio.h>
 
 #define nulltest(i) if ((i) == NULL) {printf("out of heap\n");exit(0);}
-#define abs(a) ((a)>0?(a):-(a))
+//#define abs(a) ((a)>0?(a):-(a))
 //#define min(a,b) ((a)>(b)?(b):(a))
 //#define max(a,b) ((a)<(b)?(b):(a))
 

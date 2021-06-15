@@ -96,7 +96,7 @@ char PPInput::get_next_char(FILE* infile, char* spacer)
 
 PPInput::PPInput(const char* i, const char* sp)
 {
-    strcpy(spacer, sp);
+    spacer = strdup(sp);
     if (strcmp(i, "-") == 0)
         in = stdin ;
     else

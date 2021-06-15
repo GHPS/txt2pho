@@ -194,7 +194,7 @@ in natürlicher Sprache in eine Textausgabedatei - die genannte
 PHO-Datei - umwandelt, ist hierfür lediglich ein c++-Compiler
 mit wenigen Standard-Libraries (aus der C++STD) erforderlich.
 Entwickelt wurde txt2pho (und die anderen Programme aus diesem
-Repository) mit GNU c++ 2.7, heute kommt hierfür GNU c++ 8.3
+Repository) mit GNU c/c++ 2.7, heute kommt hierfür GNU c/c++ 11.1
 zum Einsatz.
 
 Da im Laufe der Zeit c++ auf nahezu alle verfügbaren Hardware-Architekturen 

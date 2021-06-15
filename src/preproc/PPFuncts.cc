@@ -201,11 +201,11 @@ char* dnumeral_range(char* in)
     char* temp2 = new char[5] ;
     char* from, *to, *result;
     int range_type;
-    if (to = strchr (in, '-'))
+    if (to = strchr(in, '-'))
     {
         range_type = RANGE_LONG;
     }
-    else if (to = strchr (in, '/'))
+    else if (to = strchr(in, '/'))
     {
         range_type = RANGE_SMALL;
     }

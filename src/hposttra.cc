@@ -166,7 +166,7 @@ Wordlist::Wordlist(TFile &infile)
         if (buffer[0] == '{')
         {
             w.text = strdup(buffer) ;
-            strncpy(w.wordclass, "COM", 3) ;
+            strncpy(w.wordclass, "COM", 4) ;
             w.wk = Unknown ;
             w.konstit = invalid ;
             w.satztyp = garnix ;
@@ -254,7 +254,7 @@ Wordlist::Wordlist(char** lexlist, int lexemnr)
         if (buffer[0] == '{')
         {
             w.text = strdup(buffer) ;
-            strncpy(w.wordclass, "COM", 3) ;
+            strncpy(w.wordclass, "COM", 4) ;
             w.wk = Unknown ;
             w.konstit = invalid ;
             w.pg_betonung = 0 ;
@@ -300,7 +300,7 @@ Wordlist::Wordlist(char** lexlist, int lexemnr)
         if (w.flag == 0)
         {
             w1.text = strdup(wklstring) ;
-            strncpy(w1.wordclass, "COM", 3) ;
+            strncpy(w1.wordclass, "COM", 4) ;
             w1.wk = Unknown ;
             w1.konstit = invalid ;
             w1.satztyp = garnix ;
