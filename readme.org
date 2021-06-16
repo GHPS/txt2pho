@@ -143,6 +143,12 @@ relevante Frage anders: Was sind die Stärken von txt2pho?
     Datenschutzanforderungen wie Krankenhäusern, Ärzten,
     Rechtsanwälten und Journalisten wichtig ist.
 
+    Selbst in einem System zur Heimautomation kann es
+    wünschenswert sein, die ausgegebenen Meldungen
+    nicht durch einen Cloud-Dienstleister verarbeiten
+    zu lassen, um so den Schutz der eigenen Privatsphäre
+    zu gewährleisten.
+
     Überdies stellt die Verfügbarkeit der vollständigen
     Quelltexte sicher, dass ein möglicher Nutzer sich
     einen differenzierten Überblick über die verwendeten
@@ -183,7 +189,8 @@ die Vorteile von txt2pho
 - die Schonung von Umweltressourcen
 
 * Installation
-** txt2pho
+** txt2pho und mbrola zur Sprachausgabe
+*** txt2pho
 
 txt2pho wird nur in Form von Quelltexten bereitgestellt, da es 
 einerseits sehr einfach ist, den Code in eine ausführbare Form
@@ -265,10 +272,64 @@ _ 483   2  85   6  85  10  85  14  85  18  85  23  85  27  85  31  85  35  85  3
 Glückwunsch! Jetzt lassen sich beliebige deutsche Texte in Phonem-Dateien konvertieren, die dann
 von MBROLA zu echten Audio-Dateien umgewandelt werden können.
 
-** MBROLA
+*** MBROLA
 
 Im zweiten Schritt sind noch das Programm MBROLA und eine Sprachdatei für die deutsche
 Sprache zu installieren. Wie beides geht, erklärt die [[https://github.com/numediart/MBROLA][mbrola Entwicklungsseite]].
+
+** Hilfsprogramme preproc und pipeflt
+
+Zur Verbesserung der Sprachausgabe von txt2pho wurden Hilfsprogramme entwickelt, die
+die Eingabedatei zunächst als Filter aufbereiten. Von diesen Programmen ist heute nur 
+noch die Nutzung von preproc sinnvoll (pipeflt diente schlicht der Entfernung von Zeilenumbrüchen,
+eine Funktion, die in preproc enthalten ist).
+
+Der Zweck von preproc ist es, die Eingabedatei zur Sprachausgabe dadurch vorzubereiten, dass
+eine Reihe von Regelsätzen angewandt wird und anschließend bekannte deutsche Abkürzungen
+in ihre Langform übersetzt werden. In den Regelsätzen kodiert ist die Aussprache von Zahlen
+und Brüchen, von Uhrzeiten und Daten und von eMail-Adressen.
+
+Zum Testen von preproc muss dem Programm die Datei mit den Regelsätzen als erstem
+Parameter und jener mit den Abkürzungen als zweitem Parameter übergeben werden:
+
+#+BEGIN_SRC sh
+echo "1000 1/2  am 1.5.2021"|./preproc data/PPRules/rules.lst data/hadifix.abk
+#+END_SRC
+
+Die Ausgabe sollte lauten
+
+#+BEGIN_SRC sh
+ein tausend ein halb am 1n 5n zwei tausend einundzwanzig   
+#+END_SRC
+
+Üblicherweise wird die Ausgabe von preproc wird als pipe nach txt2pho weitergeleitet:
+#+BEGIN_SRC sh
+echo "1000 1/2  am 1.5.2021"|./preproc data/PPRules/rules.lst data/hadifix.abk |./txt2pho -m  
+#+END_SRC
+
+#+BEGIN_SRC sh
+_ 10   0  85 
+_ 33  58  85 
+aI 83   7  85  31  85  55  85  80  85 
+n 53   6  85  43  85  81  85 
+t 99  20  90  40  92 
+aU 105  10  94  30  96  49  97  68  99  87 101 
+z 28  21 102  93 103 
+@ 47  38 104  81 104 
+n 47  23 104  66 104 
+t 46  39 103 
+_ 28  64 103 
+aI 82  12 103  37 102  61 102  85 101 
+n 48  17 101  58 100 100 100 
+h 49  41  99  82  98 
+a 56  20  98  55  97  91  96 
+l 48  31  96  73  95 
+p 51  35  93 
+_ 24  67  92 
+a 57  21  93  56  95  91  96 
+m 48  31  98  73 100 
+...
+#+END_SRC
 
 * Häufig gestellte Fragen (FAQ)
 
@@ -314,10 +375,17 @@ _ 483   4  85   8  85  12  85  16  85  20  85  24  85  29  85  33  85  37  85  4
 
 ** Andere Compilerversion verwenden
 
-   Um eine andere, modernere Version des c-Compilers zu verwenden,
-   reicht es aus, dem make-Kommando die entsprechenden Versionen als
+   txt2pho (und preproc) ist recht genügsam, was die Version
+   des verwendeten GCC-Compilers angeht. Jede Version, die in
+   den letzten Jahrzehnten veröffentlich wurde, müsste eigentlich
+   ausreichen. Getestet sind die Compiler-Versionen 7.5.0, 8.4.0
+   und 11.1. Mit letzterer Version wird aktuell entwickelt.
+
+   Um eine andere, ältere Version des c-Compilers zu verwenden,
+   reicht es aus, dem make-Kommando die entsprechenden Versionen von
+   CC (für den c-Compiler) und CPP (für den c++-Compiler) als
    Parameter zu übergeben. Natürlich muss diese Compiler-Version auch
-   installiert sein.
+   installiert sein und funktionieren.
 
 #+BEGIN_SRC sh
     make CC=gcc-8 CPP=g++-8
