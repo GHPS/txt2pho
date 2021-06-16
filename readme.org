@@ -6,10 +6,10 @@ A TTS frontend for the German inventories of the MBROLA project
 - [[#introduction][Introduction]]
 - [[#überblick][Überblick]]
 - [[#installation][Installation]]
-    -[[#txt2pho-und-mbrola-zur-sprachausgabe][txt2pho und mbrola zur Sprachausgabe]]
+    - [[#txt2pho-und-mbrola-zur-sprachausgabe][txt2pho und mbrola zur Sprachausgabe]]
         - [[#txt2pho][txt2pho]]
         - [[#mbrola][MBROLA]]
-    - [#hilfsprogramme-preproc-und-pipeflt][Hilfsprogramme preproc und pipeflt]]
+    - [[#hilfsprogramme-preproc-und-pipeflt][Hilfsprogramme preproc und pipeflt]]
 - [[#häufig-gestellte-fragen-faq][Häufig gestelle Fragen (FAQ)]]
     - [[#txt2pho-spricht-wörter-mit-umlauten-falsch-aus][txt2pho spricht Wörter mit Umlauten falsch aus]]
     - [[#andere-compilerversion-verwenden][Andere Compilerversion verwenden]]
@@ -130,7 +130,14 @@ relevante Frage anders: Was sind die Stärken von txt2pho?
     unmittelbar hörbar. Das System eignet sich also sehr gut zum
     Korrekturlesen von Texten.
 
-3) Datenschutz und Datensouveränität
+3) Stabilität des Projekts
+    
+    Von unterschiedlichen Benutzergruppen - etwa Blinden - wird
+    txt2pho seit Jahrzehnten zur Sprachausgabe genutzt, oft
+    täglich über mehrere Stunden. Das Programm ist im regelmäßigen
+    Einsatz extrem stabil und ausgetestet.
+
+4) Datenschutz und Datensouveränität
 
     Alle Daten im Prozess der Sprachgenerierung werden lokal,
     ohne Netzwerk- oder Serveranbindung erzeugt. txt2pho kann
@@ -158,7 +165,7 @@ relevante Frage anders: Was sind die Stärken von txt2pho?
     dass in der Software keine Hintertüren oder versteckten
     Abhörmöglichkeiten implementiert sind.
 
-4) Umweltschutz und Verbrauch der Ressourcen Energie/Wasser 
+5) Umweltschutz und Verbrauch der Ressourcen Energie/Wasser 
 
     Das Alter von txt2pho hat zudem den Vorteil, dass es
     zum Zeitpunkt der Entwicklung mit den damals verfügbaren
@@ -186,6 +193,7 @@ Gegenüber konkurrierenden Systemen sind
 die Vorteile von txt2pho 
 - die Flexibilität im Einsatz
 - die Unverfälschtheit der Ausgabe
+- Stabilität des Projekts
 - der Schutz und die Souveränität über die genutzten Daten
 - die Verfügbarkeit des gesamten Quellcodes
 - die Schonung von Umweltressourcen
