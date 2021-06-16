@@ -6,8 +6,10 @@ A TTS frontend for the German inventories of the MBROLA project
 - [[#introduction][Introduction]]
 - [[#überblick][Überblick]]
 - [[#installation][Installation]]
-    - [[#txt2pho][txt2pho]]
-    - [[#mbrola][MBROLA]]
+    -[[#txt2pho-und-mbrola-zur-sprachausgabe][txt2pho und mbrola zur Sprachausgabe]]
+        - [[#txt2pho][txt2pho]]
+        - [[#mbrola][MBROLA]]
+    - [#hilfsprogramme-preproc-und-pipeflt][Hilfsprogramme preproc und pipeflt]]
 - [[#häufig-gestellte-fragen-faq][Häufig gestelle Fragen (FAQ)]]
     - [[#txt2pho-spricht-wörter-mit-umlauten-falsch-aus][txt2pho spricht Wörter mit Umlauten falsch aus]]
     - [[#andere-compilerversion-verwenden][Andere Compilerversion verwenden]]
@@ -235,8 +237,9 @@ beginnen.
     make all
 #+END_SRC
 
-Nach dem erfolgreichen Compilieren steht die ausführbare Datei txt2pho
-direkt im obersten Projektordner zur Verfügung.
+Nach dem erfolgreichen Compilieren lassen sich die ausführbare Datei txt2pho
+(und die Hilfsprogramme preproc und pipeflt) direkt im obersten Projektordner
+aufrufen.
 
 Jetzt gilt es noch, die Einstellungen an einen Ort zu kopieren, den
 txt2pho standardmäßig erwartet (etwa ~/.config), und diese Datei - 
@@ -302,7 +305,9 @@ Die Ausgabe sollte lauten
 ein tausend ein halb am 1n 5n zwei tausend einundzwanzig   
 #+END_SRC
 
-Üblicherweise wird die Ausgabe von preproc wird als pipe nach txt2pho weitergeleitet:
+Die gute Nachricht ist dann: Auch preproc funktioniert!
+
+Üblicherweise wird die Ausgabe von preproc direkt als pipe nach txt2pho weitergeleitet:
 #+BEGIN_SRC sh
 echo "1000 1/2  am 1.5.2021"|./preproc data/PPRules/rules.lst data/hadifix.abk |./txt2pho -m  
 #+END_SRC
