@@ -65,8 +65,8 @@ Sprachergebnis erzielt.
 Ohne besondere Anpassungen klingt txt2pho (mit Hilfe von
 mbrola und der Stimme mbrola-de2) so:
 
-- [[https://github.com/GHPS/txt2pho/tree/master/examples/example1.wav][Text "Ein Test für Sprachausgabe in Deutsch"]]
-- [[https://github.com/GHPS/txt2pho/tree/master/examples/example2.wav][Friedrich Schiller "Die Glocke"]]
+- [[https://github.com/GHPS/txt2pho/tree/master/examples/example1.mp3][Text "Ein Test für Sprachausgabe in Deutsch"]]
+- [[https://github.com/GHPS/txt2pho/tree/master/examples/example2.mp3][Friedrich Schiller "Die Glocke"]]
 
 
 Gut ein Vierteljahrhundert später stellt sich die Frage,
