@@ -62,6 +62,13 @@ zu können. Das Ergebnis im Bereich der Softwareentwicklung
 ist ein System, das ein - für die 90er Jahre - recht gutes
 Sprachergebnis erzielt.
 
+Ohne besondere Anpassungen klingt txt2pho (mit Hilfe von
+mbrola und der Stimme mbrola-de2) so:
+
+- [[https://github.com/GHPS/txt2pho/tree/master/examples/example1.wav][Text "Ein Test für Sprachausgabe in Deutsch"]]
+- [[https://github.com/GHPS/txt2pho/tree/master/examples/example2.wav][Friedrich Schiller "Die Glocke"]]
+
+
 Gut ein Vierteljahrhundert später stellt sich die Frage,
 warum man eine so alte Software heute noch einsetzen, ja
 sogar weiterentwickeln sollte. Da heute jedes Smartphone mit
@@ -301,7 +308,7 @@ in ihre Langform übersetzt werden. In den Regelsätzen kodiert ist die Aussprac
 und Brüchen, von Uhrzeiten und Daten und von eMail-Adressen.
 
 Zum Testen von preproc muss dem Programm die Datei mit den Regelsätzen als erstem
-Parameter und jener mit den Abkürzungen als zweitem Parameter übergeben werden:
+Parameter und jene mit den Abkürzungen als zweitem Parameter übergeben werden:
 
 #+BEGIN_SRC sh
 echo "1000 1/2  am 1.5.2021"|./preproc data/PPRules/rules.lst data/hadifix.abk
