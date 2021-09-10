@@ -68,6 +68,9 @@ mbrola und der Stimme mbrola-de2) so:
 - [[https://github.com/GHPS/txt2pho/tree/master/examples/example1.mp3][Text "Ein Test für Sprachausgabe in Deutsch"]]
 - [[https://github.com/GHPS/txt2pho/tree/master/examples/example2.mp3][Friedrich Schiller "Die Glocke"]]
 
+Da die Standardausgabe von mbrola eine wav-Datei ist,
+diese Beispiele jedoch mp3-codiert (und damit nur 1/10
+in der Größe) sind, ist der Klang real sogar besser...
 
 Gut ein Vierteljahrhundert später stellt sich die Frage,
 warum man eine so alte Software heute noch einsetzen, ja
