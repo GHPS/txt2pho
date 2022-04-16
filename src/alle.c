@@ -8384,8 +8384,6 @@ int best3(float* in, float* out, int init)
     by snns2c ( Bernward Kett 1995 )
 *********************************************************/
 
-#include <math.h>
-
 #define Act_Logistic(sum, bias)  ( (sum+bias<10000.0) ? ( 1.0/(1.0 + exp(-sum-bias) ) ) : 0.0 )
 #define NULL (void *)0
 
