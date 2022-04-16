@@ -96,24 +96,24 @@ int main(int argc, char** argv)
                 }
             }
         }
-        fprintf(errfile, "-%s-", &xinput[g]) ;
+        fprintf(errfile, "%s", &xinput[g]) ;
         fflush(errfile) ;
         output = rl->apply(xinput, g) ;
-        fprintf(errfile, "-%s-", output) ;
+        fprintf(errfile, " (%s/", output) ;
         fflush(errfile) ;
         if (al != NULL)
             output = al->apply(output) ;
-        fprintf(errfile, "-%s-", output) ;
+        fprintf(errfile, "%s/", output) ;
         fflush(errfile) ;
         output = fl.call(output) ;
-        fprintf(errfile, "-%s-", output) ;
+        fprintf(errfile, "%s/", output) ;
         fflush(errfile) ;
         if (strlen(output) < 1)
         {
             delete (output) ;
             continue ;
         }
-        fprintf(errfile, "-%s\n", output) ;
+        fprintf(errfile, "%s)\n", output) ;
         fflush(errfile) ;
         p = output[strlen(output)-1] ;
         output[strlen(output)-1] = '\0' ;
@@ -129,14 +129,6 @@ int main(int argc, char** argv)
         delete (al) ;
     delete (rl) ;
     fclose(errfile) ;
-    unlink(errfilename) ;
+    //unlink(errfilename) ;
     return (0) ;
 }
-
-
-
-
-
-
-
-
