@@ -66,7 +66,7 @@ ZZ:ZZE AS time
 #
 # Datum
 #
-Z*.Z*.ZZZZ AFTER 'Am,am,Dem,dem,Den,den,Zum,zum,Vom,vom,Beim,beim' IN 4 WORDS AS full_date_flex
+Z*.Z*.ZZZZ AFTER 'Am,am,Der,der,Dem,dem,Den,den,Zum,zum,Vom,vom,Beim,beim' IN 4 WORDS AS full_date_flex
 Z*.Z*.ZZZZ AS full_date
 Z*.Z*.ZZZZE AFTER 'Am,am,Dem,dem,Den,den,Zum,zum,Vom,vom,Beim,beim' IN 4 WORDS AS full_date_flex_before_point
 Z*.Z*.ZZZZE AS full_date_before_point
