@@ -5239,8 +5239,8 @@ tÆÄËûÂ“M•	!né	ÑtL“ÄNËûÊ˜
 0¦ûû©	W¬‹	Ñ»]û©N
 0¦ûª©RL¦	W¬‹	»]ûÑª4RL-
 »¦û©»Âà¦R	éÌ0	»-Ñû©N»Êà-R
-»¦û©à¦R	éÌ0	»-Ñû©Nà-R
 0¦û©»Âà£Rà	W4‹	»-Ñû©N»ÊàõW
+»¦û©à¦R	éÌ0	»-Ñû©Nà-R
 0¦û©•R£Rà	W4‹	»-Ñû©NRõW
 0¦û©RÂL	W¬‹	»¦û©ÑRÊL
 0¦û©ˆ£““¦	W4‹	»¦û©Ñˆõ“-
@@ -8778,7 +8778,7 @@ JtL©	W¬‹	ÑJtNL©N
 öt£»¦	W4‹	ÑJtõ»-
 öt£¦ˆ	W4‹	ÑJtõ«(
 öt£¦ˆ»tMË€tˆ¦	W4‹	ÑJtõ«(Ã»tËïtNˆ-
-öt£¦ˆ¦ÂR	W4‹	ÑJtõ«(ÃÊR
+öt£¦ˆ¦ÂR	W4‹	ÑJtõ«(ÃÑtÊR
 öt£¦ˆ•tbLÂàË¦ÂL	W4‹	ÑJtõ«(•tbLÊóËtÊL
 öt£¦ˆû¦Â•àt»¦	W4‹	ÑJtõ«(ÃûtÊàtN»-
 öt£¦ˆû£L“M•¦ˆ	W4‹	ÑJtõ«(ÃûõL˜«(
