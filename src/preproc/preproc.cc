@@ -13,48 +13,95 @@
 #include "PPFnclst.h"
 #include <string.h>
 #include <unistd.h>
+#include <stdlib.h>
 
 FILE* errfile ;
+
+extern char* optarg ;
+
+const char* synopsis =
+    "preproc 0.96\n"
+    "Usage: preproc -r Rules-File <-a Abbreviations-File> | read from stdin, write to stdout\n"
+    "Valid options are:\n"
+    "  -r filename      - Specifies the Rules-File.\n"
+    "  -a filename      - Specifies an optional Abbreviations-File.\n"
+    "  -d level         - Level specifies the amount of debugging information (default is 0, maximum is 1).\n"
+    "                     The higher the number, the more information is given. The debug info\n"
+    "                     is written into a preproc*.log file located in /tmp.\n"
+    "  -v               - Gives the version number and exits.\n"
+    "  -h               - Prints this information.\n" ;
 
 int main(int argc, char** argv)
 {
     PPFunctionlist fl ;
     PPRulelist* rl ;
     PPAbbreviationlist* al ;
+    char rname[2048] ;
+    char aname[2048] ;
+    strcpy(rname, "-") ;
+    strcpy(aname, "-") ;
     char* xinput ;
     char* output ;
     int g ;
+    int debuglevel = 0 ;
     char pid[32] ;
     sprintf(pid, "%d", getpid()) ;
     char errfilename[512] ;
     strcat(strcat(strcpy(errfilename, "/tmp/preproc"), pid), ".log") ;
-    errfile = fopen(errfilename, "w") ;
     PPInput ip("-", "()&\%") ;
     FILE* abbfile = NULL ;
     al = NULL ;
-    if (argc < 2)
+    char optc ;
+    optarg = NULL ;
+    while ((optc = getopt(argc, argv, "r:a:d:vh")) != EOF)
     {
-        fprintf(stdout, "Usage: preproc Rules-File <Abbreviations-File> | read from stdin, write to stdout\n") ;
+        switch (optc)
+        {
+            case 'r':
+                if (optarg != NULL) strcpy(rname, optarg) ;
+                break ;
+            case 'a':
+                if (optarg != NULL) strcpy(aname, optarg) ;
+                break ;
+            case 'd':
+                if (optarg != NULL) debuglevel=std::atoi(optarg) ;
+                break ;
+            case 'v':
+                printf("preproc 0.96\n") ;
+                return (0) ;
+            case 'h':
+                printf("%s\n", synopsis) ;
+                return (0) ;
+        }
+    }
+    if (strcmp(rname, "-")==0)
+    {
+        fprintf(stdout, "Usage: preproc -r Rules-File <-a Abbreviations-File> | read from stdin, write to stdout\n") ;
         return (1) ;
     }
-    FILE* rlfile = fopen(argv[1], "r") ;
+    FILE* rlfile = fopen(rname, "r") ;
     if (rlfile == NULL)
     {
-        fprintf(stderr, "Cannot open Rules-File %s\n", argv[1]) ;
+        fprintf(stderr, "Cannot open Rules-File %s\n", rname) ;
         return (2) ;
     }
-    if (argc > 2)
+    if (strcmp(aname, "-")!=0)
     {
-        abbfile = fopen(argv[2], "r") ;
+        abbfile = fopen(aname, "r") ;
         if (abbfile == NULL)
         {
-            fprintf(stderr, "Cannot open Abbreviations-File %s\n", argv[2]) ;
+            fprintf(stderr, "Cannot open Abbreviations-File %s\n", aname) ;
+            return (2) ;
         }
     }
     char p ;
     char* n ;
     rl = new PPRulelist(rlfile) ;
     fclose(rlfile) ;
+    if (debuglevel>0)
+    {
+        errfile = fopen(errfilename, "w") ;
+    }
     if (abbfile != NULL)
     {
         al = new PPAbbreviationlist(abbfile) ;
@@ -96,25 +143,40 @@ int main(int argc, char** argv)
                 }
             }
         }
-        fprintf(errfile, "%s", &xinput[g]) ;
-        fflush(errfile) ;
+        if (debuglevel>0)
+        {
+            fprintf(errfile, "%s", &xinput[g]) ;
+            fflush(errfile) ;
+        }
         output = rl->apply(xinput, g) ;
-        fprintf(errfile, " (%s/", output) ;
-        fflush(errfile) ;
+        if (debuglevel>0)
+        {
+            fprintf(errfile, " (%s/", output) ;
+            fflush(errfile) ;
+        }
         if (al != NULL)
             output = al->apply(output) ;
-        fprintf(errfile, "%s/", output) ;
-        fflush(errfile) ;
+        if (debuglevel>0)
+        {
+            fprintf(errfile, "%s/", output) ;
+            fflush(errfile) ;
+        }
         output = fl.call(output) ;
-        fprintf(errfile, "%s/", output) ;
-        fflush(errfile) ;
+        if (debuglevel>0)
+        {
+            fprintf(errfile, "%s/", output) ;
+            fflush(errfile) ;
+        }
         if (strlen(output) < 1)
         {
             delete (output) ;
             continue ;
         }
-        fprintf(errfile, "%s)\n", output) ;
-        fflush(errfile) ;
+        if (debuglevel>0)
+        {
+            fprintf(errfile, "%s)\n", output) ;
+            fflush(errfile) ;
+        }
         p = output[strlen(output)-1] ;
         output[strlen(output)-1] = '\0' ;
         fprintf(stdout, "%s", output) ;
@@ -128,7 +190,10 @@ int main(int argc, char** argv)
     if (al != NULL)
         delete (al) ;
     delete (rl) ;
-    fclose(errfile) ;
+    if (debuglevel>0)
+    {
+        fclose(errfile) ;
+    }
     //unlink(errfilename) ;
     return (0) ;
 }
