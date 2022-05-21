@@ -8,8 +8,6 @@
 */
 
 #include "synthese.h"
-
-
 #include "ascii.h"
 
 //#define DEBUG3 0
@@ -31,8 +29,6 @@ int language = 0 ;
     #include <fcntl.h>
     #include <unistd.h>
 #endif
-
-
 
 
 extern long bt4(long) ;
@@ -87,7 +83,7 @@ Synthese::Synthese(char* __hWnd, char* path, char* logprefix, int db, int pip)
     }
     if (strlen(logprefix) == 0)
         logprefix = (char*) "/tmp/" ;
-    strcat(strcpy(pid, logprefix), "hadifix.") ;
+    strcat(strcpy(pid, logprefix), "txt2pho.") ;
     strcat(pid, __hWnd) ;
     piping = pip ;
     nopreproc = pip ;
@@ -100,15 +96,22 @@ Synthese::Synthese(char* __hWnd, char* path, char* logprefix, int db, int pip)
     #ifdef DEBUG3
     f0fil=fopen(strcat(strcpy(temp, pid), ".hadi.f0"), "w") ;
     #endif
-    errfile = fopen(strcat(strcpy(temp, pid), ".error.log"), "w") ;
-    if (errfile == NULL)
-        printf("ERROR CAN'T OPEN LOGFILE\n") ;
+    if (debuglevel > 0)   // Lifted up
+    {
+        errfile = fopen(strcat(strcpy(temp, pid), ".error.log"), "w") ;
+        if (errfile == NULL)
+            fprintf(stderr, "ERROR CAN'T OPEN LOGFILE\n") ;
+    }
     if (debuglevel > 2)
     {
         strcat(strcpy(temp, pid), ".debug.log") ;
         debugstr.open(temp) ;
     }
-    fprintf(errfile, "Debuglevel %d\n", debuglevel) ;
+    if (debuglevel > 0)   // Lifted up
+    {
+        fprintf(errfile, "Debuglevel %d\n", debuglevel) ;
+        fflush(errfile) ;
+    }
     env = new Environment(szProgramPath, "hadifix.cfg") ;
     inventname = strdup(env->get_value("INVENTORY")) ;
     inventpath = strdup(env->get_value("INVPATH")) ;
@@ -125,8 +128,12 @@ Synthese::Synthese(char* __hWnd, char* path, char* logprefix, int db, int pip)
         if (strlen(rcenv->get_value("PROMCOMP")) > 0)
             use_wagonprom = atoi(rcenv->get_value("PROMCOMP")) ;
     }
-    fprintf(errfile, "INVENTORY %s\n", inventname) ;
-    fprintf(errfile, "INVPASTH %s\n", inventpath) ;
+    if (debuglevel > 0)   // Lifted up
+    {
+        fprintf(errfile, "INVENTORY %s\n", inventname) ;
+        fprintf(errfile, "INVPATH %s\n", inventpath) ;
+        fflush(errfile) ;
+    }
     defaultspeechrate = 1.0 ;
     if (strlen(env->get_value("SPEECHRATE")) > 1)
         defaultspeechrate = atof(env->get_value("SPEECHRATE")) ;
@@ -174,7 +181,11 @@ Synthese::Synthese(char* __hWnd, char* path, char* logprefix, int db, int pip)
     }
     #endif
     d->set_speech_rate(defaultspeechrate) ;
-    fprintf(errfile, "Program Path %s\n", szProgramPath) ;
+    if (debuglevel > 0)   // Lifted up
+    {
+        fprintf(errfile, "Program Path %s\n", szProgramPath) ;
+        fflush(errfile) ;
+    }
     #ifdef UNIX
     strcpy(lexemfilnam, pid) ;
     #else
@@ -221,8 +232,11 @@ Synthese::Synthese(char* __hWnd, char* path, char* logprefix, int db, int pip)
     intnet = new Netz((char*)INTNETPARNAME, NETPARPATH) ;
     #endif
     #ifdef PHONDURNET
+    if (debuglevel > 0)   // Lifted up
+    {
     fprintf(errfile, "Vor PDN\n") ;
     fflush(errfile) ;
+    }
     phondurnet = new PhonNetz("vokal.par", "kons.par", szProgramPath) ;
     #endif
     if (debuglevel > 0)
@@ -230,7 +244,10 @@ Synthese::Synthese(char* __hWnd, char* path, char* logprefix, int db, int pip)
         fprintf(errfile, "INIT passed\n\n") ;
         fflush(errfile) ;
     }
-    fprintf(errfile, "HADIFIX SUCCESSFULLY INITIALIZED\n") ;
+    if (debuglevel > 0)   // Lifted up
+    {
+    fprintf(errfile, "TXT2PHO SUCCESSFULLY INITIALIZED\n") ;
+    }
 }
 
 int Synthese::change_voice(char* path, const char* name)
@@ -245,7 +262,6 @@ int Synthese::change_voice(char* path, const char* name)
         fprintf(errfile, "In ChangeVoice\n") ;
         fflush(errfile) ;
     }
-    fflush(errfile) ;
     #ifndef NOTREE
     delete (b) ;
     #endif
@@ -276,10 +292,8 @@ int Synthese::change_voice(char* path, const char* name)
     }
     #endif
     fflush(errfile) ;
-    fflush(errfile) ;
     return (1) ;
 }
-
 
 
 int Synthese::talk(const char* rf, int modus, const char* filename)
@@ -443,7 +457,7 @@ int Synthese::talk(const char* rf, int modus, const char* filename)
                                 if (strncmp(&lexem.Chars().c_str()[10], "Englisch", 8) == 0)
                                     language = 1 ;
                                 else
-                                    language = 0 	;
+                                    language = 0 ;
                                 fprintf(errfile, "Language changed to %d\n", language) ;
                             }
                             if (strncmp(lexem.Chars().c_str(), "{Transcription:", 15) == 0)
@@ -610,7 +624,7 @@ int Synthese::talk(const char* rf, int modus, const char* filename)
                 reduction_level = s->reduce(reduction_level) ;
                 if (debuglevel > 1)
                 {
-                    fprintf(errfile, "Before Intonation_Features\n") ;
+                    fprintf(errfile, "Before Intonation Features\n") ;
                     fflush(errfile) ;
                 }
                 s->compute_intonation_features() ;
@@ -718,7 +732,7 @@ int Synthese::talk(const char* rf, int modus, const char* filename)
                 rewind(xbs) ;
                 durnet->compute(xbs, kbs, (nefu)DURNETNAME) ;
                 #endif
-                #else		// NO_FILES
+                #else               // NO_FILES
                 #ifdef DURNETNAME
                 durnet->compute(n, proslist, (nefu)DURNETNAME) ;
                 #endif
@@ -874,8 +888,11 @@ EndOfLoop:
 Synthese::~Synthese()
 {
     char temp[256] ;
+    if (debuglevel > 0)   // Lifted up
+    {
     fprintf(errfile, "Starting to delete Hadifix\n") ;
     fflush(errfile) ;
+    }
     delete (env) ;
     #ifdef UNIX
     if (rcenv != NULL)
@@ -890,8 +907,11 @@ Synthese::~Synthese()
     delete (a) ;
     delete (d) ;
     delete (i) ;
+    if (debuglevel > 0)   // Lifted up
+    {
     fprintf(errfile, "Starting to delete the Lexicon\n") ;
     fflush(errfile) ;
+    }
     delete (lexicon) ;
     delete (vvv) ;
     #ifdef NN
@@ -917,8 +937,11 @@ Synthese::~Synthese()
     #ifdef DEBUG3
     fclose(f0fil) ;
     #endif
-    fprintf(errfile, "Leaving HADIFIX %d\n", instcnt) ;
+    if (debuglevel > 0)   // Lifted up
+    {
+    fprintf(errfile, "Leaving TXT2PHO %d\n", instcnt) ;
     fflush(errfile) ;
+    }
     strcat(strcpy(temp, pid), ".hadi.log") ;
     if (debuglevel == 0)
         unlink(temp) ;
