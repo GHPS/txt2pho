@@ -13,6 +13,7 @@ A TTS frontend for the German inventories of the MBROLA project
 - [[#häufig-gestellte-fragen-faq][Häufig gestelle Fragen (FAQ)]]
     - [[#txt2pho-spricht-wörter-mit-umlauten-falsch-aus][txt2pho spricht Wörter mit Umlauten falsch aus]]
     - [[#andere-compilerversion-verwenden][Andere Compilerversion verwenden]]
+    - [[#fehler-finden][Fehler finden]]
     - [[#aktuelle-größe-des-projekts][Aktuelle Größe des Projekts]]
     - [[#programmentwicklung][Programmentwicklung]]
 
@@ -327,7 +328,7 @@ Die gute Nachricht ist dann: Auch preproc funktioniert!
 
 Üblicherweise wird die Ausgabe von preproc direkt als pipe nach txt2pho weitergeleitet:
 #+BEGIN_SRC sh
-echo "1000 1/2  am 1.5.2021"|./preproc data/PPRules/rules.lst data/hadifix.abk |./txt2pho -m  
+echo "1000 1/2  am 1.5.2021"|./preproc -r data/preproc.rls -a data/preproc.abk |./txt2pho -m  
 #+END_SRC
 
 #+BEGIN_SRC sh
@@ -413,6 +414,14 @@ _ 483   4  85   8  85  12  85  16  85  20  85  24  85  29  85  33  85  37  85  4
 #+BEGIN_SRC sh
     make CC=gcc-8 CPP=g++-8
 #+END_SRC
+
+** Fehler finden
+  Sowohl txt2pho als auch preproc bieten die Möglichkeit, durch das Aktivieren der
+  Debugoption umfangreiche Fehler- und Debuginformationen zu bekommen. In beiden
+  Fällen dient hierzu der Parameter -d, mit dem sich ein bestimmter Debuglevel
+  setzen lässt. Standardmäßig ist der Debuglevel 0, d.h. keine Fehler- und
+  Debuginformationen werden ausgegeben (was in Versionen vor 0.97 noch anders
+  war).
 
 ** Aktuelle Größe des Projekts
 
