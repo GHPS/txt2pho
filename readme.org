@@ -311,8 +311,13 @@ eine Reihe von Regelsätzen angewandt wird und anschließend bekannte deutsche A
 in ihre Langform übersetzt werden. In den Regelsätzen kodiert ist die Aussprache von Zahlen
 und Brüchen, von Uhrzeiten und Daten und von eMail-Adressen.
 
-Zum Testen von preproc muss dem Programm die Datei mit den Regelsätzen als erstem
-Parameter und jene mit den Abkürzungen als zweitem Parameter übergeben werden:
+Um preproc nutzen zu können, muss dem Programm zumindest die Regel-Datei mit Hilfe
+des Parameters -r übergeben werden, die Abkürzungsdatei kann dann - optional - nach
+dem Parameter -a folgen. Standardmäßig heißen die zu übergebenden Dateien preproc.rls 
+(die Regel-Datei) und preproc.abk (die Abkürzungsdatei) und finden sich im Verzeichnis data.
+Anders als in Versionen vor 0.97 ist die Reihenfolge der Parameter beliebig. 
+
+Ein einfacher Test von preproc sieht so aus:
 
 #+BEGIN_SRC sh
 echo "1000 1/2  am 1.5.2021"|./preproc -r data/preproc.rls -a data/preproc.abk
@@ -416,12 +421,20 @@ _ 483   4  85   8  85  12  85  16  85  20  85  24  85  29  85  33  85  37  85  4
 #+END_SRC
 
 ** Fehler finden
+
   Sowohl txt2pho als auch preproc bieten die Möglichkeit, durch das Aktivieren der
   Debugoption umfangreiche Fehler- und Debuginformationen zu bekommen. In beiden
   Fällen dient hierzu der Parameter -d, mit dem sich ein bestimmter Debuglevel
   setzen lässt. Standardmäßig ist der Debuglevel 0, d.h. keine Fehler- und
   Debuginformationen werden ausgegeben (was in Versionen vor 0.97 noch anders
-  war).
+  war). Je höher der Debuglevel, desto detaillierter sind die ausgegebenen
+  Informationen.
+
+  Diese Informationen werden im Verzeichnis /tmp in Fehler- und Debugdateien gespeichert,
+  die den Namen des Programms ergänzt um die PID bei Programmstart und die Erweiterung
+  .log tragen. Die Dateien von txt2pho sind zusätzlich als debug- bzw. error-Dateien
+  gekennzeichnet. Im tmp-Verzeichnis bleiben die Dateien bis zum Neustart des Systems
+  erhalten.
 
 ** Aktuelle Größe des Projekts
 
