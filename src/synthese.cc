@@ -96,12 +96,12 @@ Synthese::Synthese(char* __hWnd, char* path, char* logprefix, int db, int pip)
     #ifdef DEBUG3
     f0fil=fopen(strcat(strcpy(temp, pid), ".hadi.f0"), "w") ;
     #endif
-    if (debuglevel > 0)   // Lifted up
-    {
+    /* if (debuglevel > 0)   // Lifted up */
+    /* { */
         errfile = fopen(strcat(strcpy(temp, pid), ".error.log"), "w") ;
         if (errfile == NULL)
             fprintf(stderr, "ERROR CAN'T OPEN LOGFILE\n") ;
-    }
+    /* } */
     if (debuglevel > 2)
     {
         strcat(strcpy(temp, pid), ".debug.log") ;
@@ -234,8 +234,8 @@ Synthese::Synthese(char* __hWnd, char* path, char* logprefix, int db, int pip)
     #ifdef PHONDURNET
     if (debuglevel > 0)   // Lifted up
     {
-    fprintf(errfile, "Vor PDN\n") ;
-    fflush(errfile) ;
+        fprintf(errfile, "Vor PDN\n") ;
+        fflush(errfile) ;
     }
     phondurnet = new PhonNetz("vokal.par", "kons.par", szProgramPath) ;
     #endif
@@ -246,7 +246,7 @@ Synthese::Synthese(char* __hWnd, char* path, char* logprefix, int db, int pip)
     }
     if (debuglevel > 0)   // Lifted up
     {
-    fprintf(errfile, "TXT2PHO SUCCESSFULLY INITIALIZED\n") ;
+        fprintf(errfile, "TXT2PHO SUCCESSFULLY INITIALIZED\n") ;
     }
 }
 
@@ -265,8 +265,11 @@ int Synthese::change_voice(char* path, const char* name)
     #ifndef NOTREE
     delete (b) ;
     #endif
-    fprintf(errfile, "1\n") ;
-    fflush(errfile) ;
+    if (debuglevel > 0)
+    {
+        fprintf(errfile, "1\n") ;
+        fflush(errfile) ;
+    }
     if (path != NULL)
     {
         delete (inventpath) ;
@@ -278,7 +281,10 @@ int Synthese::change_voice(char* path, const char* name)
     i = new Intonation_Model(inventname, inventpath) ;
     a = new Intensity_Control(inventname, inventpath) ;
     d->set_speech_rate(defaultspeechrate) ;
-    fflush(errfile) ;
+    if (debuglevel > 0)
+    {
+        fflush(errfile) ;
+    }
     #ifdef NOTREE
     b = NULL ;
     #else
@@ -291,7 +297,10 @@ int Synthese::change_voice(char* path, const char* name)
         b = new Baum(treename, inventpath, 0, errfile) ;
     }
     #endif
-    fflush(errfile) ;
+    if (debuglevel > 0)
+    {
+        fflush(errfile) ;
+    }
     return (1) ;
 }
 
@@ -423,7 +432,10 @@ int Synthese::talk(const char* rf, int modus, const char* filename)
                 while (lexemfile != NULL && !feof(lexemfile))
                 {
                     fread_lexem(lexemfile, lexem);
-                    fflush(errfile) ;
+                    if (debuglevel > 0)
+                    {
+                        fflush(errfile) ;
+                    }
                     if (cnt_lexem == 0 && (lexem.Type() != TLexem::wordform && lexem.Type() != TLexem::comment))
                         continue ;
                     if (lexem.Type() != TLexem::nothing)
@@ -458,7 +470,10 @@ int Synthese::talk(const char* rf, int modus, const char* filename)
                                     language = 1 ;
                                 else
                                     language = 0 ;
-                                fprintf(errfile, "Language changed to %d\n", language) ;
+                                    if (debuglevel > 0)
+                                    {
+                                        fprintf(errfile, "Language changed to %d\n", language) ;
+                                    }
                             }
                             if (strncmp(lexem.Chars().c_str(), "{Transcription:", 15) == 0)
                             {
@@ -858,10 +873,16 @@ int Synthese::talk(const char* rf, int modus, const char* filename)
 
 EndOfLoop:
 
-    fflush(errfile) ;
+    if (debuglevel > 0)
+    {
+        fflush(errfile) ;
+    }
     if (infi != NULL)
         delete (infi) ;
-    fflush(errfile) ;
+    if (debuglevel > 0)
+    {
+        fflush(errfile) ;
+    }
     if (outfile != stdout)
 
         if (outfile != NULL)
@@ -890,8 +911,8 @@ Synthese::~Synthese()
     char temp[256] ;
     if (debuglevel > 0)   // Lifted up
     {
-    fprintf(errfile, "Starting to delete Hadifix\n") ;
-    fflush(errfile) ;
+        fprintf(errfile, "Starting to delete Hadifix\n") ;
+        fflush(errfile) ;
     }
     delete (env) ;
     #ifdef UNIX
@@ -909,8 +930,8 @@ Synthese::~Synthese()
     delete (i) ;
     if (debuglevel > 0)   // Lifted up
     {
-    fprintf(errfile, "Starting to delete the Lexicon\n") ;
-    fflush(errfile) ;
+        fprintf(errfile, "Starting to delete the Lexicon\n") ;
+        fflush(errfile) ;
     }
     delete (lexicon) ;
     delete (vvv) ;
@@ -939,8 +960,8 @@ Synthese::~Synthese()
     #endif
     if (debuglevel > 0)   // Lifted up
     {
-    fprintf(errfile, "Leaving TXT2PHO %d\n", instcnt) ;
-    fflush(errfile) ;
+        fprintf(errfile, "Leaving TXT2PHO %d\n", instcnt) ;
+        fflush(errfile) ;
     }
     strcat(strcpy(temp, pid), ".hadi.log") ;
     if (debuglevel == 0)
@@ -948,7 +969,3 @@ Synthese::~Synthese()
     if (debuglevel > 2)
         debugstr.close() ;
 }
-
-
-
-
