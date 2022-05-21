@@ -303,7 +303,7 @@ Sprache zu installieren. Wie beides geht, erklärt die [[https://github.com/nume
 Zur Verbesserung der Sprachausgabe von txt2pho wurden Hilfsprogramme entwickelt, die
 die Eingabedatei zunächst als Filter aufbereiten. Von diesen Programmen ist heute nur 
 noch die Nutzung von preproc sinnvoll (pipeflt diente schlicht der Entfernung von Zeilenumbrüchen,
-eine Funktion, die in preproc enthalten ist).
+eine Funktion also, die auch in preproc enthalten ist).
 
 Der Zweck von preproc ist es, die Eingabedatei zur Sprachausgabe dadurch vorzubereiten, dass
 eine Reihe von Regelsätzen angewandt wird und anschließend bekannte deutsche Abkürzungen
@@ -314,7 +314,7 @@ Zum Testen von preproc muss dem Programm die Datei mit den Regelsätzen als erst
 Parameter und jene mit den Abkürzungen als zweitem Parameter übergeben werden:
 
 #+BEGIN_SRC sh
-echo "1000 1/2  am 1.5.2021"|./preproc data/PPRules/rules.lst data/hadifix.abk
+echo "1000 1/2  am 1.5.2021"|./preproc -r data/preproc.rls -a data/preproc.abk
 #+END_SRC
 
 Die Ausgabe sollte lauten
