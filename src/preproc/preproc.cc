@@ -7,6 +7,8 @@
 
 */
 
+#define version "0.97"
+
 #include "PPRullst.h"
 #include "PPInput.h"
 #include "PPAbblst.h"
@@ -20,7 +22,7 @@ FILE* errfile ;
 extern char* optarg ;
 
 const char* synopsis =
-    "preproc 0.96\n"
+    "preproc " version "\n"
     "Usage: preproc -r Rules-File <-a Abbreviations-File> | read from stdin, write to stdout\n"
     "Valid options are:\n"
     "  -r filename      - Specifies the Rules-File.\n"
@@ -47,7 +49,7 @@ int main(int argc, char** argv)
     char pid[32] ;
     sprintf(pid, "%d", getpid()) ;
     char errfilename[512] ;
-    strcat(strcat(strcpy(errfilename, "/tmp/preproc"), pid), ".log") ;
+    strcat(strcat(strcpy(errfilename, "/tmp/preproc."), pid), ".log") ;
     PPInput ip("-", "()&\%") ;
     FILE* abbfile = NULL ;
     al = NULL ;
@@ -67,7 +69,7 @@ int main(int argc, char** argv)
                 if (optarg != NULL) debuglevel=std::atoi(optarg) ;
                 break ;
             case 'v':
-                printf("preproc 0.96\n") ;
+                printf("preproc " version "\n") ;
                 return (0) ;
             case 'h':
                 printf("%s\n", synopsis) ;

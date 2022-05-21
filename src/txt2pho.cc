@@ -7,6 +7,8 @@
 
 */
 
+#define version "0.97"
+
 #include "synthese.h"
 #include <unistd.h>
 #ifndef SUN
@@ -19,7 +21,7 @@ extern int optind, opterr, optopt ;
 extern char* optarg ;
 
 const char* synopsis =
-    "txt2pho 0.96\n"
+    "txt2pho " version "\n"
     "Usage: \"txt2pho -pfmdvioh\"\n"
     "Txt2pho reads text from stdin (if no filename is given with the -i option)\n"
     "and writes MBROLA input to stdout (if no filename is given with the -o option)\n"
@@ -63,11 +65,8 @@ int main (int argc, char** argv)
     {
         switch (optc)
         {
-            case 'v':
-                printf("txt2pho 0.96\n") ;
-                return (0) ;
             case 'p':
-                if (optarg != NULL)strcpy(path, optarg) ;
+                if (optarg != NULL) strcpy(path, optarg) ;
                 break;
             case 'm':
                 voicenr = 0 ;
@@ -76,15 +75,18 @@ int main (int argc, char** argv)
                 voicenr = 1 ;
                 break ;
             case 'd':
-                if (optarg != NULL)debuglevel = atoi(optarg) ;
+                if (optarg != NULL) debuglevel = atoi(optarg) ;
                 break ;
             case 'i':
-                if (optarg != NULL)strcpy(inname, optarg) ;
+                if (optarg != NULL) strcpy(inname, optarg) ;
                 piping = 0 ;
                 break ;
             case 'o':
-                if (optarg != NULL)strcpy(outname, optarg) ;
+                if (optarg != NULL) strcpy(outname, optarg) ;
                 break ;
+            case 'v':
+                printf("txt2pho " version "\n") ;
+                return (0) ;
             case 'h':
                 printf("%s\n", synopsis) ;
                 return (0) ;
@@ -98,4 +100,3 @@ int main (int argc, char** argv)
     delete (s) ;
     return (0) ;
 }
-
