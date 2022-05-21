@@ -156,7 +156,7 @@ silgre=1?
 
 # Regeln fuer Grenzen
 	pdiss=0? # wenn nur ein max in der Phrase ist
-# Hilfsregel: Scheisse, geht nicht!!
+# Auxiliary Rule: Doesn't work
 	
 		betali:0.25;
 # 2.1.97: pdiss ist in hadi derzeit immer=0!! Regeln deshalb auskommentiert!!

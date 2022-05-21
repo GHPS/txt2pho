@@ -109,7 +109,6 @@ tobo=3?
 			amplitude:55;
 			amplitude:20;
 
-
 # ANSTIEG (betali): 14.12.96
 
 silgre=1?
@@ -122,7 +121,7 @@ sslope=1?
 rifa=0?
 	betali:0.2;
 	pdiss=0? # wenn nur ein max in der Phrase ist
-# Hilfsregel: Scheisse, geht nicht!!
+# Auxiliary Rule: Doesn't work
 
 	
 		betali:0.25;
@@ -137,11 +136,7 @@ rifa=0?
 				#betali:-0.046*pdiss+0.49;
 				betali:0.4;	
 
-
-
-
 # Regeln fuer fall, 14.12.1996 
-
 
 silgre=1? # handelt es sich um eine Silbe?
 rifa=0?
@@ -156,12 +151,5 @@ rifa=0?
 		betare:0.0;
 		betare:0.5 ;
 		
-
-
  betare:0.8;  # Regeln fuer Grenzton; silgre=0 (willkuerlicher Wert)
-	
-
-
-
-
 
