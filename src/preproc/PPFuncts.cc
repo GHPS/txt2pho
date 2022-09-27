@@ -125,6 +125,7 @@ char* numeral(char* in)
     }
     *q = '\0';
     result = new char[approx_len + MAX(strlen (p), MAX_UNIT_LENGTH) + 1];
+    strcpy (result, "");
     if (number2txt (result, temp1) == NULL)
     {
         delete (result);
