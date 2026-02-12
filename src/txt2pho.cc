@@ -31,7 +31,7 @@ const char* synopsis =
     "Valid options are:\n"
     "  -p path      - This option specifies the path to the txt2pho files. Default\n"
     "                 value is /usr/local/share/txt2pho/data/. The path must end with a separator '/'.\n"
-    "  -m | -f      - This variable specifies the voice: m is male, f ist female\n"
+    "  -m | -f      - This variable specifies the voice: m is male, f is female\n"
     "  -d level     - Level specifies the amount of debugging information (default is 0, maximum is 11).\n"
     "                 The higher the number, the more information is given. The debug info\n"
     "                 is written into files located in /tmp.\n"
